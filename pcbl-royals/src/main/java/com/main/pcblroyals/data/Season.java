@@ -1,16 +1,10 @@
 package com.main.pcblroyals.data;
 
+import org.hibernate.annotations.Formula;
+
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 
 @Entity(name = "seasons")
@@ -21,6 +15,13 @@ public class Season {
     private int year;
     private String division;
     private List<Player> players;
+	//NEW CODE: Adding games in order to get season record
+//	private List<Game> games;
+	private int wins;
+	private int ties;
+	private int losses;
+	//END NEW CODE: Adding games in order to get record
+
 
     @ManyToMany(
         cascade={CascadeType.ALL},
@@ -34,6 +35,20 @@ public class Season {
 	public void setPlayers(List<Player> players) {
 		this.players = players;
 	}
+
+	//NEW CODE: Adding games in order to get season record
+	@Formula("(select sum(case when g.team_score > g.opponent_score then 1 else 0 end) from games g where g.season_id = id)")
+	public int getWins(){ return wins;}
+	public void setWins(int wins){ this.wins = wins;}
+
+	@Formula("(select sum(case when g.team_score = g.opponent_score then 1 else 0 end) from games g where g.season_id = id)")
+	public int getTies(){ return ties;}
+	public void setTies(int ties){ this.ties = ties;}
+
+	@Formula("(select sum(case when g.team_score < g.opponent_score then 1 else 0 end) from games g where g.season_id = id)")
+	public int getLosses(){ return losses;}
+	public void setLosses(int losses){ this.losses = losses;}
+	//END NEW CODE: Adding games in order to get record
 
 	@Column (name="division", nullable=false)
     public String getDivision() {
@@ -66,6 +81,4 @@ public class Season {
 	public void setYear(int year) {
 		this.year = year;
 	}
-
-
 }
