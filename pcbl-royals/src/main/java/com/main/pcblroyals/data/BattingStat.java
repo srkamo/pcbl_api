@@ -1,5 +1,7 @@
 package com.main.pcblroyals.data;
 
+import org.hibernate.annotations.Formula;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,8 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-@Entity
-@Table (name="batting_stats", schema="pcbl")
+@Entity(name = "batting_stats")
+@Table (name="batting_stats", schema="pcblroyals_dev")
 public class BattingStat {
 	private int id;
     private Player player;
@@ -29,6 +31,10 @@ public class BattingStat {
     private int passedBalls;
     private int caughtStealing;
     private int strikeOuts;
+
+	private float battingAverage;
+	private float onBasePercentage;
+	private float sluggingAverage;
 
 
     @Id @GeneratedValue(strategy=GenerationType.AUTO)
@@ -168,5 +174,23 @@ public class BattingStat {
 	public void setWalks(int walks) {
 		this.walks = walks;
 	}
+
+	@Formula("case when atbats = 0 then 0 else round(singles/atbats,3) end")
+	public float getBattingAverage(){ return battingAverage;}
+	public void setBattingAverage(float battingAverage){ this.battingAverage = battingAverage;}
+
+	@Formula("case " +
+			"	when (atbats + walks + hitbypitch + sacrifices = 0) then 0 " +
+			" 	else round((singles + walks + hitbypitch)/(atbats + walks + hitbypitch + sacrifices),3)" +
+			"end")
+	public float getOnBasePercentage(){ return onBasePercentage;}
+	public void setOnBasePercentage(float onBasePercentage){ this.onBasePercentage = onBasePercentage;}
+
+	@Formula("case " +
+			"   when atbats = 0 then 0 " +
+			"   else round((singles + 2*doubles + 3*triples + 4*homeruns)/(atbats),3) " +
+			"end")
+	public float getSluggingAverage(){ return sluggingAverage;}
+	public void setSluggingAverage(float sluggingAverage){ this.sluggingAverage = sluggingAverage;}
 
 }

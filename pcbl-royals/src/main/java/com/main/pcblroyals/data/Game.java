@@ -12,8 +12,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-@Entity
-@Table (name="games", schema="PCBL")
+@Entity(name = "games")
+@Table (name="games", schema="pcblroyals_dev")
 public class Game implements Comparable<Game> {
     private int id;
     private Season season;

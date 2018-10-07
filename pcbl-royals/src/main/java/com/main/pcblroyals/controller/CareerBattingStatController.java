@@ -3,12 +3,14 @@ package com.main.pcblroyals.controller;
 import com.main.pcblroyals.data.CareerBattingStat;
 import com.main.pcblroyals.data.Player;
 import com.main.pcblroyals.service.CareerBattingStatService;
+import com.main.pcblroyals.service.CareerPitchingStatService;
 import com.main.pcblroyals.service.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -18,6 +20,10 @@ public class CareerBattingStatController {
     @Autowired
     @Qualifier("careerBattingStatService")
     private CareerBattingStatService careerBattingStatService;
+
+    @Autowired
+    @Qualifier("careerPitchingStatService")
+    private CareerPitchingStatService careerPitchingStatService;
 
 //    @PostMapping("/api/createPlayer")
 //    public void createNewPlayer(@Valid @RequestBody Player player) {
@@ -45,8 +51,14 @@ public class CareerBattingStatController {
 //    }
 
     @GetMapping("api/viewCareerStatsAllPlayer")
-    public  List<CareerBattingStat> viewCareerStatsAllPlayer(){
-        return careerBattingStatService.getAllCareerStats();
+    public  List<Object>  viewCareerStatsAllPlayer(){
+
+        List<Object> battingPitchingStats = new ArrayList<>();
+
+        battingPitchingStats.add(careerBattingStatService.getAllCareerStats());
+        battingPitchingStats.add(careerPitchingStatService.getAllCareerPitchingStats());
+
+        return battingPitchingStats;
     }
 
 }

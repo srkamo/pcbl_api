@@ -28,12 +28,12 @@ public class SeasonController {
     }
 
     @DeleteMapping("/api/removeSeason/{id}")
-    public void removeseason(@PathVariable(value = "id") int seasonId) {
+    public void removeSeason(@PathVariable(value = "id") int seasonId) {
         seasonService.removeSeason(seasonId);
     }
 
     @GetMapping("/api/viewSingleSeason/{id}")
-    public Season viewseasonById(@PathVariable(value = "id") int seasonId) {
+    public Season viewSeasonById(@PathVariable(value = "id") int seasonId) {
         return seasonService.getSeasonById(seasonId);
     }
 
@@ -41,5 +41,6 @@ public class SeasonController {
     public List<Season> viewAllseason() {
         return seasonService.getAllSeason();
     }
+
 
 }
