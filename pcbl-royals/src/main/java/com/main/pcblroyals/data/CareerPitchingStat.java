@@ -1,5 +1,7 @@
 package com.main.pcblroyals.data;
 
+import org.hibernate.annotations.Formula;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,7 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-@Entity
+@Entity(name = "pitching_career_stats")
 @Table (name="pitching_career_stats", schema="PCBL")
 public class CareerPitchingStat {
 	private int id;
@@ -29,6 +31,10 @@ public class CareerPitchingStat {
     private int losses;
     private int ties;
     private int saves;
+
+	private float earnedRunAverage;
+	private float walksAndHitsPerInning;
+
 
     @Id @GeneratedValue(strategy=GenerationType.AUTO)
     public int getId() {
@@ -167,5 +173,22 @@ public class CareerPitchingStat {
 		this.saves = saves;
 	}
 
+	//CORRECT WITH FORMULA
+	@Formula("case " +
+			"   when innings = 0 then 0 " +
+			"   else (earned_runs*9)/innings " +
+			"end")
+	public float getEarnedRunAverage(){ return earnedRunAverage; }
+	public void setEarnedRunAverage(float earnedRunAverage) {
+		this.earnedRunAverage = earnedRunAverage;
+	}
 
+	@Formula("case " +
+			"   when innings = 0 then 0 " +
+			"   else (hits+walks)/innings " +
+			"end")
+	public float getWalksAndHitsPerInning(){ return walksAndHitsPerInning;}
+	public void setWalksAndHitsPerInning(float walksAndHitsPerInning){
+		this.walksAndHitsPerInning = walksAndHitsPerInning;
+	}
 }
