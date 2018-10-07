@@ -10,7 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table (name="batting_stats", schema="PCBL")
+@Table (name="batting_stats", schema="pcbl")
 public class BattingStat {
 	private int id;
     private Player player;

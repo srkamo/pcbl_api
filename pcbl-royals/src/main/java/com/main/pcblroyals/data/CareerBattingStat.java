@@ -9,8 +9,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-@Entity
-@Table (name="batting_career_stats", schema="PCBL")
+@Entity(name = "batting_career_stats")
+@Table (name="batting_career_stats", schema="pcblRoyals_dev")
 public class CareerBattingStat {
 	private int id;
     private Player player;
