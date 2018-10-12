@@ -35,7 +35,6 @@ public class SeasonService {
     @Transactional
     public List<Season> getAllSeason() {
         return seasonDao.selectAllSeason();
-
     }
 
     @Transactional
