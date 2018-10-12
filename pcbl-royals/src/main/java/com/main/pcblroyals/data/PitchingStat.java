@@ -1,5 +1,7 @@
 package com.main.pcblroyals.data;
 
+import org.hibernate.annotations.Formula;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,8 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-@Entity
-@Table (name="pitching_stats", schema="PCBL")
+@Entity(name = "pitching_stats")
+@Table (name="pitching_stats", schema="pcblroyals_dev")
 public class PitchingStat {
 	private int id;
     private Player player;
@@ -26,6 +28,7 @@ public class PitchingStat {
     private int stolenBases;
     private int pickoffs;
     private int result;
+	private float testInnings;
 
     @Id @GeneratedValue(strategy=GenerationType.AUTO)
     public int getId() {
@@ -140,5 +143,9 @@ public class PitchingStat {
 	public void setResult(int result) {
 		this.result = result;
 	}
+
+	@Formula("(select (TRUNCATE(((SUM(TRUNCATE(innings,0)) + TRUNCATE(((SUM(innings) - SUM(TRUNCATE(innings,0))) / 0.3),0)) + (TRUNCATE((((SUM(innings) - SUM(TRUNCATE(innings,0))) / 0.3) - TRUNCATE(((SUM(innings) - SUM(TRUNCATE(innings,0))) / 0.3),0)),1) / 3)),1)))")
+	public float getTestInnings() { return testInnings;}
+	public void setTestInnings(float testInnings) { this.testInnings = testInnings;}
 
 }
