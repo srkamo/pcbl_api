@@ -1,5 +1,6 @@
 package com.main.pcblroyals.data;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Formula;
 
 import java.util.List;
@@ -14,14 +15,15 @@ public class Season {
     private String season;
     private int year;
     private String division;
-    private List<Player> players;
+
 	//NEW CODE: Adding games in order to get season record
-//	private List<Game> games;
 	private int wins;
 	private int ties;
 	private int losses;
 	//END NEW CODE: Adding games in order to get record
 
+	@JsonIgnore
+	private List<Player> players;
 
     @ManyToMany(
         cascade={CascadeType.ALL},

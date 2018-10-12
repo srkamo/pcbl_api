@@ -1,5 +1,6 @@
 package com.main.pcblroyals.data;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Formula;
 
 import javax.persistence.Column;
@@ -15,8 +16,8 @@ import javax.persistence.Table;
 @Table (name="batting_stats", schema="pcblroyals_dev")
 public class BattingStat {
 	private int id;
-    private Player player;
     private Game game;
+	private Player player;
     private int atBats;
     private int singles;
     private int doubles;
@@ -32,17 +33,30 @@ public class BattingStat {
     private int caughtStealing;
     private int strikeOuts;
 
-	private float battingAverage;
-	private float onBasePercentage;
-	private float sluggingAverage;
-
-
     @Id @GeneratedValue(strategy=GenerationType.AUTO)
     public int getId() {
 		return id;
 	}
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	@ManyToOne
+	@JoinColumn(name="game_id", nullable=false)
+	public Game getGame() {
+		return game;
+	}
+	public void setGame(Game game) {
+		this.game = game;
+	}
+
+	@ManyToOne
+	@JoinColumn(name="player_id", nullable=false)
+	public Player getPlayer() {
+		return player;
+	}
+	public void setPlayer(Player player) {
+		this.player = player;
 	}
 
 	@Column (name="atbats", nullable=false)
@@ -69,15 +83,6 @@ public class BattingStat {
 		this.doubles = doubles;
 	}
 
-    @ManyToOne
-    @JoinColumn(name="game_id", nullable=false)
-	public Game getGame() {
-		return game;
-	}
-	public void setGame(Game game) {
-		this.game = game;
-	}
-
 	@Column (name="hitbypitch", nullable=false)
 	public int getHitByPitch() {
 		return hitByPitch;
@@ -100,15 +105,6 @@ public class BattingStat {
 	}
 	public void setPassedBalls(int passedBalls) {
 		this.passedBalls = passedBalls;
-	}
-
-    @ManyToOne
-    @JoinColumn(name="player_id", nullable=false)
-	public Player getPlayer() {
-		return player;
-	}
-	public void setPlayer(Player player) {
-		this.player = player;
 	}
 
 	@Column (name="rbis", nullable=false)
@@ -174,23 +170,4 @@ public class BattingStat {
 	public void setWalks(int walks) {
 		this.walks = walks;
 	}
-
-	@Formula("case when atbats = 0 then 0 else round(singles/atbats,3) end")
-	public float getBattingAverage(){ return battingAverage;}
-	public void setBattingAverage(float battingAverage){ this.battingAverage = battingAverage;}
-
-	@Formula("case " +
-			"	when (atbats + walks + hitbypitch + sacrifices = 0) then 0 " +
-			" 	else round((singles + walks + hitbypitch)/(atbats + walks + hitbypitch + sacrifices),3)" +
-			"end")
-	public float getOnBasePercentage(){ return onBasePercentage;}
-	public void setOnBasePercentage(float onBasePercentage){ this.onBasePercentage = onBasePercentage;}
-
-	@Formula("case " +
-			"   when atbats = 0 then 0 " +
-			"   else round((singles + 2*doubles + 3*triples + 4*homeruns)/(atbats),3) " +
-			"end")
-	public float getSluggingAverage(){ return sluggingAverage;}
-	public void setSluggingAverage(float sluggingAverage){ this.sluggingAverage = sluggingAverage;}
-
 }
