@@ -205,15 +205,26 @@ public class PitchingStatBean implements Serializable {
         double roundedDecimalPart = (float)Math.round(decimalPart * 10f)/10f;
         inningsPitched = (double) integerPart;
 
-        if(roundedDecimalPart > 0.1 && roundedDecimalPart < 0.4){
+        if(roundedDecimalPart > 0.1 && roundedDecimalPart < 0.45){
             inningsPitched += 0.1;
         }
-        if(roundedDecimalPart > 0.4 && roundedDecimalPart < 0.7){
+        if(roundedDecimalPart > 0.45 && roundedDecimalPart < 0.75){
             inningsPitched += 0.2;
         }
-        if(roundedDecimalPart > 0.7 && roundedDecimalPart < 1.0){
+        if(roundedDecimalPart > 0.75 && roundedDecimalPart < 1.0){
             inningsPitched += 1.0;
         }
+    }
+
+    public void formatInningsPitchedRaw(){
+        long integerPart = (long) inningsPitched;
+        double decimalPart = inningsPitched - integerPart;
+        inningsPitchedRaw = ((double) 1/3)*decimalPart + integerPart;
+        System.out.println("--------");
+        System.out.println(inningsPitched);
+        System.out.println(decimalPart);
+        System.out.println(decimalPart*(1/3));
+        System.out.println(inningsPitchedRaw);
     }
 
     public void calculateEarnedRunAverage(){
@@ -283,4 +294,50 @@ public class PitchingStatBean implements Serializable {
         calculateEarnedRunAverage();
         calculateWalksAndHitsPerInning();
     }
+
+    public PitchingStatBean(int player_id,
+                            String firstName,
+                            String lastName,
+                            int numGames,
+                            int wins,
+                            int losses,
+                            int ties,
+                            int saves,
+                            float inningsPitchedRaw,
+                            int earnedRuns,
+                            int totalRuns,
+                            int strikeouts,
+                            int walks,
+                            int hitByPitch,
+                            int hits,
+                            int wildPitches,
+                            int stolenBases,
+                            int pickoffs)
+    {
+        this.player_id = player_id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.numGames = numGames;
+        this.wins = wins;
+        this.losses = losses;
+        this.ties = ties;
+        this.saves = saves;
+        this.inningsPitchedRaw = inningsPitchedRaw;
+        this.earnedRuns = earnedRuns;
+        this.totalRuns = totalRuns;
+        this.strikeouts = strikeouts;
+        this.walks = walks;
+        this.hitByPitch = hitByPitch;
+        this.hits = hits;
+        this.wildPitches = wildPitches;
+        this.stolenBases = stolenBases;
+        this.pickoffs = pickoffs;
+
+        //formatInningsPitchedRaw();
+        formatInningsPitched();
+        calculateEarnedRunAverage();
+        calculateWalksAndHitsPerInning();
+    }
+
+
 }

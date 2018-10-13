@@ -38,6 +38,11 @@ public class SeasonService {
     }
 
     @Transactional
+    public List<Season> getAllSeasonReverseChronological() {
+        return seasonDao.getAllSeasonReverseChronological();
+    }
+
+    @Transactional
     public void removeSeason(int seasonId) {
         seasonDao.deleteSeason(seasonId);
 

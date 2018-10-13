@@ -1,5 +1,6 @@
 package com.main.pcblroyals.controller;
 
+import com.main.pcblroyals.bean.PitchingStatBean;
 import com.main.pcblroyals.data.CareerBattingStat;
 import com.main.pcblroyals.data.CareerPitchingStat;
 import com.main.pcblroyals.data.Player;
@@ -47,7 +48,7 @@ public class CareerPitchingStatController {
 //    }
 
     @GetMapping("api/viewCareerPitchingStatsAllPlayer")
-    public  List<CareerPitchingStat> viewCareerPitchingStatsAllPlayer(){
+    public  List<PitchingStatBean> viewCareerPitchingStatsAllPlayer(){
         return careerPitchingStatService.getAllCareerPitchingStats();
     }
 

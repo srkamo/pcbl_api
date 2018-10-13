@@ -32,7 +32,7 @@ public class BattingPitchingStatController {
     public List<Object> getStatsBySeason(@PathVariable(value = "id") int seasonId){
         List<Object> allStats = new ArrayList<>();
         // seasons for drop down
-        allStats.add(seasonService.getAllSeason());
+        allStats.add(seasonService.getAllSeasonReverseChronological());
         allStats.add(battingStatService.getBattingStatsBySeason(seasonId));
         allStats.add(pitchingStatService.getPitchingStatsBySeason(seasonId));
 

@@ -1,5 +1,6 @@
 package com.main.pcblroyals.dao;
 
+import com.main.pcblroyals.bean.BattingStatBean;
 import com.main.pcblroyals.data.CareerBattingStat;
 import com.main.pcblroyals.data.Player;
 import org.springframework.stereotype.Repository;
@@ -47,10 +48,32 @@ public class CareerBattingStatDao {
 //        return (List<Player>) query.getResultList();
 //    }
 
-    public List<CareerBattingStat> selectAllCareerStats(){
-        String q = "select b from batting_career_stats b";
+//    public List<CareerBattingStat> selectAllCareerStats(){
+
+//
+//
+//
+//        String q = "select b from batting_career_stats b order by b.player.lastName";
+//        Query query = entityManager.createQuery(q);
+//        return (List<CareerBattingStat>) query.getResultList();
+//    }
+
+    public List<BattingStatBean> selectAllCareerStats(){
+        String q = "select new com.main.pcblroyals.bean.BattingStatBean(" +
+                "b.player.id, b.player.firstName, b.player.lastName, b.player.id, " +
+                "b.atBats, b.singles, b.doubles, b.triples, b.homeRuns, " +
+                "b.walks, b.hitByPitch,b.sacrifices,b.runs,b.rbis," +
+                "b.stolenBases,b.passedBalls,b.caughtStealing,b.strikeOuts" +
+                "" +
+                ")  " +
+                " from batting_career_stats b " +
+                " order by b.player.lastName";
+
+
+
+        //String q = "select b from batting_career_stats b order by b.player.lastName";
         Query query = entityManager.createQuery(q);
-        return (List<CareerBattingStat>) query.getResultList();
+        return (List<BattingStatBean>) query.getResultList();
     }
 
 }

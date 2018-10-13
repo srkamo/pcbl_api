@@ -1,5 +1,6 @@
 package com.main.pcblroyals.service;
 
+import com.main.pcblroyals.bean.PitchingStatBean;
 import com.main.pcblroyals.dao.CareerBattingStatDao;
 import com.main.pcblroyals.dao.CareerPitchingStatDao;
 import com.main.pcblroyals.dao.PlayerDao;
@@ -49,7 +50,7 @@ public class CareerPitchingStatService {
 //    }
 
     @Transactional
-    public List<CareerPitchingStat> getAllCareerPitchingStats(){
+    public List<PitchingStatBean> getAllCareerPitchingStats(){
         return careerPitchingStatDao.selectAllCareerPitchingStats();
     }
 

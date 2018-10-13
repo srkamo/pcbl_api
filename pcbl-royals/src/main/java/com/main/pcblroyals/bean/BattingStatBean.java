@@ -3,9 +3,7 @@ package com.main.pcblroyals.bean;
 import java.io.Serializable;
 import java.io.StreamCorruptedException;
 
-/**
- * Created by rblay on 10/10/18.
- */
+
 public class BattingStatBean implements Serializable {
 
     private int player_id;
@@ -32,7 +30,6 @@ public class BattingStatBean implements Serializable {
     private float battingAverage;
     private float onBasePercentage;
     private float sluggingAverage;
-
 
     public long getPlayer_id() {
         return player_id;
@@ -202,7 +199,34 @@ public class BattingStatBean implements Serializable {
         this.sluggingAverage = sluggingAverage;
     }
 
+    //constructor for single season or game batting stats
     public BattingStatBean(int player_id, String firstName, String lastName, long numGames, long atBats, long singles, long doubles, long triples, long homeRuns, long walks, long hitByPitch, long sacrifices, long runs, long rbis, long stolenBases, long passedBalls, long caughtStealing, long strikeOuts) {
+        this.player_id = player_id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.numGames = numGames;
+        this.atBats = atBats;
+        this.singles = singles;
+        this.doubles = doubles;
+        this.triples = triples;
+        this.homeRuns = homeRuns;
+        this.walks = walks;
+        this.hitByPitch = hitByPitch;
+        this.sacrifices = sacrifices;
+        this.runs = runs;
+        this.rbis = rbis;
+        this.stolenBases = stolenBases;
+        this.passedBalls = passedBalls;
+        this.caughtStealing = caughtStealing;
+        this.strikeOuts = strikeOuts;
+
+        calculateBattingAverage();
+        calculateOnBasePercentage();
+        calculateSluggingAverage();
+    }
+
+    //constructor for career batting stats
+    public BattingStatBean(int player_id, String firstName, String lastName, int numGames, int atBats, int singles, int doubles, int triples, int homeRuns, int walks, int hitByPitch, int sacrifices, int runs, int rbis, int stolenBases, int passedBalls, int caughtStealing, int strikeOuts) {
         this.player_id = player_id;
         this.firstName = firstName;
         this.lastName = lastName;

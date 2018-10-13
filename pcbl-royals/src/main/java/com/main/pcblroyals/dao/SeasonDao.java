@@ -44,4 +44,10 @@ public class SeasonDao {
         return (List<Season>) query.getResultList();
     }
 
+    public List<Season> getAllSeasonReverseChronological() {
+        String q = "select s from seasons s order by id desc";
+        Query query = entityManager.createQuery(q);
+        return (List<Season>) query.getResultList();
+    }
+
 }
