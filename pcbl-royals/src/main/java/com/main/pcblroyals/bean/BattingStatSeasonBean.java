@@ -6,9 +6,9 @@ import java.io.Serializable;
  * Created by rblay on 10/14/18.
  */
 public class BattingStatSeasonBean extends BattingStatBean implements Serializable  {
-    private int season_id;
-    private String season;
-    private int year;
+    protected int season_id;
+    protected String season;
+    protected int year;
 
     protected long numGames;
 
