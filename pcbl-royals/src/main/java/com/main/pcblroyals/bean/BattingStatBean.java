@@ -6,62 +6,24 @@ import java.io.StreamCorruptedException;
 
 public class BattingStatBean implements Serializable {
 
-    private int player_id;
-    private String firstName;
-    private String lastName;
+    protected long atBats;
+    protected long singles;
+    protected long doubles;
+    protected long triples;
+    protected long homeRuns;
+    protected long walks;
+    protected long hitByPitch;
+    protected long sacrifices;
+    protected long runs;
+    protected long rbis;
+    protected long stolenBases;
+    protected long passedBalls;
+    protected long caughtStealing;
+    protected long strikeOuts;
 
-    private long numGames;
-
-    private long atBats;
-    private long singles;
-    private long doubles;
-    private long triples;
-    private long homeRuns;
-    private long walks;
-    private long hitByPitch;
-    private long sacrifices;
-    private long runs;
-    private long rbis;
-    private long stolenBases;
-    private long passedBalls;
-    private long caughtStealing;
-    private long strikeOuts;
-
-    private float battingAverage;
-    private float onBasePercentage;
-    private float sluggingAverage;
-
-    public long getPlayer_id() {
-        return player_id;
-    }
-
-    public void setPlayer_id(int player_id) {
-        this.player_id = player_id;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public long getNumGames() {
-        return numGames;
-    }
-
-    public void setNumGames(long numGames) {
-        this.numGames = numGames;
-    }
+    protected float battingAverage;
+    protected float onBasePercentage;
+    protected float sluggingAverage;
 
     public long getAtBats() {
         return atBats;
@@ -200,11 +162,7 @@ public class BattingStatBean implements Serializable {
     }
 
     //constructor for single season or game batting stats
-    public BattingStatBean(int player_id, String firstName, String lastName, long numGames, long atBats, long singles, long doubles, long triples, long homeRuns, long walks, long hitByPitch, long sacrifices, long runs, long rbis, long stolenBases, long passedBalls, long caughtStealing, long strikeOuts) {
-        this.player_id = player_id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.numGames = numGames;
+    public BattingStatBean(long atBats, long singles, long doubles, long triples, long homeRuns, long walks, long hitByPitch, long sacrifices, long runs, long rbis, long stolenBases, long passedBalls, long caughtStealing, long strikeOuts) {
         this.atBats = atBats;
         this.singles = singles;
         this.doubles = doubles;
@@ -225,33 +183,29 @@ public class BattingStatBean implements Serializable {
         calculateSluggingAverage();
     }
 
-    //constructor for career batting stats
-    public BattingStatBean(int player_id, String firstName, String lastName, int numGames, int atBats, int singles, int doubles, int triples, int homeRuns, int walks, int hitByPitch, int sacrifices, int runs, int rbis, int stolenBases, int passedBalls, int caughtStealing, int strikeOuts) {
-        this.player_id = player_id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.numGames = numGames;
-        this.atBats = atBats;
-        this.singles = singles;
-        this.doubles = doubles;
-        this.triples = triples;
-        this.homeRuns = homeRuns;
-        this.walks = walks;
-        this.hitByPitch = hitByPitch;
-        this.sacrifices = sacrifices;
-        this.runs = runs;
-        this.rbis = rbis;
-        this.stolenBases = stolenBases;
-        this.passedBalls = passedBalls;
-        this.caughtStealing = caughtStealing;
-        this.strikeOuts = strikeOuts;
+    //default constructor
+    public BattingStatBean() {
+        this.atBats = 0;
+        this.singles = 0;
+        this.doubles = 0;
+        this.triples = 0;
+        this.homeRuns = 0;
+        this.walks = 0;
+        this.hitByPitch = 0;
+        this.sacrifices = 0;
+        this.runs = 0;
+        this.rbis = 0;
+        this.stolenBases = 0;
+        this.passedBalls = 0;
+        this.caughtStealing = 0;
+        this.strikeOuts = 0;
 
         calculateBattingAverage();
         calculateOnBasePercentage();
         calculateSluggingAverage();
     }
 
-    private void calculateBattingAverage(){
+    protected void calculateBattingAverage(){
         if(atBats == 0){
             battingAverage = 0;
             battingAverage = (float)Math.round(battingAverage * 1000f)/1000f;
@@ -262,7 +216,7 @@ public class BattingStatBean implements Serializable {
         }
     }
 
-    private void calculateOnBasePercentage(){
+    protected void calculateOnBasePercentage(){
         if(atBats + walks + hitByPitch + sacrifices == 0){
             onBasePercentage = 0;
             onBasePercentage = (float)Math.round(onBasePercentage * 1000f)/1000f;
@@ -273,7 +227,7 @@ public class BattingStatBean implements Serializable {
         }
     }
 
-    private void calculateSluggingAverage(){
+    protected void calculateSluggingAverage(){
         if(atBats == 0){
             sluggingAverage = 0;
             sluggingAverage = (float)Math.round(sluggingAverage * 1000f)/1000f;

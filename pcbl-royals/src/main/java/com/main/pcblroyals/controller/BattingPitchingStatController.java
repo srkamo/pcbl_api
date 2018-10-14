@@ -1,11 +1,10 @@
 package com.main.pcblroyals.controller;
 
 import com.main.pcblroyals.bean.BattingStatBean;
+import com.main.pcblroyals.bean.BattingStatPlayerBean;
+import com.main.pcblroyals.bean.BattingStatSeasonBean;
 import com.main.pcblroyals.bean.PitchingStatBean;
-import com.main.pcblroyals.service.BattingStatService;
-import com.main.pcblroyals.service.GameService;
-import com.main.pcblroyals.service.PitchingStatService;
-import com.main.pcblroyals.service.SeasonService;
+import com.main.pcblroyals.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
@@ -33,6 +32,10 @@ public class BattingPitchingStatController {
     @Qualifier("gameService")
     private GameService gameService;
 
+    @Autowired
+    @Qualifier("playerService")
+    private PlayerService playerService;
+
 
     @GetMapping("api/getStatsBySeason/{id}")
     public List<Object> getStatsBySeason(@PathVariable(value = "id") int seasonId){
@@ -46,7 +49,7 @@ public class BattingPitchingStatController {
     }
 
     @GetMapping("api/battingStatsBySeason/{id}")
-    public List<BattingStatBean> getBattingStatsBySeason(@PathVariable(value = "id") int seasonId){
+    public List<BattingStatPlayerBean> getBattingStatsBySeason(@PathVariable(value = "id") int seasonId){
         return battingStatService.getBattingStatsBySeason(seasonId);
     }
 
@@ -69,6 +72,18 @@ public class BattingPitchingStatController {
         allStats.add(pitchingStatService.getPitchingStatsBySeasonGame(seasonId, gameId));
 
         return allStats;
+    }
+
+    @GetMapping("api/getStatsSeasonByPlayer/{playerId}")
+    public List<Object> getBattingStatsSeasonByPlayer(@PathVariable(value = "playerId") int playerId){
+
+        List<Object> playerSeasonStats = new ArrayList<>();
+        //player info
+        playerSeasonStats.add(playerService.getPlayerById(playerId));
+        //player season
+        playerSeasonStats.add(battingStatService.getBattingStatsSeasonByPlayer(playerId));
+
+        return playerSeasonStats;
     }
 
 }

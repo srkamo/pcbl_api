@@ -1,6 +1,7 @@
 package com.main.pcblroyals.dao;
 
 import com.main.pcblroyals.bean.BattingStatBean;
+import com.main.pcblroyals.bean.BattingStatPlayerBean;
 import com.main.pcblroyals.data.CareerBattingStat;
 import com.main.pcblroyals.data.Player;
 import org.springframework.stereotype.Repository;
@@ -58,8 +59,8 @@ public class CareerBattingStatDao {
 //        return (List<CareerBattingStat>) query.getResultList();
 //    }
 
-    public List<BattingStatBean> selectAllCareerStats(){
-        String q = "select new com.main.pcblroyals.bean.BattingStatBean(" +
+    public List<BattingStatPlayerBean> selectAllCareerStats(){
+        String q = "select new com.main.pcblroyals.bean.BattingStatPlayerBean(" +
                 "b.player.id, b.player.firstName, b.player.lastName, b.player.id, " +
                 "b.atBats, b.singles, b.doubles, b.triples, b.homeRuns, " +
                 "b.walks, b.hitByPitch,b.sacrifices,b.runs,b.rbis," +
@@ -73,7 +74,7 @@ public class CareerBattingStatDao {
 
         //String q = "select b from batting_career_stats b order by b.player.lastName";
         Query query = entityManager.createQuery(q);
-        return (List<BattingStatBean>) query.getResultList();
+        return (List<BattingStatPlayerBean>) query.getResultList();
     }
 
 }
