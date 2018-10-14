@@ -26,4 +26,9 @@ public class GameService {
         mostRecentGames.add(allGames.get(2));
         return mostRecentGames;
     }
+
+    @Transactional
+    public List<Game> getGamesBySeason(int seasonId){
+        return gameDao.getGamesBySeason(seasonId);
+    }
 }

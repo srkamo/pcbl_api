@@ -23,4 +23,9 @@ public class PitchingStatService {
     public List<PitchingStatBean> getPitchingStatsBySeason(int seasonId){
         return pitchingStatDao.getPitchingStatsBySeason(seasonId);
     }
+
+    @Transactional
+    public List<PitchingStatBean> getPitchingStatsBySeasonGame(int seasonId, int gameId){
+        return pitchingStatDao.getPitchingStatsBySeasonGame(seasonId, gameId);
+    }
 }

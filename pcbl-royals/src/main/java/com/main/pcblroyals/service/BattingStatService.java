@@ -25,4 +25,9 @@ public class BattingStatService {
     public List<BattingStatBean> getBattingStatsBySeason(int seasonId){
         return battingStatDao.getBattingStatsBySeason(seasonId);
     }
+
+    @Transactional
+    public List<BattingStatBean> getBattingStatsBySeasonGame(int seasonId, int gameId){
+        return battingStatDao.getBattingStatsBySeasonGame(seasonId, gameId);
+    }
 }
