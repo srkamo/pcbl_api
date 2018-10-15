@@ -1,6 +1,7 @@
 package com.main.pcblroyals.dao;
 
 import com.main.pcblroyals.bean.PitchingStatBean;
+import com.main.pcblroyals.bean.PitchingStatPlayerBean;
 import com.main.pcblroyals.data.CareerBattingStat;
 import com.main.pcblroyals.data.CareerPitchingStat;
 import com.main.pcblroyals.data.Player;
@@ -55,8 +56,8 @@ public class CareerPitchingStatDao {
 //        return (List<CareerPitchingStat>) query.getResultList();
 //    }
 
-    public List<PitchingStatBean> selectAllCareerPitchingStats(){
-        String q = "select new com.main.pcblroyals.bean.PitchingStatBean(" +
+    public List<PitchingStatPlayerBean> selectAllCareerPitchingStats(){
+        String q = "select new com.main.pcblroyals.bean.PitchingStatPlayerBean(" +
                 "p.player.id, p.player.firstName, p.player.lastName, games, " +
                 "wins, " +
                 "losses, " +
@@ -76,7 +77,7 @@ public class CareerPitchingStatDao {
                 "from pitching_career_stats p " +
                 " order by p.player.lastName, p.player.firstName";
         Query query = entityManager.createQuery(q);
-        return (List<PitchingStatBean>) query.getResultList();
+        return (List<PitchingStatPlayerBean>) query.getResultList();
     }
 
 }

@@ -1,9 +1,6 @@
 package com.main.pcblroyals.controller;
 
-import com.main.pcblroyals.bean.BattingStatBean;
-import com.main.pcblroyals.bean.BattingStatPlayerBean;
-import com.main.pcblroyals.bean.BattingStatSeasonBean;
-import com.main.pcblroyals.bean.PitchingStatBean;
+import com.main.pcblroyals.bean.*;
 import com.main.pcblroyals.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -54,7 +51,7 @@ public class BattingPitchingStatController {
     }
 
     @GetMapping("api/pitchingStatsBySeason/{id}")
-    public List<PitchingStatBean> getPitchingStatsBySeason(@PathVariable(value = "id") int seasonId){
+    public List<PitchingStatPlayerBean> getPitchingStatsBySeason(@PathVariable(value = "id") int seasonId){
         return pitchingStatService.getPitchingStatsBySeason(seasonId);
     }
 
@@ -82,6 +79,8 @@ public class BattingPitchingStatController {
         playerSeasonStats.add(playerService.getPlayerById(playerId));
         //player season batting
         playerSeasonStats.add(battingStatService.getBattingStatsSeasonByPlayer(playerId));
+        //player season pitching
+        playerSeasonStats.add(pitchingStatService.getPitchingStatsBySeason(playerId));
 
         return playerSeasonStats;
     }

@@ -9,7 +9,6 @@ public class BattingStatSeasonBean extends BattingStatBean implements Serializab
     protected int season_id;
     protected String season;
     protected int year;
-
     protected long numGames;
 
     public int getSeason_id() {
