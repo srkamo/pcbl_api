@@ -27,7 +27,7 @@ public class BattingStatDao {
                 " from batting_stats b " +
                 " where b.game.season.id = " + seasonId +
                 " group by b.player.id, b.player.firstName, b.player.lastName " +
-                " order by b.player.lastName";
+                " order by b.player.lastName, b.player.firstName";
 
         Query query = entityManager.createQuery(q);
         return (List<BattingStatPlayerBean>) query.getResultList();
@@ -45,7 +45,7 @@ public class BattingStatDao {
                 " where b.game.season.id = " + seasonId +
                 " and b.game.id = " + gameId +
                 " group by b.player.id, b.player.firstName, b.player.lastName " +
-                " order by b.player.lastName";
+                " order by b.player.lastName, b.player.firstName";
 
         Query query = entityManager.createQuery(q);
         return (List<BattingStatPlayerBean>) query.getResultList();

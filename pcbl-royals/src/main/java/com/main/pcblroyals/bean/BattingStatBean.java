@@ -2,6 +2,7 @@ package com.main.pcblroyals.bean;
 
 import java.io.Serializable;
 import java.io.StreamCorruptedException;
+import java.text.DecimalFormat;
 
 
 public class BattingStatBean implements Serializable {
@@ -21,9 +22,9 @@ public class BattingStatBean implements Serializable {
     protected long caughtStealing;
     protected long strikeOuts;
 
-    protected float battingAverage;
-    protected float onBasePercentage;
-    protected float sluggingAverage;
+    protected String battingAverage;
+    protected String onBasePercentage;
+    protected String sluggingAverage;
 
     public long getAtBats() {
         return atBats;
@@ -137,27 +138,27 @@ public class BattingStatBean implements Serializable {
         this.strikeOuts = strikeOuts;
     }
 
-    public float getBattingAverage() {
+    public String getBattingAverage() {
         return battingAverage;
     }
 
-    public void setBattingAverage(float battingAverage) {
+    public void setBattingAverage(String battingAverage) {
         this.battingAverage = battingAverage;
     }
 
-    public float getOnBasePercentage() {
+    public String getOnBasePercentage() {
         return onBasePercentage;
     }
 
-    public void setOnBasePercentage(float onBasePercentage) {
+    public void setOnBasePercentage(String onBasePercentage) {
         this.onBasePercentage = onBasePercentage;
     }
 
-    public float getSluggingAverage() {
+    public String getSluggingAverage() {
         return sluggingAverage;
     }
 
-    public void setSluggingAverage(float sluggingAverage) {
+    public void setSluggingAverage(String sluggingAverage) {
         this.sluggingAverage = sluggingAverage;
     }
 
@@ -206,35 +207,46 @@ public class BattingStatBean implements Serializable {
     }
 
     protected void calculateBattingAverage(){
+        float tempBattingAverage;
         if(atBats == 0){
-            battingAverage = 0;
-            battingAverage = (float)Math.round(battingAverage * 1000f)/1000f;
+            tempBattingAverage = 0;
         }
         else {
-            battingAverage = (float)singles/atBats;
-            battingAverage = (float)Math.round(battingAverage * 1000f)/1000f;
+            tempBattingAverage = (float)singles/atBats;
+            tempBattingAverage = (float)Math.round(tempBattingAverage * 1000f)/1000f;
         }
+
+        DecimalFormat df = new DecimalFormat("0.000");
+        battingAverage = df.format(tempBattingAverage);
     }
 
     protected void calculateOnBasePercentage(){
+        float tempOnBasePercentage;
         if(atBats + walks + hitByPitch + sacrifices == 0){
-            onBasePercentage = 0;
-            onBasePercentage = (float)Math.round(onBasePercentage * 1000f)/1000f;
+            tempOnBasePercentage = 0;
+            tempOnBasePercentage = (float)Math.round(tempOnBasePercentage * 1000f)/1000f;
         }
         else{
-            onBasePercentage = ((float)singles + walks + hitByPitch)/(atBats + walks + hitByPitch + sacrifices);
-            onBasePercentage = (float)Math.round(onBasePercentage * 1000f)/1000f;
+            tempOnBasePercentage = ((float)singles + walks + hitByPitch)/(atBats + walks + hitByPitch + sacrifices);
+            tempOnBasePercentage = (float)Math.round(tempOnBasePercentage * 1000f)/1000f;
         }
+
+        DecimalFormat df = new DecimalFormat("0.000");
+        onBasePercentage = df.format(tempOnBasePercentage);
     }
 
     protected void calculateSluggingAverage(){
+        float tempSluggingAverage;
         if(atBats == 0){
-            sluggingAverage = 0;
-            sluggingAverage = (float)Math.round(sluggingAverage * 1000f)/1000f;
+            tempSluggingAverage = 0;
+            tempSluggingAverage = (float)Math.round(tempSluggingAverage * 1000f)/1000f;
         }
-        else {
-            sluggingAverage = ((float) singles + 2*doubles + 3*triples + 4*homeRuns)/(atBats);
-            sluggingAverage = (float)Math.round(sluggingAverage * 1000f)/1000f;
+        else{
+            tempSluggingAverage = ((float) singles + 2*doubles + 3*triples + 4*homeRuns)/(atBats);
+            tempSluggingAverage = (float)Math.round(tempSluggingAverage * 1000f)/1000f;
         }
+
+        DecimalFormat df = new DecimalFormat("0.000");
+        sluggingAverage = df.format(tempSluggingAverage);
     }
 }

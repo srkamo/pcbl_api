@@ -61,14 +61,14 @@ public class CareerBattingStatDao {
 
     public List<BattingStatPlayerBean> selectAllCareerStats(){
         String q = "select new com.main.pcblroyals.bean.BattingStatPlayerBean(" +
-                "b.player.id, b.player.firstName, b.player.lastName, b.player.id, " +
+                "b.player.id, b.player.firstName, b.player.lastName, b.games, " +
                 "b.atBats, b.singles, b.doubles, b.triples, b.homeRuns, " +
                 "b.walks, b.hitByPitch,b.sacrifices,b.runs,b.rbis," +
                 "b.stolenBases,b.passedBalls,b.caughtStealing,b.strikeOuts" +
                 "" +
                 ")  " +
                 " from batting_career_stats b " +
-                " order by b.player.lastName";
+                " order by b.player.lastName, b.player.firstName";
 
 
 

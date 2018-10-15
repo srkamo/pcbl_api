@@ -1,6 +1,7 @@
 package com.main.pcblroyals.bean;
 
 import java.io.Serializable;
+import java.text.DecimalFormat;
 
 /**
  * Created by rblay on 10/11/18.
@@ -27,8 +28,8 @@ public class PitchingStatBean implements Serializable {
     private long stolenBases;
     private long pickoffs;
 
-    private double earnedRunAverage;
-    private double walksAndHitsPerInning;
+    private String earnedRunAverage;
+    private String walksAndHitsPerInning;
 
     public int getPlayer_id() {
 
@@ -183,19 +184,19 @@ public class PitchingStatBean implements Serializable {
         this.pickoffs = pickoffs;
     }
 
-    public double getEarnedRunAverage() {
+    public String getEarnedRunAverage() {
         return earnedRunAverage;
     }
 
-    public void setEarnedRunAverage(double earnedRunAverage) {
+    public void setEarnedRunAverage(String earnedRunAverage) {
         this.earnedRunAverage = earnedRunAverage;
     }
 
-    public double getWalksAndHitsPerInning() {
+    public String getWalksAndHitsPerInning() {
         return walksAndHitsPerInning;
     }
 
-    public void setWalksAndHitsPerInning(double walksAndHitsPerInning) {
+    public void setWalksAndHitsPerInning(String walksAndHitsPerInning) {
         this.walksAndHitsPerInning = walksAndHitsPerInning;
     }
 
@@ -220,36 +221,34 @@ public class PitchingStatBean implements Serializable {
         long integerPart = (long) inningsPitched;
         double decimalPart = inningsPitched - integerPart;
         inningsPitchedRaw = ((double) 1/3)*decimalPart + integerPart;
-        System.out.println("--------");
-        System.out.println(inningsPitched);
-        System.out.println(decimalPart);
-        System.out.println(decimalPart*(1/3));
-        System.out.println(inningsPitchedRaw);
     }
 
     public void calculateEarnedRunAverage(){
-        earnedRunAverage = 0f;
+        double tempEarnedRunAverage = 0f;
         if(inningsPitchedRaw == 0){
-            earnedRunAverage = 0f;
-            earnedRunAverage = (double) Math.round(earnedRunAverage * 1000f)/1000f;
+            tempEarnedRunAverage = 0f;
         }
         else {
             //REDO CALCULATION
-            earnedRunAverage = ((double) earnedRuns*9)/inningsPitchedRaw;
-            earnedRunAverage = (double) Math.round(earnedRunAverage * 1000f)/1000f;
+            tempEarnedRunAverage = ((double) earnedRuns*9)/inningsPitchedRaw;
+            tempEarnedRunAverage = (double) Math.round(tempEarnedRunAverage * 1000f)/1000f;
         }
+
+        DecimalFormat df = new DecimalFormat("0.00");
+        earnedRunAverage = df.format(tempEarnedRunAverage);
     }
 
     public void calculateWalksAndHitsPerInning(){
-        walksAndHitsPerInning = 0f;
+        double tempWalksAndHitsPerInning = 0f;
         if(inningsPitchedRaw == 0){
-            walksAndHitsPerInning = 0f;
-            walksAndHitsPerInning = (double) Math.round(walksAndHitsPerInning * 1000f)/1000f;
+            tempWalksAndHitsPerInning = 0f;
         }
         else {
-            walksAndHitsPerInning = (((double) hits + walks)/inningsPitchedRaw);
-            walksAndHitsPerInning = (double) Math.round(walksAndHitsPerInning * 1000f)/1000f;
+            tempWalksAndHitsPerInning = (((double) hits + walks)/inningsPitchedRaw);
+            tempWalksAndHitsPerInning = (double) Math.round(tempWalksAndHitsPerInning * 1000f)/1000f;
         }
+        DecimalFormat df = new DecimalFormat("0.00");
+        walksAndHitsPerInning = df.format(tempWalksAndHitsPerInning);
     }
 
     public PitchingStatBean(int player_id,
@@ -333,11 +332,8 @@ public class PitchingStatBean implements Serializable {
         this.stolenBases = stolenBases;
         this.pickoffs = pickoffs;
 
-        //formatInningsPitchedRaw();
-        formatInningsPitched();
+        formatInningsPitchedRaw();
         calculateEarnedRunAverage();
         calculateWalksAndHitsPerInning();
     }
-
-
 }

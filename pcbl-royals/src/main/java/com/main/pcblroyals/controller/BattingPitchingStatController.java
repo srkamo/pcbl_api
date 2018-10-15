@@ -80,7 +80,7 @@ public class BattingPitchingStatController {
         List<Object> playerSeasonStats = new ArrayList<>();
         //player info
         playerSeasonStats.add(playerService.getPlayerById(playerId));
-        //player season
+        //player season batting
         playerSeasonStats.add(battingStatService.getBattingStatsSeasonByPlayer(playerId));
 
         return playerSeasonStats;

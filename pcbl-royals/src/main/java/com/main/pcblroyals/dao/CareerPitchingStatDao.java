@@ -74,7 +74,7 @@ public class CareerPitchingStatDao {
                 "pickoffs " +
                 ") " +
                 "from pitching_career_stats p " +
-                " order by p.player.lastName";
+                " order by p.player.lastName, p.player.firstName";
         Query query = entityManager.createQuery(q);
         return (List<PitchingStatBean>) query.getResultList();
     }
