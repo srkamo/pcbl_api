@@ -15,7 +15,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
-public class CareerBattingStatController {
+public class CareerStatController {
 
     @Autowired
     @Qualifier("careerBattingStatService")
@@ -50,13 +50,20 @@ public class CareerBattingStatController {
 //        return playerService.getAllPlayer();
 //    }
 
+    // career stats page
     @GetMapping("api/viewCareerStatsAllPlayer")
     public  List<Object>  viewCareerStatsAllPlayer(){
 
         List<Object> battingPitchingStats = new ArrayList<>();
 
+        // career batting stats all players
         battingPitchingStats.add(careerBattingStatService.getAllCareerStats());
+        // all time batting stat for team
+        battingPitchingStats.add(careerBattingStatService.getAllTimeBattingStat());
+
+        // career pitching stats all players
         battingPitchingStats.add(careerPitchingStatService.getAllCareerPitchingStats());
+        // all time pitching stat for team
 
         return battingPitchingStats;
     }

@@ -33,13 +33,15 @@ public class BattingPitchingStatController {
     @Qualifier("playerService")
     private PlayerService playerService;
 
-
+    // single season page
     @GetMapping("api/getStatsBySeason/{id}")
     public List<Object> getStatsBySeason(@PathVariable(value = "id") int seasonId){
         List<Object> allStats = new ArrayList<>();
         // seasons for drop down
         allStats.add(seasonService.getAllSeasonReverseChronological());
+        // batting stats (player)
         allStats.add(battingStatService.getBattingStatsBySeason(seasonId));
+        // pitching stats (player)
         allStats.add(pitchingStatService.getPitchingStatsBySeason(seasonId));
 
         return allStats;
@@ -55,6 +57,7 @@ public class BattingPitchingStatController {
         return pitchingStatService.getPitchingStatsBySeason(seasonId);
     }
 
+    // single game page
     @GetMapping("api/getStatsBySeasonGame/{seasonId}/{gameId}")
     public List<Object> getStatsBySeasonGame(@PathVariable(value = "seasonId") int seasonId,
                                              @PathVariable(value = "gameId") int gameId){
@@ -70,6 +73,7 @@ public class BattingPitchingStatController {
 
         return allStats;
     }
+
 
     @GetMapping("api/getStatsSeasonByPlayer/{playerId}")
     public List<Object> getBattingStatsSeasonByPlayer(@PathVariable(value = "playerId") int playerId){

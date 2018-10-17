@@ -70,11 +70,20 @@ public class CareerBattingStatDao {
                 " from batting_career_stats b " +
                 " order by b.player.lastName, b.player.firstName";
 
-
-
-        //String q = "select b from batting_career_stats b order by b.player.lastName";
         Query query = entityManager.createQuery(q);
         return (List<BattingStatPlayerBean>) query.getResultList();
+    }
+
+    public List<BattingStatBean> getAllTimeBattingStat(){
+
+        String q = "select new com.main.pcblroyals.bean.BattingStatBean" +
+                "(sum(b.atBats), sum(b.singles), sum(b.doubles), sum(b.triples), sum(b.homeRuns), " +
+                "sum(b.walks), sum(b.hitByPitch), sum(b.sacrifices), sum(b.runs), sum(b.rbis), " +
+                "sum(b.stolenBases), sum(b.passedBalls), sum(b.caughtStealing), sum(b.strikeOuts)) " +
+                "from batting_stats b";
+
+        Query query = entityManager.createQuery(q);
+        return (List<BattingStatBean>) query.getResultList();
     }
 
 }

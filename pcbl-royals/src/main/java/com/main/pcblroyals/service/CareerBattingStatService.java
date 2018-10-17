@@ -53,4 +53,9 @@ public class CareerBattingStatService {
         return careerBattingStatDao.selectAllCareerStats();
     }
 
+    @Transactional
+    public List<BattingStatBean> getAllTimeBattingStat(){
+        return careerBattingStatDao.getAllTimeBattingStat();
+    }
+
 }
