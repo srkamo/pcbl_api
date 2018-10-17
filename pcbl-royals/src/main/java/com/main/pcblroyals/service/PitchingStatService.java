@@ -1,8 +1,6 @@
 package com.main.pcblroyals.service;
 
-import com.main.pcblroyals.bean.PitchingStatBean;
-import com.main.pcblroyals.bean.PitchingStatPlayerBean;
-import com.main.pcblroyals.bean.PitchingStatSeasonBean;
+import com.main.pcblroyals.bean.*;
 import com.main.pcblroyals.dao.PitchingStatDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -34,5 +32,10 @@ public class PitchingStatService {
     @Transactional
     public List<PitchingStatSeasonBean> getPitchingStatsSeasonByPlayer(int playerId){
         return pitchingStatDao.getPitchingStatsSeasonByPlayer(playerId);
+    }
+
+    @Transactional
+    public List<PitchingStatGameBean> getPitchingStatsGameBySeasonPlayer(int seasonId, int playerId){
+        return pitchingStatDao.getPitchingStatsGameBySeasonPlayer(seasonId,playerId);
     }
 }

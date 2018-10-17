@@ -1,6 +1,7 @@
 package com.main.pcblroyals.dao;
 
 import com.main.pcblroyals.bean.PitchingStatBean;
+import com.main.pcblroyals.bean.PitchingStatGameBean;
 import com.main.pcblroyals.bean.PitchingStatPlayerBean;
 import com.main.pcblroyals.bean.PitchingStatSeasonBean;
 import org.springframework.stereotype.Repository;
@@ -108,6 +109,32 @@ public class PitchingStatDao {
                 " order by p.player.lastName, p.player.firstName";
         Query query = entityManager.createQuery(q);
         return (List<PitchingStatSeasonBean>) query.getResultList();
+    }
 
+    public List<PitchingStatGameBean> getPitchingStatsGameBySeasonPlayer(int seasonId, int playerId){
+        String q = "select new com.main.pcblroyals.bean.PitchingStatGameBean(" +
+                "p.game.id, p.game.opponent.id, p.game.opponent.name, p.game.homeTeam, p.game.date,  " +
+                "sum(case when p.result = 1 then 1 else 0 end), " +
+                "sum(case when p.result = 2 then 1 else 0 end), " +
+                "sum(case when p.result = 4 then 1 else 0 end), " +
+                "sum(case when p.result = 3 then 1 else 0 end), " +
+                "SUM(ROUND(innings) + (10 * (innings - ROUND(innings)) / 3)), " +
+                "sum(earnedRuns)," +
+                "sum(totalRuns), " +
+                "sum(strikeouts), " +
+                "sum(walks), " +
+                "sum(hitByPitch), " +
+                "sum(hits), " +
+                "sum(wildPitches), " +
+                "sum(stolenBases), " +
+                "sum(pickoffs) " +
+                ") " +
+                " from pitching_stats p " +
+                " where p.game.season.id = " + seasonId +
+                " and p.player.id = " + playerId +
+                " group by p.game.id, p.game.opponent.id, p.game.opponent.name, p.game.homeTeam, p.game.date " +
+                " order by p.game.date";
+        Query query = entityManager.createQuery(q);
+        return (List<PitchingStatGameBean>) query.getResultList();
     }
 }

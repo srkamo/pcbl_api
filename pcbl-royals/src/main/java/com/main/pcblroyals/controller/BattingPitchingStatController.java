@@ -94,9 +94,12 @@ public class BattingPitchingStatController {
                                                                        @PathVariable(value = "playerId") int playerId){
         List<Object> gameStats = new ArrayList<>();
 
+        //player info
+        gameStats.add(playerService.getPlayerById(playerId));
         //game batting info, by season player
         gameStats.add(battingStatService.getBattingStatsGameBySeasonPlayer(seasonId,playerId));
         //game pitching info, by season player
+        gameStats.add(pitchingStatService.getPitchingStatsGameBySeasonPlayer(seasonId,playerId));
 
         return gameStats;
     }
