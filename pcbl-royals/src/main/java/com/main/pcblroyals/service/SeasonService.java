@@ -1,5 +1,6 @@
 package com.main.pcblroyals.service;
 
+import com.main.pcblroyals.bean.AllTimeSeasonBean;
 import com.main.pcblroyals.dao.SeasonDao;
 import com.main.pcblroyals.data.Season;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +47,10 @@ public class SeasonService {
     public void removeSeason(int seasonId) {
         seasonDao.deleteSeason(seasonId);
 
+    }
+
+    public List<AllTimeSeasonBean> getAllTimeRecord(){
+        return seasonDao.getAllTimeRecord();
     }
 
 }

@@ -1,5 +1,6 @@
 package com.main.pcblroyals.dao;
 
+import com.main.pcblroyals.bean.AllTimeSeasonBean;
 import com.main.pcblroyals.data.Season;
 import org.springframework.stereotype.Repository;
 
@@ -48,6 +49,15 @@ public class SeasonDao {
         String q = "select s from seasons s order by id desc";
         Query query = entityManager.createQuery(q);
         return (List<Season>) query.getResultList();
+
+    }
+
+    public List<AllTimeSeasonBean> getAllTimeRecord(){
+        String q = "select new com.main.pcblroyals.bean.AllTimeSeasonBean" +
+                "(sum(s.wins), sum(s.ties), sum(s.losses)) " +
+                "from seasons s";
+        Query query = entityManager.createQuery(q);
+        return (List<AllTimeSeasonBean>) query.getResultList();
     }
 
 }

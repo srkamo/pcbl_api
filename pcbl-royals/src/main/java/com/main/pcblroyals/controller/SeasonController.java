@@ -1,5 +1,6 @@
 package com.main.pcblroyals.controller;
 
+import com.main.pcblroyals.bean.AllTimeSeasonBean;
 import com.main.pcblroyals.data.Game;
 import com.main.pcblroyals.data.Season;
 import com.main.pcblroyals.service.GameService;
@@ -48,6 +49,7 @@ public class SeasonController {
     public List<Object> getMostRecentGames() {
         List<Object> seasonsAndRecentGames = new ArrayList<Object>();
         seasonsAndRecentGames.add(seasonService.getAllSeason());
+        seasonsAndRecentGames.add(seasonService.getAllTimeRecord());
         seasonsAndRecentGames.add(gameService.getMostRecentGames());
 
         return seasonsAndRecentGames;
@@ -56,6 +58,11 @@ public class SeasonController {
     @GetMapping("/api/viewAllSeason")
     public List<Season> viewAllseason() {
         return seasonService.getAllSeason();
+    }
+
+    @GetMapping("/api/getAllTimeRecord")
+    public List<AllTimeSeasonBean> getAllTimeRecord() {
+        return seasonService.getAllTimeRecord();
     }
 
 
