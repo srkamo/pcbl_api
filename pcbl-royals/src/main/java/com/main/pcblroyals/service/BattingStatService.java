@@ -1,6 +1,7 @@
 package com.main.pcblroyals.service;
 
 import com.main.pcblroyals.bean.BattingStatBean;
+import com.main.pcblroyals.bean.BattingStatGameBean;
 import com.main.pcblroyals.bean.BattingStatPlayerBean;
 import com.main.pcblroyals.bean.BattingStatSeasonBean;
 import com.main.pcblroyals.dao.BattingStatDao;
@@ -36,5 +37,10 @@ public class BattingStatService {
     @Transactional
     public List<BattingStatSeasonBean> getBattingStatsSeasonByPlayer(int playerId){
         return battingStatDao.getBattingStatsSeasonByPlayer(playerId);
+    }
+
+    @Transactional
+    public List<BattingStatGameBean> getBattingStatsGameBySeasonPlayer(int seasonId, int playerId){
+        return battingStatDao.getBattingStatsGameBySeasonPlayer(seasonId,playerId);
     }
 }

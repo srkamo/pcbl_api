@@ -1,6 +1,7 @@
 package com.main.pcblroyals.dao;
 
 import com.main.pcblroyals.bean.BattingStatBean;
+import com.main.pcblroyals.bean.BattingStatGameBean;
 import com.main.pcblroyals.bean.BattingStatPlayerBean;
 import com.main.pcblroyals.bean.BattingStatSeasonBean;
 import org.springframework.stereotype.Repository;
@@ -66,5 +67,24 @@ public class BattingStatDao {
 
         Query query = entityManager.createQuery(q);
         return (List<BattingStatSeasonBean>) query.getResultList();
+    }
+
+    public List<BattingStatGameBean> getBattingStatsGameBySeasonPlayer(int seasonId, int playerId){
+        String q = "select new com.main.pcblroyals.bean.BattingStatGameBean(" +
+                "b.game.id, b.game.opponent.id, b.game.opponent.name, b.game.homeTeam, b.game.date,  " +
+                "sum(b.atBats), sum(b.singles), sum(b.doubles), sum(b.triples), sum(b.homeRuns), " +
+                "sum(b.walks), sum(b.hitByPitch),sum(b.sacrifices),sum(b.runs),sum(b.rbis)," +
+                "sum(b.stolenBases),sum(b.passedBalls),sum(b.caughtStealing),sum(b.strikeOuts)" +
+                "" +
+                ")  " +
+                " from batting_stats b " +
+                " where b.game.season.id = " + seasonId +
+                " and b.player.id = " + playerId +
+                " group by b.game.id, b.game.opponent.id, b.game.opponent.name, b.game.homeTeam, b.game.date " +
+                " order by b.game.date";
+
+        Query query = entityManager.createQuery(q);
+        return (List<BattingStatGameBean>) query.getResultList();
+
     }
 }

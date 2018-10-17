@@ -85,4 +85,16 @@ public class BattingPitchingStatController {
         return playerSeasonStats;
     }
 
+    @GetMapping("api/getStatsGameBySeasonPlayer/{seasonId}/{playerId}")
+    public List<Object> getBattingStatsGameBySeasonPlayer(@PathVariable(value = "seasonId") int seasonId,
+                                                                       @PathVariable(value = "playerId") int playerId){
+        List<Object> gameStats = new ArrayList<>();
+
+        //game batting info, by season player
+        gameStats.add(battingStatService.getBattingStatsGameBySeasonPlayer(seasonId,playerId));
+        //game pitching info, by season player
+
+        return gameStats;
+    }
+
 }

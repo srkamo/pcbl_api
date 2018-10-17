@@ -44,7 +44,7 @@ public class BattingStatSeasonBean extends BattingStatBean implements Serializab
     }
 
 
-    //constructor for single season or game batting stats
+    //constructor for single season batting stats
     public BattingStatSeasonBean(int season_id, String season, int year, long numGames, long atBats, long singles, long doubles, long triples, long homeRuns, long walks, long hitByPitch, long sacrifices, long runs, long rbis, long stolenBases, long passedBalls, long caughtStealing, long strikeOuts) {
         this.season_id = season_id;
         this.season = season;

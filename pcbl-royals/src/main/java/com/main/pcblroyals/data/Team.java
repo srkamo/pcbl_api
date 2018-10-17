@@ -14,8 +14,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
-@Entity
-@Table (name="teams", schema="PCBL")
+@Entity(name="teams")
+@Table (name="teams", schema="pcblroyals_dev")
 public class Team implements Comparable<Team> {
     private int id;
     private String name;
