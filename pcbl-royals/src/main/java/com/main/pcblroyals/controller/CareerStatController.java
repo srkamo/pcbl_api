@@ -64,6 +64,7 @@ public class CareerStatController {
         // career pitching stats all players
         battingPitchingStats.add(careerPitchingStatService.getAllCareerPitchingStats());
         // all time pitching stat for team
+        battingPitchingStats.add(careerPitchingStatService.getAllTimePitchingStat());
 
         return battingPitchingStats;
     }

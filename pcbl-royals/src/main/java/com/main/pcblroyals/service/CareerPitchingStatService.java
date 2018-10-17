@@ -55,4 +55,9 @@ public class CareerPitchingStatService {
         return careerPitchingStatDao.selectAllCareerPitchingStats();
     }
 
+    @Transactional
+    public List<PitchingStatBean> getAllTimePitchingStat(){
+        return careerPitchingStatDao.getAllTimePitchingStat();
+    }
+
 }

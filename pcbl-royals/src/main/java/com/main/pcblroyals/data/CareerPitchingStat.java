@@ -12,12 +12,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity(name = "pitching_career_stats")
-@Table (name="pitching_career_stats", schema="PCBL")
+@Table (name="pitching_career_stats", schema="pcblroyals_dev")
 public class CareerPitchingStat {
 	private int id;
     private Player player;
     private int games;
-    private float innings;
+    private double innings;
     private int earnedRuns;
     private int totalRuns;
     private int strikeouts;
@@ -62,7 +62,7 @@ public class CareerPitchingStat {
 	}
 	
 	@Column (name="innings", nullable=false)
-	public float getInnings() {
+	public double getInnings() {
 		return innings;
 	}
 	public void setInnings(float innings) {

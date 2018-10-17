@@ -95,7 +95,7 @@ public class PitchingStatPlayerBean extends PitchingStatBean implements Serializ
                             int losses,
                             int ties,
                             int saves,
-                            float inningsPitchedRaw,
+                            double inningsPitchedRaw,
                             int earnedRuns,
                             int totalRuns,
                             int strikeouts,

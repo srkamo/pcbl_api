@@ -80,4 +80,20 @@ public class CareerPitchingStatDao {
         return (List<PitchingStatPlayerBean>) query.getResultList();
     }
 
+    /*
+            long wins, long losses, long ties, long saves, double inningsPitchedRaw, long earnedRuns, long totalRuns, long strikeouts, long walks, long hitByPitch, long hits, long wildPitches, long stolenBases, long pickoffs
+     */
+
+    public List<PitchingStatBean> getAllTimePitchingStat(){
+
+        String q = "select new com.main.pcblroyals.bean.PitchingStatBean" +
+                "(sum(p.wins), sum(p.losses), sum(p.ties), sum(p.saves), sum(p.innings), " +
+                "sum(p.earnedRuns), sum(p.totalRuns), sum(p.strikeouts), sum(p.walks), sum(p.hitByPitch), " +
+                "sum(p.hits), sum(p.wildPitches), sum(p.stolenBases), sum(p.pickoffs)) " +
+                "from pitching_career_stats p";
+
+        Query query = entityManager.createQuery(q);
+        return (List<PitchingStatBean>) query.getResultList();
+    }
+
 }

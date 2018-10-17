@@ -164,7 +164,7 @@ public class PitchingStatBean implements Serializable {
     public void formatInningsPitched(){
         long integerPart = (long) inningsPitchedRaw;
         double decimalPart = inningsPitchedRaw - integerPart;
-        double roundedDecimalPart = (float)Math.round(decimalPart * 10f)/10f;
+        double roundedDecimalPart = (double)Math.round(decimalPart * 10f)/10f;
         inningsPitched = (double) integerPart;
 
         if(roundedDecimalPart > 0.1 && roundedDecimalPart < 0.45){
@@ -228,6 +228,27 @@ public class PitchingStatBean implements Serializable {
         this.wildPitches = 0;
         this.stolenBases = 0;
         this.pickoffs = 0;
+
+        formatInningsPitched();
+        calculateEarnedRunAverage();
+        calculateWalksAndHitsPerInning();
+    }
+
+    public PitchingStatBean(long wins, long losses, long ties, long saves, double inningsPitchedRaw, long earnedRuns, long totalRuns, long strikeouts, long walks, long hitByPitch, long hits, long wildPitches, long stolenBases, long pickoffs) {
+        this.wins = wins;
+        this.losses = losses;
+        this.ties = ties;
+        this.saves = saves;
+        this.inningsPitchedRaw = inningsPitchedRaw;
+        this.earnedRuns = earnedRuns;
+        this.totalRuns = totalRuns;
+        this.strikeouts = strikeouts;
+        this.walks = walks;
+        this.hitByPitch = hitByPitch;
+        this.hits = hits;
+        this.wildPitches = wildPitches;
+        this.stolenBases = stolenBases;
+        this.pickoffs = pickoffs;
 
         formatInningsPitched();
         calculateEarnedRunAverage();
