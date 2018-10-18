@@ -52,6 +52,8 @@ public class SeasonDao {
 
     }
 
+
+    // w-l-t across all seasons
     public List<AllTimeSeasonBean> getAllTimeRecord(){
         String q = "select new com.main.pcblroyals.bean.AllTimeSeasonBean" +
                 "(sum(s.wins), sum(s.ties), sum(s.losses)) " +

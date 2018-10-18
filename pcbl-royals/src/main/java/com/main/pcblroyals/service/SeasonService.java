@@ -19,7 +19,6 @@ public class SeasonService {
 
     @Transactional
     public Season getSeasonById(int seasonId) {
-
         return seasonDao.selectSeasonById(seasonId);
     }
 

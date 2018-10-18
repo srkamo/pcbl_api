@@ -5,6 +5,7 @@ import com.main.pcblroyals.bean.BattingStatGameBean;
 import com.main.pcblroyals.bean.BattingStatPlayerBean;
 import com.main.pcblroyals.bean.BattingStatSeasonBean;
 import com.main.pcblroyals.dao.BattingStatDao;
+import com.main.pcblroyals.data.BattingStat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -42,5 +43,10 @@ public class BattingStatService {
     @Transactional
     public List<BattingStatGameBean> getBattingStatsGameBySeasonPlayer(int seasonId, int playerId){
         return battingStatDao.getBattingStatsGameBySeasonPlayer(seasonId,playerId);
+    }
+
+    @Transactional
+    public List<BattingStatBean> getAllTimeBattingStatForSeason(int seasonId){
+        return battingStatDao.getAllTimeBattingStatForSeason(seasonId);
     }
 }

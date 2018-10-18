@@ -17,7 +17,7 @@ public class PitchingStat {
 	private int id;
     private Player player;
     private Game game;
-    private float innings;
+    private double innings;
     private int earnedRuns;
     private int totalRuns;
     private int strikeouts;
@@ -57,7 +57,7 @@ public class PitchingStat {
 	}
 
 	@Column (name="innings", nullable=false)
-	public float getInnings() {
+	public double getInnings() {
 		return innings;
 	}
 	public void setInnings(float innings) {

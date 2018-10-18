@@ -60,6 +60,7 @@ public class SeasonController {
         return seasonService.getAllSeason();
     }
 
+    // gets the w-l-t across all seasons
     @GetMapping("/api/getAllTimeRecord")
     public List<AllTimeSeasonBean> getAllTimeRecord() {
         return seasonService.getAllTimeRecord();

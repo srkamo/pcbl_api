@@ -39,10 +39,16 @@ public class BattingPitchingStatController {
         List<Object> allStats = new ArrayList<>();
         // seasons for drop down
         allStats.add(seasonService.getAllSeasonReverseChronological());
+
         // batting stats (player)
         allStats.add(battingStatService.getBattingStatsBySeason(seasonId));
+        // all time batting for this season
+        allStats.add(battingStatService.getAllTimeBattingStatForSeason(seasonId));
+
         // pitching stats (player)
         allStats.add(pitchingStatService.getPitchingStatsBySeason(seasonId));
+        // all time pitching for this season
+        allStats.add(pitchingStatService.getAllTimePitchingStatForSeason(seasonId));
 
         return allStats;
     }

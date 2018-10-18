@@ -87,4 +87,16 @@ public class BattingStatDao {
         return (List<BattingStatGameBean>) query.getResultList();
 
     }
+
+    // get the all time batting stat line for a single season
+    public List<BattingStatBean> getAllTimeBattingStatForSeason(int seasonId){
+        String q = "select new com.main.pcblroyals.bean.BattingStatBean" +
+                "(sum(b.atBats), sum(b.singles), sum(b.doubles), sum(b.triples), sum(b.homeRuns), " +
+                "sum(b.walks), sum(b.hitByPitch), sum(b.sacrifices), sum(b.runs), sum(b.rbis), " +
+                "sum(b.stolenBases), sum(b.passedBalls), sum(b.caughtStealing), sum(b.strikeOuts)) " +
+                "from batting_stats b where b.game.season.id = " + seasonId;
+
+        Query query = entityManager.createQuery(q);
+        return (List<BattingStatBean>) query.getResultList();
+    }
 }

@@ -111,6 +111,10 @@ public class PitchingStatDao {
         return (List<PitchingStatSeasonBean>) query.getResultList();
     }
 
+    /*
+    int game_id, int opponent_id, String opponentName, boolean homeTeam, Date date, long wins, long losses, long ties, long saves, double inningsPitchedRaw, long earnedRuns, long totalRuns, long strikeouts, long walks, long hitByPitch, long hits, long wildPitches, long stolenBases, long pickoffs
+     */
+
     public List<PitchingStatGameBean> getPitchingStatsGameBySeasonPlayer(int seasonId, int playerId){
         String q = "select new com.main.pcblroyals.bean.PitchingStatGameBean(" +
                 "p.game.id, p.game.opponent.id, p.game.opponent.name, p.game.homeTeam, p.game.date,  " +
@@ -136,5 +140,33 @@ public class PitchingStatDao {
                 " order by p.game.date";
         Query query = entityManager.createQuery(q);
         return (List<PitchingStatGameBean>) query.getResultList();
+    }
+
+    /*
+    long wins, long losses, long ties, long saves, double inningsPitchedRaw, long earnedRuns, long totalRuns, long strikeouts, long walks, long hitByPitch, long hits, long wildPitches, long stolenBases, long pickoffs
+     */
+
+    // get the all time pitching stat line for a single season
+    public List<PitchingStatBean> getAllTimePitchingStatForSeason(int seasonId){
+        String q = "select new com.main.pcblroyals.bean.PitchingStatBean(" +
+                "sum(case when p.result = 1 then 1 else 0 end), " +
+                "sum(case when p.result = 2 then 1 else 0 end), " +
+                "sum(case when p.result = 4 then 1 else 0 end), " +
+                "sum(case when p.result = 3 then 1 else 0 end), " +
+                "SUM(ROUND(innings) + (10 * (innings - ROUND(innings)) / 3)), " +
+                "sum(earnedRuns)," +
+                "sum(totalRuns), " +
+                "sum(strikeouts), " +
+                "sum(walks), " +
+                "sum(hitByPitch), " +
+                "sum(hits), " +
+                "sum(wildPitches), " +
+                "sum(stolenBases), " +
+                "sum(pickoffs) " +
+                ") " +
+                "from pitching_stats p where p.game.season.id = " + seasonId;
+
+        Query query = entityManager.createQuery(q);
+        return (List<PitchingStatBean>) query.getResultList();
     }
 }
