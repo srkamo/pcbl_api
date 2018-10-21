@@ -8,6 +8,7 @@ public class PitchingStatPlayerBean extends PitchingStatBean implements Serializ
     protected int player_id;
     protected String firstName;
     protected String lastName;
+    protected String displayName;
     protected long numGames;
 
     public int getPlayer_id() {
@@ -41,6 +42,14 @@ public class PitchingStatPlayerBean extends PitchingStatBean implements Serializ
 
     public void setNumGames(long numGames) {
         this.numGames = numGames;
+    }
+
+    public String getDisplayName() { return displayName; }
+
+    public void setDisplayName(String displayName) { this.displayName = displayName;}
+
+    protected void formatDisplayName(){
+        displayName = lastName + ", " + firstName;
     }
 
 
@@ -82,6 +91,7 @@ public class PitchingStatPlayerBean extends PitchingStatBean implements Serializ
         this.stolenBases = stolenBases;
         this.pickoffs = pickoffs;
 
+        formatDisplayName();
         formatInningsPitched();
         calculateEarnedRunAverage();
         calculateWalksAndHitsPerInning();
@@ -125,6 +135,7 @@ public class PitchingStatPlayerBean extends PitchingStatBean implements Serializ
         this.stolenBases = stolenBases;
         this.pickoffs = pickoffs;
 
+        formatDisplayName();
         formatInningsPitchedRaw();
         calculateEarnedRunAverage();
         calculateWalksAndHitsPerInning();

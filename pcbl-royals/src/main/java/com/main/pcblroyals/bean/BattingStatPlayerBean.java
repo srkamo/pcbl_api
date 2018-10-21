@@ -10,7 +10,7 @@ public class BattingStatPlayerBean extends BattingStatBean implements Serializab
     protected int player_id;
     protected String firstName;
     protected String lastName;
-
+    protected String displayName;
     protected long numGames;
 
     public long getPlayer_id() {
@@ -45,6 +45,14 @@ public class BattingStatPlayerBean extends BattingStatBean implements Serializab
         this.numGames = numGames;
     }
 
+    public String getDisplayName() { return displayName; }
+
+    public void setDisplayName(String displayName) { this.displayName = displayName;}
+
+    protected void formatDisplayName(){
+        displayName = lastName + ", " + firstName;
+    }
+
     //constructor for single season or game batting stats
     public BattingStatPlayerBean(int player_id, String firstName, String lastName, long numGames, long atBats, long singles, long doubles, long triples, long homeRuns, long walks, long hitByPitch, long sacrifices, long runs, long rbis, long stolenBases, long passedBalls, long caughtStealing, long strikeOuts) {
         this.player_id = player_id;
@@ -66,6 +74,7 @@ public class BattingStatPlayerBean extends BattingStatBean implements Serializab
         this.caughtStealing = caughtStealing;
         this.strikeOuts = strikeOuts;
 
+        formatDisplayName();
         calculateBattingAverage();
         calculateOnBasePercentage();
         calculateSluggingAverage();
@@ -92,6 +101,7 @@ public class BattingStatPlayerBean extends BattingStatBean implements Serializab
         this.caughtStealing = caughtStealing;
         this.strikeOuts = strikeOuts;
 
+        formatDisplayName();
         calculateBattingAverage();
         calculateOnBasePercentage();
         calculateSluggingAverage();
