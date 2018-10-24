@@ -43,6 +43,14 @@ public class SingleSeasonBattingRecordBean implements Serializable {
         return recordValue;
     }
 
+    public String getRoundedValue() {
+        return roundedValue;
+    }
+
+    public void setRoundedValue(String roundedValue) {
+        this.roundedValue = roundedValue;
+    }
+
     public void setRecordValue(BigDecimal recordValue) {
         this.recordValue = recordValue;
     }
