@@ -46,15 +46,4 @@ public class BattingStatService {
     public List<BattingStatBean> getAllTimeBattingStatForSeason(int seasonId){
         return battingStatDao.getAllTimeBattingStatForSeason(seasonId);
     }
-
-    @Transactional
-    public List<SingleSeasonBattingRecordBean> getSingleSeasonBattingRecordHits(){
-        return battingStatDao.getSingleSeasonBattingRecordHits();
-    }
-
-    @Transactional
-    public List<SingleSeasonBattingRecordBean> getSingleSeasonBattingRecordDoubles(){
-        return battingStatDao.getSingleSeasonBattingRecordDoubles();
-    }
-
 }

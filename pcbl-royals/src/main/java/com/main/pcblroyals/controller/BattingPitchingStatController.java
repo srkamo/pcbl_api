@@ -109,26 +109,4 @@ public class BattingPitchingStatController {
 
         return gameStats;
     }
-
-    @GetMapping("api/getRecords")
-    public List<Object> getSingleSeasonRecordHits(){
-        List<Object> recordsList = new ArrayList<Object>();
-
-        //single season batting records hits
-        List<SingleSeasonBattingRecordBean> singleSeasonBattingHits = battingStatService.getSingleSeasonBattingRecordHits();
-        recordsList.add(singleSeasonBattingHits);
-
-        //single season batting records doubles
-        List<SingleSeasonBattingRecordBean> singleSeasonBattingDoubles = battingStatService.getSingleSeasonBattingRecordDoubles();
-        recordsList.add(singleSeasonBattingDoubles);
-
-        //singles season batting records triples
-        List<SingleSeasonBattingRecordBean> singleSeasonBattingTriples = battingStatService.getSingleSeasonBattingRecordDoubles();
-        recordsList.add(singleSeasonBattingDoubles);
-
-        return recordsList;
-    }
-
-
-
 }
