@@ -1,9 +1,6 @@
 package com.main.pcblroyals.service;
 
-import com.main.pcblroyals.bean.BattingStatBean;
-import com.main.pcblroyals.bean.BattingStatGameBean;
-import com.main.pcblroyals.bean.BattingStatPlayerBean;
-import com.main.pcblroyals.bean.BattingStatSeasonBean;
+import com.main.pcblroyals.bean.*;
 import com.main.pcblroyals.dao.BattingStatDao;
 import com.main.pcblroyals.data.BattingStat;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,4 +46,15 @@ public class BattingStatService {
     public List<BattingStatBean> getAllTimeBattingStatForSeason(int seasonId){
         return battingStatDao.getAllTimeBattingStatForSeason(seasonId);
     }
+
+    @Transactional
+    public List<SingleSeasonBattingRecordBean> getSingleSeasonBattingRecordHits(){
+        return battingStatDao.getSingleSeasonBattingRecordHits();
+    }
+
+    @Transactional
+    public List<SingleSeasonBattingRecordBean> getSingleSeasonBattingRecordDoubles(){
+        return battingStatDao.getSingleSeasonBattingRecordDoubles();
+    }
+
 }
