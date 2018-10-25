@@ -7,7 +7,7 @@ import java.text.DecimalFormat;
 /**
  * Created by rblay on 10/23/18.
  */
-public class SingleSeasonBattingRecordBean implements Serializable {
+public class SingleSeasonPitchingRecordBean implements Serializable {
     protected String recordString;
     protected String seasonString;
     protected String recordName;
@@ -55,11 +55,11 @@ public class SingleSeasonBattingRecordBean implements Serializable {
     }
 
     protected void calculateRoundedValue(){
-        DecimalFormat df = new DecimalFormat("0.000");
+        DecimalFormat df = new DecimalFormat("0.00");
         roundedValue = df.format(recordValue);
     }
 
-    public SingleSeasonBattingRecordBean(String recordString, String seasonString, String recordName, BigDecimal recordValue) {
+    public SingleSeasonPitchingRecordBean(String recordString, String seasonString, String recordName, BigDecimal recordValue) {
         this.recordString = recordString;
         this.seasonString = seasonString;
         this.recordName = recordName;

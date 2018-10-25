@@ -14,16 +14,16 @@ import java.util.List;
 /**
  * Created by rblay on 10/24/18.
  */
-@Repository("recordDao")
-public class RecordDao {
+@Repository("singleSeasonBattingRecordDao")
+public class SingleSeasonBattingRecordDao {
 
     @PersistenceContext
     EntityManager entityManager;
 
     protected int singleSeasonBattingGameFilter = 10;
 
-    //SINGLE SEASON RECORDS BATTING
-    public List<SingleSeasonBattingRecordBean> getTopPlayersSingleSeasonForStat(String statQuery, String recordName){
+    //SINGLE SEASON RECORDS
+    public List<SingleSeasonBattingRecordBean> getTopPlayersSingleSeasonBattingForStat(String statQuery, String recordName){
         String q = statQuery;
         Query query = entityManager.createNativeQuery(q);
         List<Object[]> allStatRecords = query.getResultList();
@@ -48,6 +48,7 @@ public class RecordDao {
         return topPlayersList;
     }
 
+    //SINGLE SEASON BATTING
     public String makeSingleSeasonBattingSumQuery(String recordName){
         String q = "SELECT  " +
                 "    b.player_id,  " +
@@ -81,62 +82,62 @@ public class RecordDao {
     public List<SingleSeasonBattingRecordBean> getSingleSeasonBattingRecordHits(){
         String recordName = "singles";
         String q = makeSingleSeasonBattingSumQuery(recordName);
-        return getTopPlayersSingleSeasonForStat(q,"hits");
+        return getTopPlayersSingleSeasonBattingForStat(q,"hits");
     }
 
     //doubles single season record
     public List<SingleSeasonBattingRecordBean> getSingleSeasonBattingRecordDoubles(){
         String recordName = "doubles";
         String q = makeSingleSeasonBattingSumQuery(recordName);
-        return getTopPlayersSingleSeasonForStat(q,"doubles");
+        return getTopPlayersSingleSeasonBattingForStat(q,"doubles");
     }
 
     //triples single season record
     public List<SingleSeasonBattingRecordBean> getSingleSeasonBattingRecordTriples(){
         String recordName = "triples";
         String q = makeSingleSeasonBattingSumQuery(recordName);
-        return getTopPlayersSingleSeasonForStat(q,"triples");
+        return getTopPlayersSingleSeasonBattingForStat(q,"triples");
     }
 
     //homeruns single season record
     public List<SingleSeasonBattingRecordBean> getSingleSeasonBattingRecordHomeruns(){
         String recordName = "homeruns";
         String q = makeSingleSeasonBattingSumQuery(recordName);
-        return getTopPlayersSingleSeasonForStat(q,"homeruns");
+        return getTopPlayersSingleSeasonBattingForStat(q,"homeruns");
     }
 
     //runs single season record
     public List<SingleSeasonBattingRecordBean> getSingleSeasonBattingRecordRuns(){
         String recordName = "runs";
         String q = makeSingleSeasonBattingSumQuery(recordName);
-        return getTopPlayersSingleSeasonForStat(q,"runs");
+        return getTopPlayersSingleSeasonBattingForStat(q,"runs");
     }
 
     //rbis single season record
     public List<SingleSeasonBattingRecordBean> getSingleSeasonBattingRecordRbis(){
         String recordName = "rbis";
         String q = makeSingleSeasonBattingSumQuery(recordName);
-        return getTopPlayersSingleSeasonForStat(q,"rbis");
+        return getTopPlayersSingleSeasonBattingForStat(q,"rbis");
     }
 
     //stolenbases single season record
     public List<SingleSeasonBattingRecordBean> getSingleSeasonBattingRecordStolenBases(){
         String recordName = "stolenbases";
         String q = makeSingleSeasonBattingSumQuery(recordName);
-        return getTopPlayersSingleSeasonForStat(q,"stolenbases");
+        return getTopPlayersSingleSeasonBattingForStat(q,"stolenbases");
     }
 
     //rbis single season record
     public List<SingleSeasonBattingRecordBean> getSingleSeasonBattingRecordWalks(){
         String recordName = "walks";
         String q = makeSingleSeasonBattingSumQuery(recordName);
-        return getTopPlayersSingleSeasonForStat(q,"walks");
+        return getTopPlayersSingleSeasonBattingForStat(q,"walks");
     }
 
     public List<SingleSeasonBattingRecordBean> getSingleSeasonBattingRecordHitByPitch(){
         String recordName = "hitbypitch";
         String q = makeSingleSeasonBattingSumQuery(recordName);
-        return getTopPlayersSingleSeasonForStat(q,"hitbypitch");
+        return getTopPlayersSingleSeasonBattingForStat(q,"hitbypitch");
     }
 
     public List<SingleSeasonBattingRecordBean> getSingleSeasonBattingRecordBattingAverage(){
@@ -171,7 +172,7 @@ public class RecordDao {
                 " COUNT(1) > " + Integer.toString(singleSeasonBattingGameFilter) + " " +
                 "ORDER BY  " +
                 " 6 DESC, s.year, p.last_name, p.first_name";
-        return getTopPlayersSingleSeasonForStat(q,"batting average");
+        return getTopPlayersSingleSeasonBattingForStat(q,"batting average");
     }
 
     public List<SingleSeasonBattingRecordBean> getSingleSeasonBattingRecordSluggingPercentage(){
@@ -206,7 +207,7 @@ public class RecordDao {
                 " COUNT(1) > " + Integer.toString(singleSeasonBattingGameFilter) + " " +
                 "ORDER BY  " +
                 " 6 DESC, s.year, p.last_name, p.first_name";
-        return getTopPlayersSingleSeasonForStat(q,"slugging percentage");
+        return getTopPlayersSingleSeasonBattingForStat(q,"slugging percentage");
     }
 
     public List<SingleSeasonBattingRecordBean> getSingleSeasonBattingRecordOnBasePercentage(){
@@ -242,7 +243,7 @@ public class RecordDao {
                 "ORDER BY  " +
                 " 6 DESC, s.year, p.last_name, p.first_name";
 
-        return getTopPlayersSingleSeasonForStat(q,"on base percentage");
+        return getTopPlayersSingleSeasonBattingForStat(q,"on base percentage");
     }
 
     public List<SingleSeasonBattingRecordBean> getSingleSeasonBattingRecordMVP(){
@@ -296,7 +297,7 @@ public class RecordDao {
                 "WHERE " +
                 " t1.mvp = t3.max_mvp  " +
                 "ORDER BY " +
-                " t1.year, t1.season DESC;";
+                " t1.year, t1.season DESC";
 
         Query query = entityManager.createNativeQuery(q);
         List<Object[]> allMVPRecordsecords = query.getResultList();

@@ -1,7 +1,7 @@
 package com.main.pcblroyals.controller;
 
-import com.main.pcblroyals.bean.SingleSeasonBattingRecordBean;
-import com.main.pcblroyals.service.RecordService;
+import com.main.pcblroyals.service.SingleSeasonBattingRecordService;
+import com.main.pcblroyals.service.SingleSeasonPitchingRecordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -19,51 +19,75 @@ import java.util.List;
 public class RecordController {
 
     @Autowired
-    @Qualifier("recordService")
-    private RecordService recordService;
+    @Qualifier("singleSeasonBattingRecordService")
+    private SingleSeasonBattingRecordService singleSeasonBattingRecordService;
+
+    @Autowired
+    @Qualifier("singleSeasonPitchingRecordService")
+    private SingleSeasonPitchingRecordService singleSeasonPitchingRecordService;
 
     @GetMapping("api/getRecords")
     public List<Object> getSingleSeasonRecordHits(){
         List<Object> recordsList = new ArrayList<Object>();
 
+        //SINGLE SEASON BATTING
         //single season batting records hits
-        recordsList.add(recordService.getSingleSeasonBattingRecordHits());
+        recordsList.add(singleSeasonBattingRecordService.getSingleSeasonBattingRecordHits());
 
         //single season batting records doubles
-        recordsList.add(recordService.getSingleSeasonBattingRecordDoubles());
+        recordsList.add(singleSeasonBattingRecordService.getSingleSeasonBattingRecordDoubles());
 
         //single season batting records triples
-        recordsList.add(recordService.getSingleSeasonBattingRecordTriples());
+        recordsList.add(singleSeasonBattingRecordService.getSingleSeasonBattingRecordTriples());
 
         //single season batting records homeruns
-        recordsList.add(recordService.getSingleSeasonBattingRecordHomeruns());
+        recordsList.add(singleSeasonBattingRecordService.getSingleSeasonBattingRecordHomeruns());
 
         //single season batting records runs
-        recordsList.add(recordService.getSingleSeasonBattingRecordRuns());
+        recordsList.add(singleSeasonBattingRecordService.getSingleSeasonBattingRecordRuns());
 
         //single season batting records rbis
-        recordsList.add(recordService.getSingleSeasonBattingRecordRbis());
+        recordsList.add(singleSeasonBattingRecordService.getSingleSeasonBattingRecordRbis());
 
         //single season batting records stolenbases
-        recordsList.add(recordService.getSingleSeasonBattingRecordStolenBases());
+        recordsList.add(singleSeasonBattingRecordService.getSingleSeasonBattingRecordStolenBases());
 
         //single season batting records walks
-        recordsList.add(recordService.getSingleSeasonBattingRecordWalks());
+        recordsList.add(singleSeasonBattingRecordService.getSingleSeasonBattingRecordWalks());
 
         //single season batting records hitbypitch
-        recordsList.add(recordService.getSingleSeasonBattingRecordHitByPitch());
+        recordsList.add(singleSeasonBattingRecordService.getSingleSeasonBattingRecordHitByPitch());
 
         //single season batting records batting average
-        recordsList.add(recordService.getSingleSeasonBattingRecordBattingAverage());
+        recordsList.add(singleSeasonBattingRecordService.getSingleSeasonBattingRecordBattingAverage());
 
         //single season batting records slugging average
-        recordsList.add(recordService.getSingleSeasonBattingRecordSluggingPercentage());
+        recordsList.add(singleSeasonBattingRecordService.getSingleSeasonBattingRecordSluggingPercentage());
 
         //single season batting records on base percentage
-        recordsList.add(recordService.getSingleSeasonBattingRecordOnBasePercentage());
+        recordsList.add(singleSeasonBattingRecordService.getSingleSeasonBattingRecordOnBasePercentage());
 
-        //single season batting records on base percentage
-        recordsList.add(recordService.getSingleSeasonBattingRecordMVP());
+        //single season batting records mvp
+        recordsList.add(singleSeasonBattingRecordService.getSingleSeasonBattingRecordMVP());
+
+        //SINGLE SEASON PITCHING
+        //single season pitching records wins
+        recordsList.add(singleSeasonPitchingRecordService.getSingleSeasonPitchingRecordWins());
+
+        //single season pitching records wins
+        recordsList.add(singleSeasonPitchingRecordService.getSingleSeasonPitchingRecordSaves());
+
+        //single season batting records strikeouts
+        recordsList.add(singleSeasonPitchingRecordService.getSingleSeasonPitchingRecordStrikeouts());
+
+        //single season batting records era
+        recordsList.add(singleSeasonPitchingRecordService.getSingleSeasonPitchingRecordERA());
+
+        //single season batting records era
+        recordsList.add(singleSeasonPitchingRecordService.getSingleSeasonPitchingRecordWHIP());
+
+        //single season batting records cy young
+        recordsList.add(singleSeasonPitchingRecordService.getSingleSeasonPitchingRecordCyYoung());
 
         return recordsList;
     }
