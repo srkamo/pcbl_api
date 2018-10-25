@@ -35,8 +35,8 @@ public class SingleGameBattingRecordDao {
 
             int homeAway = (int)record[4];
             int year = (int)record[6];
-            String opponent = (String)record[3];
             String date = (String)record[7];
+            String opponent = (String)record[3];
             String gameString = "";
 
             if(homeAway == 1){
@@ -93,11 +93,6 @@ public class SingleGameBattingRecordDao {
                 "ORDER BY  " +
                 " 9 DESC, g.date, p.last_name,p.first_name";
         return q;
-    }
-    public List<SingleGameRecordBean> getSingleGameBattingRecordTemplate(){
-        String recordName = "temp";
-        String q = makeSingleGameBattingSumQuery(recordName);
-        return getTopPlayersSingleGameBattingForStat(q,"temp");
     }
 
     public List<SingleGameRecordBean> getSingleGameBattingRecordHits(){

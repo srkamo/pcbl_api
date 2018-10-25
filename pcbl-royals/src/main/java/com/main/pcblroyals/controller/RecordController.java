@@ -1,6 +1,7 @@
 package com.main.pcblroyals.controller;
 
 import com.main.pcblroyals.service.SingleGameBattingRecordService;
+import com.main.pcblroyals.service.SingleGamePitchingRecordService;
 import com.main.pcblroyals.service.SingleSeasonBattingRecordService;
 import com.main.pcblroyals.service.SingleSeasonPitchingRecordService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,10 @@ public class RecordController {
     @Autowired
     @Qualifier("singleGameBattingRecordService")
     private SingleGameBattingRecordService singleGameBattingRecordService;
+
+    @Autowired
+    @Qualifier("singleGamePitchingRecordService")
+    private SingleGamePitchingRecordService singleGamePitchingRecordService;
 
     @GetMapping("api/getRecords")
     public List<Object> getSingleSeasonRecordHits(){
@@ -126,6 +131,13 @@ public class RecordController {
 
         //single game batting records hitbypitch
         recordsList.add(singleGameBattingRecordService.getSingleGameBattingRecordHitByPitch());
+
+
+        /////////////////////
+        //SINGLE GAME PITCHING
+        /////////////////////
+        //single game pitching records strikeouts
+        recordsList.add(singleGamePitchingRecordService.getSingleSeasonPitchingRecordStrikeouts());
 
         return recordsList;
     }
