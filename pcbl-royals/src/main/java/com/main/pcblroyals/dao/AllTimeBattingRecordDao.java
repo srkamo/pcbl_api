@@ -93,7 +93,6 @@ public class AllTimeBattingRecordDao {
                 "ORDER BY  " +
                 "  4 DESC";
         return getTopPlayersAllTimeBattingForStat(q,"games");
-
     }
 
     public List<RecordBean> getAllTimeBattingRecordHits(){
@@ -319,72 +318,5 @@ public class AllTimeBattingRecordDao {
                 "  6 DESC, s.year, p.last_name,p.first_name; */";
         return getTopPlayersAllTimeBattingForStat(q,"mvp");
     }
-
-//    public List<RecordBean> getAllTimeBattingRecordMVP2(){
-//        String q = "SELECT  " +
-//                " t1.player_id, " +
-//                " t1.first_name, " +
-//                " t1.last_name, " +
-//                " t1.season, " +
-//                " t1.year, " +
-//                " t1.season_id," +
-//                " t1.mvp " +
-//                "FROM " +
-//                " (SELECT " +
-//                "  b.player_id,  " +
-//                "     p.first_name,  " +
-//                "     p.last_name,  " +
-//                "     s.season,  " +
-//                "     s.year, " +
-//                "     g.season_id, " +
-//                "     SUM(singles) + SUM(doubles)*2 + SUM(triples)*3 + SUM(homeruns)*4 + SUM(stolenbases) +SUM(runs) + SUM(rbis) + SUM(walks) + SUM(hitbypitch) - SUM(strikeouts) - SUM(caughtstealing) AS mvp    " +
-//                " FROM  " +
-//                "  batting_stats b " +
-//                "  JOIN players p ON b.player_id = p.id " +
-//                "  JOIN games g ON b.game_id = g.id " +
-//                "  JOIN seasons s ON g.season_id = s.id " +
-//                " GROUP BY " +
-//                "  b.player_id,  " +
-//                "     p.first_name,  " +
-//                "     p.last_name,  " +
-//                "     s.season,  " +
-//                "     s.year, " +
-//                "     g.season_id " +
-//                " ) t1  " +
-//                "JOIN " +
-//                " (SELECT " +
-//                "  season_id, MAX(mvp) AS max_mvp " +
-//                " FROM ( " +
-//                "  SELECT b.player_id,  " +
-//                "   g.season_id, SUM(singles) + SUM(doubles)*2 + SUM(triples)*3 + SUM(homeruns)*4 + SUM(stolenbases) + SUM(runs) + SUM(rbis) + SUM(walks) + SUM(hitbypitch) - SUM(strikeouts) - SUM(caughtstealing) AS mvp " +
-//                "   FROM batting_stats b " +
-//                "   JOIN players p ON b.player_id = p.id " +
-//                "   JOIN games g ON b.game_id = g.id " +
-//                "   JOIN seasons s ON g.season_id = s.id " +
-//                "  GROUP BY b.player_id, g.season_id " +
-//                "  ) t2     " +
-//                " GROUP BY " +
-//                "  season_id " +
-//                " ) t3 " +
-//                "ON " +
-//                " t1.season_id = t3.season_id " +
-//                "WHERE " +
-//                " t1.mvp = t3.max_mvp  " +
-//                "ORDER BY " +
-//                " t1.year, t1.season DESC";
-//
-//        Query query = entityManager.createNativeQuery(q);
-//        List<Object[]> allMVPRecordsecords = query.getResultList();
-//        List<RecordBean> mvpList = new ArrayList<RecordBean>();
-//
-//        for(Object[] record:allMVPRecordsecords){
-//            String recordString = (String)record[2] + ", " + (String)record[1];
-//            BigDecimal tempRecord = (BigDecimal) record[6];
-//
-//            RecordBean tempBean = new RecordBean(recordString,"mvp",tempRecord);
-//            mvpList.add(tempBean);
-//        }
-//        return mvpList;
-//    }
 
 }

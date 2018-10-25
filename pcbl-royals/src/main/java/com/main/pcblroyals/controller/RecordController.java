@@ -37,6 +37,10 @@ public class RecordController {
     @Qualifier("allTimeBattingRecordService")
     private AllTimeBattingRecordService allTimeBattingRecordService;
 
+    @Autowired
+    @Qualifier("allTimePitchingRecordService")
+    private AllTimePitchingRecordService allTimePitchingRecordService;
+
     @GetMapping("api/getRecords")
     public List<Object> getSingleSeasonRecordHits(){
         List<Object> recordsList = new ArrayList<Object>();
@@ -184,6 +188,27 @@ public class RecordController {
 
         //all time batting records mvp
         recordsList.add(allTimeBattingRecordService.getAllTimeBattingRecordMVP());
+
+        /////////////////////
+        //ALL TIME PITCHING
+        /////////////////////
+        //all time pitching records games pitched
+        recordsList.add(allTimePitchingRecordService.getAllTimePitchingRecordGamesPitched());
+
+        //all time pitching records wins
+        recordsList.add(allTimePitchingRecordService.getAllTimePitchingRecordWins());
+
+        //all time pitching records saves
+        recordsList.add(allTimePitchingRecordService.getAllTimePitchingRecordSaves());
+
+        //all time pitching records era
+        recordsList.add(allTimePitchingRecordService.getAllTimePitchingRecordERA());
+
+        //all time pitching records whip
+        recordsList.add(allTimePitchingRecordService.getAllTimePitchingRecordWHIP());
+
+        //all time pitching records cy young
+        recordsList.add(allTimePitchingRecordService.getAllTimePitchingRecordCyYoung());
 
         return recordsList;
     }

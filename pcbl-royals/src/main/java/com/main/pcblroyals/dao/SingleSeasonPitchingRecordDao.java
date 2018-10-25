@@ -173,7 +173,7 @@ public class SingleSeasonPitchingRecordDao {
                 "HAVING " +
                 " COUNT(1) > " + Integer.toString(singleSeasonPitchingGameFilter) + " " +
                 "ORDER BY  " +
-                "  6 DESC, s.year, p.last_name, p.first_name";
+                "  6 ASC, s.year, p.last_name, p.first_name";
         return getTopPlayersSingleSeasonPitchingForStat(q,"era");
     }
 
@@ -211,7 +211,7 @@ public class SingleSeasonPitchingRecordDao {
                 "HAVING " +
                 " COUNT(1) > " + Integer.toString(singleSeasonPitchingGameFilter) + " " +
                 "ORDER BY  " +
-                " 6 DESC, s.year, p.last_name, p.first_name";
+                " 6 ASC, s.year, p.last_name, p.first_name";
         return getTopPlayersSingleSeasonPitchingForStat(q,"whip");
     }
 
