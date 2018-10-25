@@ -46,4 +46,9 @@ public class BattingStatService {
     public List<BattingStatBean> getAllTimeBattingStatForSeason(int seasonId){
         return battingStatDao.getAllTimeBattingStatForSeason(seasonId);
     }
+
+    @Transactional
+    public List<BattingStatBean> getTeamStatsForGame(int seasonId, int gameId){
+        return battingStatDao.getTeamStatsForGame(seasonId, gameId);
+    }
 }

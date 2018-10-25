@@ -35,7 +35,6 @@ public class PlayerService {
     @Transactional
     public List<Player> getAllPlayer() {
         return playerDao.selectAllPlayer();
-
     }
 
     @Transactional

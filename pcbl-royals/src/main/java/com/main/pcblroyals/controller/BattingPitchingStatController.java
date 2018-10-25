@@ -1,6 +1,8 @@
 package com.main.pcblroyals.controller;
 
 import com.main.pcblroyals.bean.*;
+import com.main.pcblroyals.data.Player;
+import com.main.pcblroyals.data.Season;
 import com.main.pcblroyals.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -75,18 +77,31 @@ public class BattingPitchingStatController {
 
         // player batting stats by season and game
         allStats.add(battingStatService.getBattingStatsBySeasonGame(seasonId, gameId));
+        // team stats for this game
+        allStats.add(battingStatService.getTeamStatsForGame(seasonId, gameId));
+
+        // player pitching stats by season and game
         allStats.add(pitchingStatService.getPitchingStatsBySeasonGame(seasonId, gameId));
+        // all time records for this season pitching
 
         return allStats;
     }
 
+    // get just the team stat for a single game (for testing)
+    @GetMapping("api/getTeamStatsForGame/{seasonId}/{gameId}")
+    public List<BattingStatBean> getTeamStatsForGame(@PathVariable(value = "seasonId") int seasonId,
+                                             @PathVariable(value = "gameId") int gameId) {
+        return battingStatService.getTeamStatsForGame(seasonId, gameId);
+    }
 
+    // SINGLE PLAYER PAGE (all time)
+    // player stats all time
     @GetMapping("api/getStatsSeasonByPlayer/{playerId}")
     public List<Object> getBattingStatsSeasonByPlayer(@PathVariable(value = "playerId") int playerId){
 
         List<Object> playerSeasonStats = new ArrayList<>();
         //player info
-        playerSeasonStats.add(playerService.getPlayerById(playerId));
+        playerSeasonStats.add(playerService.getAllPlayer());
         //player season batting
         playerSeasonStats.add(battingStatService.getBattingStatsSeasonByPlayer(playerId));
         //player season pitching
@@ -95,13 +110,18 @@ public class BattingPitchingStatController {
         return playerSeasonStats;
     }
 
+
+    // SINGLE PLAYER PAGE (season)
+    // player stats for single season (by game)
     @GetMapping("api/getStatsGameBySeasonPlayer/{seasonId}/{playerId}")
     public List<Object> getBattingStatsGameBySeasonPlayer(@PathVariable(value = "seasonId") int seasonId,
-                                                                       @PathVariable(value = "playerId") int playerId){
+                                                          @PathVariable(value = "playerId") int playerId){
         List<Object> gameStats = new ArrayList<>();
 
-        //player info
-        gameStats.add(playerService.getPlayerById(playerId));
+        //player info for drop down
+        gameStats.add(playerService.getAllPlayer());
+        // list of seasons that this player played in
+        gameStats.add(playerService.getPlayerById(playerId).getSeasons());
         //game batting info, by season player
         gameStats.add(battingStatService.getBattingStatsGameBySeasonPlayer(seasonId,playerId));
         //game pitching info, by season player
@@ -109,4 +129,10 @@ public class BattingPitchingStatController {
 
         return gameStats;
     }
+
+    @GetMapping("api/getAllPlayers")
+    public List<Player> getAllPlayers(){
+        return playerService.getAllPlayer();
+    }
+
 }

@@ -41,7 +41,7 @@ public class PlayerDao {
     }
 
     public List<Player> selectAllPlayer() {
-        String q = "select * from players";
+        String q = "select p from players p";
         Query query = entityManager.createQuery(q);
         return (List<Player>) query.getResultList();
     }

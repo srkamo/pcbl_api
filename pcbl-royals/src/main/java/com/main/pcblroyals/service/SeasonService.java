@@ -48,8 +48,10 @@ public class SeasonService {
 
     }
 
+    @Transactional
     public List<AllTimeSeasonBean> getAllTimeRecord(){
         return seasonDao.getAllTimeRecord();
     }
+
 
 }
