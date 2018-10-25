@@ -33,7 +33,6 @@ public class SingleGamePitchingRecordDao {
 
             String gameString = "";
             int homeAway = (int)record[4];
-            int year = (int)record[6];
             String opponent = (String)record[3];
             String date = (String)record[7];
 

@@ -170,7 +170,7 @@ public class SingleSeasonBattingRecordDao {
                 " COUNT(1) > " + Integer.toString(singleSeasonBattingGameFilter) + " " +
                 "ORDER BY  " +
                 " 6 DESC, s.year, p.last_name, p.first_name";
-        return getTopPlayersSingleSeasonBattingForStat(q,"batting average");
+        return getTopPlayersSingleSeasonBattingForStat(q,"batting_average");
     }
 
     public List<SingleSeasonRecordBean> getSingleSeasonBattingRecordSluggingPercentage(){
@@ -205,7 +205,7 @@ public class SingleSeasonBattingRecordDao {
                 " COUNT(1) > " + Integer.toString(singleSeasonBattingGameFilter) + " " +
                 "ORDER BY  " +
                 " 6 DESC, s.year, p.last_name, p.first_name";
-        return getTopPlayersSingleSeasonBattingForStat(q,"slugging percentage");
+        return getTopPlayersSingleSeasonBattingForStat(q,"slugging_percentage");
     }
 
     public List<SingleSeasonRecordBean> getSingleSeasonBattingRecordOnBasePercentage(){
@@ -241,7 +241,7 @@ public class SingleSeasonBattingRecordDao {
                 "ORDER BY  " +
                 " 6 DESC, s.year, p.last_name, p.first_name";
 
-        return getTopPlayersSingleSeasonBattingForStat(q,"on base percentage");
+        return getTopPlayersSingleSeasonBattingForStat(q,"on_base_percentage");
     }
 
     public List<SingleSeasonRecordBean> getSingleSeasonBattingRecordMVP(){

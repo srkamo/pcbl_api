@@ -37,4 +37,10 @@ public class RecordBean implements Serializable {
 
     public RecordBean() {
     }
+
+    public RecordBean(String recordString, String recordName, BigDecimal recordValue){
+        this.recordString = recordString;
+        this.recordName = recordName;
+        this.recordValue = recordValue;
+    }
 }

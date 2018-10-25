@@ -34,7 +34,6 @@ public class SingleGameBattingRecordDao {
             String recordString = (String)record[2] + ", " + (String)record[1];
 
             int homeAway = (int)record[4];
-            int year = (int)record[6];
             String date = (String)record[7];
             String opponent = (String)record[3];
             String gameString = "";

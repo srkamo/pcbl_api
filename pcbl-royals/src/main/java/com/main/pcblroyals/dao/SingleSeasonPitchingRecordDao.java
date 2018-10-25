@@ -287,7 +287,7 @@ public class SingleSeasonPitchingRecordDao {
             String seasonString = (String)record[3] + " " + Integer.toString((int)record[4]);
             BigDecimal tempRecord = (BigDecimal) record[6];
 
-            SingleSeasonRecordBean tempBean = new SingleSeasonRecordBean(recordString,"cy young",tempRecord,seasonString);
+            SingleSeasonRecordBean tempBean = new SingleSeasonRecordBean(recordString,"cy_young",tempRecord,seasonString);
             cyYoungList.add(tempBean);
         }
         return cyYoungList;

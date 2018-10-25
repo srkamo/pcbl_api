@@ -1,9 +1,6 @@
 package com.main.pcblroyals.controller;
 
-import com.main.pcblroyals.service.SingleGameBattingRecordService;
-import com.main.pcblroyals.service.SingleGamePitchingRecordService;
-import com.main.pcblroyals.service.SingleSeasonBattingRecordService;
-import com.main.pcblroyals.service.SingleSeasonPitchingRecordService;
+import com.main.pcblroyals.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -35,6 +32,10 @@ public class RecordController {
     @Autowired
     @Qualifier("singleGamePitchingRecordService")
     private SingleGamePitchingRecordService singleGamePitchingRecordService;
+
+    @Autowired
+    @Qualifier("allTimeBattingRecordService")
+    private AllTimeBattingRecordService allTimeBattingRecordService;
 
     @GetMapping("api/getRecords")
     public List<Object> getSingleSeasonRecordHits(){
@@ -138,6 +139,51 @@ public class RecordController {
         /////////////////////
         //single game pitching records strikeouts
         recordsList.add(singleGamePitchingRecordService.getSingleSeasonPitchingRecordStrikeouts());
+
+        /////////////////////
+        //ALL TIME BATTING
+        /////////////////////
+        //all time batting records games
+        recordsList.add(allTimeBattingRecordService.getAllTimeBattingRecordGames());
+
+        //all time batting records hits
+        recordsList.add(allTimeBattingRecordService.getAllTimeBattingRecordHits());
+
+        //all time batting records doubles
+        recordsList.add(allTimeBattingRecordService.getAllTimeBattingRecordDoubles());
+
+        //all time batting records triples
+        recordsList.add(allTimeBattingRecordService.getAllTimeBattingRecordTriples());
+
+        //all time batting records homeruns
+        recordsList.add(allTimeBattingRecordService.getAllTimeBattingRecordHomeruns());
+
+        //all time batting records runs
+        recordsList.add(allTimeBattingRecordService.getAllTimeBattingRecordRuns());
+
+        //all time batting records rbis
+        recordsList.add(allTimeBattingRecordService.getAllTimeBattingRecordRbis());
+
+        //all time batting records stolenbases
+        recordsList.add(allTimeBattingRecordService.getAllTimeBattingRecordStolenBases());
+
+        //all time batting records walks
+        recordsList.add(allTimeBattingRecordService.getAllTimeBattingRecordWalks());
+
+        //all time batting records hitbypitch
+        recordsList.add(allTimeBattingRecordService.getAllTimeBattingRecordHitByPitch());
+
+        //all time batting records batting average
+        recordsList.add(allTimeBattingRecordService.getAllTimeBattingRecordBattingAverage());
+
+        //all time batting records slugging percentage
+        recordsList.add(allTimeBattingRecordService.getAllTimeBattingRecordSluggingPercentage());
+
+        //all time batting records on base percentage
+        recordsList.add(allTimeBattingRecordService.getAllTimeBattingRecordOnBasePercentage());
+
+        //all time batting records mvp
+        recordsList.add(allTimeBattingRecordService.getAllTimeBattingRecordMVP());
 
         return recordsList;
     }
