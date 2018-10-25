@@ -112,6 +112,23 @@ public class AllTimePitchingRecordDao {
         return getTopPlayersAllTimePitchingForStat(q,"saves");
     }
 
+    public List<RecordBean> getAllTimePitchingRecordStrikeouts(){
+        String q = "SELECT   " +
+                "  s.player_id, p.first_name, p.last_name,   " +
+                "    SUM(strikeouts) AS strikeouts  " +
+                "FROM   " +
+                "  pitching_stats s  " +
+                "JOIN  " +
+                "  players p  " +
+                "ON  " +
+                "  s.player_id = p.id  " +
+                "GROUP BY   " +
+                "  s.player_id, p.first_name, p.last_name  " +
+                "ORDER BY   " +
+                "  4 DESC";
+        return getTopPlayersAllTimePitchingForStat(q,"strikeouts");
+    }
+
     public List<RecordBean> getAllTimePitchingRecordERA(){
         String q = "SELECT   " +
                 "   s.player_id, " +

@@ -31,6 +31,10 @@ public class AllTimePitchingRecordService {
         return allTimePitchingRecordDao.getAllTimePitchingRecordSaves();
     }
 
+    public List<RecordBean> getAllTimePitchingRecordStrikeouts(){
+        return allTimePitchingRecordDao.getAllTimePitchingRecordStrikeouts();
+    }
+
     public List<RecordBean> getAllTimePitchingRecordERA(){
         return allTimePitchingRecordDao.getAllTimePitchingRecordERA();
     }
