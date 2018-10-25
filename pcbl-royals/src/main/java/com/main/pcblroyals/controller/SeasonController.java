@@ -48,9 +48,34 @@ public class SeasonController {
     @GetMapping("/api/getAllSeasonsAndRecentGames")
     public List<Object> getMostRecentGames() {
         List<Object> seasonsAndRecentGames = new ArrayList<Object>();
+
+        // all season records
         seasonsAndRecentGames.add(seasonService.getAllSeason());
+        // all time for all seasons
         seasonsAndRecentGames.add(seasonService.getAllTimeRecord());
+        // get the 3 most recent games
         seasonsAndRecentGames.add(gameService.getMostRecentGames());
+
+        /*
+        // all seasons
+        List<Season> seasons = seasonService.getAllSeason();
+
+        // all time record for all seasons
+        List<AllTimeSeasonBean> allTimeSeasonBean = seasonService.getAllTimeRecord();
+        // add the all time record to the list of seasons for display
+        Season allTimeSeason = new Season();
+        allTimeSeason.setSeason("All Time");
+        allTimeSeason.setWins((int)allTimeSeasonBean.get(0).getWins());
+        allTimeSeason.setTies((int)allTimeSeasonBean.get(0).getTies());
+        allTimeSeason.setLosses((int)allTimeSeasonBean.get(0).getLosses());
+        seasons.add(allTimeSeason);
+
+        // 3 most recent games
+        List<Game> recentGames = gameService.getMostRecentGames();
+
+        seasonsAndRecentGames.add(seasons);
+        seasonsAndRecentGames.add(recentGames);
+        */
 
         return seasonsAndRecentGames;
     }

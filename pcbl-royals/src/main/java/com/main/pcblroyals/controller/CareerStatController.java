@@ -1,5 +1,8 @@
 package com.main.pcblroyals.controller;
 
+import com.main.pcblroyals.bean.BattingStatBean;
+import com.main.pcblroyals.bean.BattingStatPlayerBean;
+import com.main.pcblroyals.bean.PitchingStatBean;
 import com.main.pcblroyals.data.CareerBattingStat;
 import com.main.pcblroyals.data.Player;
 import com.main.pcblroyals.service.CareerBattingStatService;
@@ -65,6 +68,23 @@ public class CareerStatController {
         battingPitchingStats.add(careerPitchingStatService.getAllCareerPitchingStats());
         // all time pitching stat for team
         battingPitchingStats.add(careerPitchingStatService.getAllTimePitchingStat());
+
+        /*
+        // career batting stats all players
+        List<BattingStatBean> battingStats = new ArrayList<>();
+        battingStats.addAll(careerBattingStatService.getAllCareerStats());
+        // add the all time stat at the end
+        battingStats.add(careerBattingStatService.getAllTimeBattingStat().get(0));
+
+        // career pitching stats all players
+        List<PitchingStatBean> pitchingStats = new ArrayList<>();
+        pitchingStats.addAll(careerPitchingStatService.getAllCareerPitchingStats());
+        // add the all time stat at the end
+        pitchingStats.add(careerPitchingStatService.getAllTimePitchingStat().get(0));
+
+        battingPitchingStats.add(battingStats);
+        battingPitchingStats.add(pitchingStats);
+        */
 
         return battingPitchingStats;
     }

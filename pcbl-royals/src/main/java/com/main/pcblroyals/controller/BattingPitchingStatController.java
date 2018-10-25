@@ -2,14 +2,15 @@ package com.main.pcblroyals.controller;
 
 import com.main.pcblroyals.bean.*;
 import com.main.pcblroyals.data.Player;
-import com.main.pcblroyals.data.Season;
 import com.main.pcblroyals.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @CrossOrigin
@@ -38,6 +39,7 @@ public class BattingPitchingStatController {
     // single season page
     @GetMapping("api/getStatsBySeason/{id}")
     public List<Object> getStatsBySeason(@PathVariable(value = "id") int seasonId){
+
         List<Object> allStats = new ArrayList<>();
         // seasons for drop down
         allStats.add(seasonService.getAllSeasonReverseChronological());
