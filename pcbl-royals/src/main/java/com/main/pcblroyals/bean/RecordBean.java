@@ -2,33 +2,21 @@ package com.main.pcblroyals.bean;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.text.DecimalFormat;
 
 /**
- * Created by rblay on 10/23/18.
+ * Created by rblay on 10/24/18.
  */
-public class SingleSeasonBattingRecordBean implements Serializable {
+public class RecordBean implements Serializable {
     protected String recordString;
-    protected String seasonString;
     protected String recordName;
     protected BigDecimal recordValue;
-    protected String roundedValue;
 
     public String getRecordString() {
-
         return recordString;
     }
 
     public void setRecordString(String recordString) {
         this.recordString = recordString;
-    }
-
-    public String getSeasonString() {
-        return seasonString;
-    }
-
-    public void setSeasonString(String seasonString) {
-        this.seasonString = seasonString;
     }
 
     public String getRecordName() {
@@ -47,16 +35,12 @@ public class SingleSeasonBattingRecordBean implements Serializable {
         this.recordValue = recordValue;
     }
 
-    protected void calculateRoundedValue(){
-        DecimalFormat df = new DecimalFormat("0.000");
-        roundedValue = df.format(recordValue);
+    public RecordBean() {
     }
 
-    public SingleSeasonBattingRecordBean(String recordString, String seasonString, String recordName, BigDecimal recordValue) {
+    public RecordBean(String recordString, String recordName, BigDecimal recordValue){
         this.recordString = recordString;
-        this.seasonString = seasonString;
         this.recordName = recordName;
         this.recordValue = recordValue;
-        calculateRoundedValue();
     }
 }
