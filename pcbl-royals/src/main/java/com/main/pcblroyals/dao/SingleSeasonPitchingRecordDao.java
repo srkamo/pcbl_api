@@ -1,10 +1,8 @@
 package com.main.pcblroyals.dao;
 
-import com.main.pcblroyals.bean.SingleSeasonBattingRecordBean;
-import com.main.pcblroyals.bean.SingleSeasonPitchingRecordBean;
+import com.main.pcblroyals.bean.SingleSeasonRecordBean;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -24,23 +22,24 @@ public class SingleSeasonPitchingRecordDao {
     protected int singleSeasonPitchingGameFilter = 10;
 
     //SINGLE SEASON RECORDS
-    public List<SingleSeasonPitchingRecordBean> getTopPlayersSingleSeasonPitchingForStat(String statQuery, String recordName){
+    public List<SingleSeasonRecordBean> getTopPlayersSingleSeasonPitchingForStat(String statQuery, String recordName){
         String q = statQuery;
         Query query = entityManager.createNativeQuery(q);
         List<Object[]> allStatRecords = query.getResultList();
 
         //Selecting only first 4 names (plus tied people if needed)
-        List<SingleSeasonPitchingRecordBean> topPlayersList = new ArrayList<SingleSeasonPitchingRecordBean>();
+        List<SingleSeasonRecordBean> topPlayersList = new ArrayList<SingleSeasonRecordBean>();
         BigDecimal lastRecordAdded = BigDecimal.valueOf(Integer.MIN_VALUE);
         int numPeopleAdded = 0;
         for(Object[] record:allStatRecords){
-            String recordString = (String)record[2] + ", " + (String)record[1];
             String seasonString = (String)record[3] + " " + Integer.toString((int)record[4]);
+            String recordString = (String)record[2] + ", " + (String)record[1];
+
             BigDecimal tempRecord = (BigDecimal) record[5];
             if(numPeopleAdded >= 5 && !tempRecord.equals(lastRecordAdded)){
                 break;
             } else {
-                SingleSeasonPitchingRecordBean tempBean = new SingleSeasonPitchingRecordBean(recordString,seasonString,recordName,tempRecord);
+                SingleSeasonRecordBean tempBean = new SingleSeasonRecordBean(recordString,recordName,tempRecord,seasonString);
                 topPlayersList.add(tempBean);
             }
             lastRecordAdded = tempRecord;
@@ -49,7 +48,7 @@ public class SingleSeasonPitchingRecordDao {
         return topPlayersList;
     }
     //strikeouts single season record
-    public List<SingleSeasonPitchingRecordBean> getSingleSeasonPitchingRecordWins(){
+    public List<SingleSeasonRecordBean> getSingleSeasonPitchingRecordWins(){
         String q = "SELECT  " +
                 " ps.player_id,  " +
                 "    p.first_name,  " +
@@ -80,7 +79,7 @@ public class SingleSeasonPitchingRecordDao {
         return getTopPlayersSingleSeasonPitchingForStat(q,"wins");
     }
 
-    public List<SingleSeasonPitchingRecordBean> getSingleSeasonPitchingRecordSaves(){
+    public List<SingleSeasonRecordBean> getSingleSeasonPitchingRecordSaves(){
         String q = "SELECT  " +
                 " ps.player_id,  " +
                 "    p.first_name,  " +
@@ -112,7 +111,7 @@ public class SingleSeasonPitchingRecordDao {
     }
 
     //strikeouts single season record
-    public List<SingleSeasonPitchingRecordBean> getSingleSeasonPitchingRecordStrikeouts(){
+    public List<SingleSeasonRecordBean> getSingleSeasonPitchingRecordStrikeouts(){
         String q = "SELECT  " +
                 " ps.player_id,  " +
                 "    p.first_name,  " +
@@ -142,7 +141,7 @@ public class SingleSeasonPitchingRecordDao {
     }
 
     //era single season record
-    public List<SingleSeasonPitchingRecordBean> getSingleSeasonPitchingRecordERA(){
+    public List<SingleSeasonRecordBean> getSingleSeasonPitchingRecordERA(){
         String q = "SELECT  " +
                 "  ps.player_id,  " +
                 "    p.first_name,  " +
@@ -179,7 +178,7 @@ public class SingleSeasonPitchingRecordDao {
     }
 
     //whip single season record
-    public List<SingleSeasonPitchingRecordBean> getSingleSeasonPitchingRecordWHIP(){
+    public List<SingleSeasonRecordBean> getSingleSeasonPitchingRecordWHIP(){
         String q = "SELECT  " +
                 " ps.player_id,  " +
                 "    p.first_name,  " +
@@ -216,7 +215,7 @@ public class SingleSeasonPitchingRecordDao {
         return getTopPlayersSingleSeasonPitchingForStat(q,"whip");
     }
 
-    public List<SingleSeasonPitchingRecordBean> getSingleSeasonPitchingRecordCyYoung(){
+    public List<SingleSeasonRecordBean> getSingleSeasonPitchingRecordCyYoung(){
         String q = "SELECT   " +
                 "  t1.player_id,  " +
                 "  t1.first_name,  " +
@@ -281,14 +280,14 @@ public class SingleSeasonPitchingRecordDao {
 
         Query query = entityManager.createNativeQuery(q);
         List<Object[]> allMVPRecordsecords = query.getResultList();
-        List<SingleSeasonPitchingRecordBean> cyYoungList = new ArrayList<SingleSeasonPitchingRecordBean>();
+        List<SingleSeasonRecordBean> cyYoungList = new ArrayList<SingleSeasonRecordBean>();
 
         for(Object[] record:allMVPRecordsecords){
             String recordString = (String)record[2] + ", " + (String)record[1];
             String seasonString = (String)record[3] + " " + Integer.toString((int)record[4]);
             BigDecimal tempRecord = (BigDecimal) record[6];
 
-            SingleSeasonPitchingRecordBean tempBean = new SingleSeasonPitchingRecordBean(recordString,seasonString,"cy young",tempRecord);
+            SingleSeasonRecordBean tempBean = new SingleSeasonRecordBean(recordString,"cy young",tempRecord,seasonString);
             cyYoungList.add(tempBean);
         }
         return cyYoungList;

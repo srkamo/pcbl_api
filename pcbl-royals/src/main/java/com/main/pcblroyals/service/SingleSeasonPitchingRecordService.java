@@ -1,8 +1,6 @@
 package com.main.pcblroyals.service;
 
-import com.main.pcblroyals.bean.SingleSeasonBattingRecordBean;
-import com.main.pcblroyals.bean.SingleSeasonPitchingRecordBean;
-import com.main.pcblroyals.dao.SingleSeasonBattingRecordDao;
+import com.main.pcblroyals.bean.SingleSeasonRecordBean;
 import com.main.pcblroyals.dao.SingleSeasonPitchingRecordDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -23,32 +21,32 @@ public class SingleSeasonPitchingRecordService {
 
 
     @Transactional
-    public List<SingleSeasonPitchingRecordBean> getSingleSeasonPitchingRecordWins(){
+    public List<SingleSeasonRecordBean> getSingleSeasonPitchingRecordWins(){
         return singleSeasonPitchingRecordDao.getSingleSeasonPitchingRecordWins();
     }
 
     @Transactional
-    public List<SingleSeasonPitchingRecordBean> getSingleSeasonPitchingRecordSaves(){
+    public List<SingleSeasonRecordBean> getSingleSeasonPitchingRecordSaves(){
         return singleSeasonPitchingRecordDao.getSingleSeasonPitchingRecordSaves();
     }
 
     @Transactional
-    public List<SingleSeasonPitchingRecordBean> getSingleSeasonPitchingRecordStrikeouts(){
+    public List<SingleSeasonRecordBean> getSingleSeasonPitchingRecordStrikeouts(){
         return singleSeasonPitchingRecordDao.getSingleSeasonPitchingRecordStrikeouts();
     }
 
     @Transactional
-    public List<SingleSeasonPitchingRecordBean> getSingleSeasonPitchingRecordERA(){
+    public List<SingleSeasonRecordBean> getSingleSeasonPitchingRecordERA(){
         return singleSeasonPitchingRecordDao.getSingleSeasonPitchingRecordERA();
     }
 
     @Transactional
-    public List<SingleSeasonPitchingRecordBean> getSingleSeasonPitchingRecordWHIP(){
+    public List<SingleSeasonRecordBean> getSingleSeasonPitchingRecordWHIP(){
         return singleSeasonPitchingRecordDao.getSingleSeasonPitchingRecordWHIP();
     }
 
     @Transactional
-    public List<SingleSeasonPitchingRecordBean> getSingleSeasonPitchingRecordCyYoung(){
+    public List<SingleSeasonRecordBean> getSingleSeasonPitchingRecordCyYoung(){
         return singleSeasonPitchingRecordDao.getSingleSeasonPitchingRecordCyYoung();
     }
 

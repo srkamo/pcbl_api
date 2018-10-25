@@ -1,6 +1,6 @@
 package com.main.pcblroyals.dao;
 
-import com.main.pcblroyals.bean.SingleSeasonBattingRecordBean;
+import com.main.pcblroyals.bean.SingleSeasonRecordBean;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.Entity;
@@ -22,14 +22,13 @@ public class SingleSeasonBattingRecordDao {
 
     protected int singleSeasonBattingGameFilter = 10;
 
-    //SINGLE SEASON RECORDS
-    public List<SingleSeasonBattingRecordBean> getTopPlayersSingleSeasonBattingForStat(String statQuery, String recordName){
+    public List<SingleSeasonRecordBean> getTopPlayersSingleSeasonBattingForStat(String statQuery, String recordName){
         String q = statQuery;
         Query query = entityManager.createNativeQuery(q);
         List<Object[]> allStatRecords = query.getResultList();
 
         //Selecting only first 4 names (plus tied people if needed)
-        List<SingleSeasonBattingRecordBean> topPlayersList = new ArrayList<SingleSeasonBattingRecordBean>();
+        List<SingleSeasonRecordBean> topPlayersList = new ArrayList<SingleSeasonRecordBean>();
         BigDecimal lastRecordAdded = BigDecimal.valueOf(Integer.MIN_VALUE);
         int numPeopleAdded = 0;
         for(Object[] record:allStatRecords){
@@ -39,7 +38,7 @@ public class SingleSeasonBattingRecordDao {
             if(numPeopleAdded >= 5 && !tempRecord.equals(lastRecordAdded)){
                 break;
             } else {
-                SingleSeasonBattingRecordBean tempBean = new SingleSeasonBattingRecordBean(recordString,seasonString,recordName,tempRecord);
+                SingleSeasonRecordBean tempBean = new SingleSeasonRecordBean(recordString,recordName,tempRecord,seasonString);
                 topPlayersList.add(tempBean);
             }
             lastRecordAdded = tempRecord;
@@ -48,7 +47,6 @@ public class SingleSeasonBattingRecordDao {
         return topPlayersList;
     }
 
-    //SINGLE SEASON BATTING
     public String makeSingleSeasonBattingSumQuery(String recordName){
         String q = "SELECT  " +
                 "    b.player_id,  " +
@@ -79,68 +77,68 @@ public class SingleSeasonBattingRecordDao {
     }
 
     //hits single season record
-    public List<SingleSeasonBattingRecordBean> getSingleSeasonBattingRecordHits(){
+    public List<SingleSeasonRecordBean> getSingleSeasonBattingRecordHits(){
         String recordName = "singles";
         String q = makeSingleSeasonBattingSumQuery(recordName);
         return getTopPlayersSingleSeasonBattingForStat(q,"hits");
     }
 
     //doubles single season record
-    public List<SingleSeasonBattingRecordBean> getSingleSeasonBattingRecordDoubles(){
+    public List<SingleSeasonRecordBean> getSingleSeasonBattingRecordDoubles(){
         String recordName = "doubles";
         String q = makeSingleSeasonBattingSumQuery(recordName);
         return getTopPlayersSingleSeasonBattingForStat(q,"doubles");
     }
 
     //triples single season record
-    public List<SingleSeasonBattingRecordBean> getSingleSeasonBattingRecordTriples(){
+    public List<SingleSeasonRecordBean> getSingleSeasonBattingRecordTriples(){
         String recordName = "triples";
         String q = makeSingleSeasonBattingSumQuery(recordName);
         return getTopPlayersSingleSeasonBattingForStat(q,"triples");
     }
 
     //homeruns single season record
-    public List<SingleSeasonBattingRecordBean> getSingleSeasonBattingRecordHomeruns(){
+    public List<SingleSeasonRecordBean> getSingleSeasonBattingRecordHomeruns(){
         String recordName = "homeruns";
         String q = makeSingleSeasonBattingSumQuery(recordName);
         return getTopPlayersSingleSeasonBattingForStat(q,"homeruns");
     }
 
     //runs single season record
-    public List<SingleSeasonBattingRecordBean> getSingleSeasonBattingRecordRuns(){
+    public List<SingleSeasonRecordBean> getSingleSeasonBattingRecordRuns(){
         String recordName = "runs";
         String q = makeSingleSeasonBattingSumQuery(recordName);
         return getTopPlayersSingleSeasonBattingForStat(q,"runs");
     }
 
     //rbis single season record
-    public List<SingleSeasonBattingRecordBean> getSingleSeasonBattingRecordRbis(){
+    public List<SingleSeasonRecordBean> getSingleSeasonBattingRecordRbis(){
         String recordName = "rbis";
         String q = makeSingleSeasonBattingSumQuery(recordName);
         return getTopPlayersSingleSeasonBattingForStat(q,"rbis");
     }
 
     //stolenbases single season record
-    public List<SingleSeasonBattingRecordBean> getSingleSeasonBattingRecordStolenBases(){
+    public List<SingleSeasonRecordBean> getSingleSeasonBattingRecordStolenBases(){
         String recordName = "stolenbases";
         String q = makeSingleSeasonBattingSumQuery(recordName);
         return getTopPlayersSingleSeasonBattingForStat(q,"stolenbases");
     }
 
     //rbis single season record
-    public List<SingleSeasonBattingRecordBean> getSingleSeasonBattingRecordWalks(){
+    public List<SingleSeasonRecordBean> getSingleSeasonBattingRecordWalks(){
         String recordName = "walks";
         String q = makeSingleSeasonBattingSumQuery(recordName);
         return getTopPlayersSingleSeasonBattingForStat(q,"walks");
     }
 
-    public List<SingleSeasonBattingRecordBean> getSingleSeasonBattingRecordHitByPitch(){
+    public List<SingleSeasonRecordBean> getSingleSeasonBattingRecordHitByPitch(){
         String recordName = "hitbypitch";
         String q = makeSingleSeasonBattingSumQuery(recordName);
         return getTopPlayersSingleSeasonBattingForStat(q,"hitbypitch");
     }
 
-    public List<SingleSeasonBattingRecordBean> getSingleSeasonBattingRecordBattingAverage(){
+    public List<SingleSeasonRecordBean> getSingleSeasonBattingRecordBattingAverage(){
         String q = "SELECT  " +
                 " b.player_id,  " +
                 "    p.first_name,  " +
@@ -175,7 +173,7 @@ public class SingleSeasonBattingRecordDao {
         return getTopPlayersSingleSeasonBattingForStat(q,"batting average");
     }
 
-    public List<SingleSeasonBattingRecordBean> getSingleSeasonBattingRecordSluggingPercentage(){
+    public List<SingleSeasonRecordBean> getSingleSeasonBattingRecordSluggingPercentage(){
         String q = "SELECT  " +
                 " b.player_id,  " +
                 "    p.first_name,  " +
@@ -210,7 +208,7 @@ public class SingleSeasonBattingRecordDao {
         return getTopPlayersSingleSeasonBattingForStat(q,"slugging percentage");
     }
 
-    public List<SingleSeasonBattingRecordBean> getSingleSeasonBattingRecordOnBasePercentage(){
+    public List<SingleSeasonRecordBean> getSingleSeasonBattingRecordOnBasePercentage(){
         String q = "SELECT  " +
                 " b.player_id,  " +
                 "    p.first_name,  " +
@@ -246,7 +244,7 @@ public class SingleSeasonBattingRecordDao {
         return getTopPlayersSingleSeasonBattingForStat(q,"on base percentage");
     }
 
-    public List<SingleSeasonBattingRecordBean> getSingleSeasonBattingRecordMVP(){
+    public List<SingleSeasonRecordBean> getSingleSeasonBattingRecordMVP(){
         String q = "SELECT  " +
                 " t1.player_id, " +
                 " t1.first_name, " +
@@ -301,14 +299,14 @@ public class SingleSeasonBattingRecordDao {
 
         Query query = entityManager.createNativeQuery(q);
         List<Object[]> allMVPRecordsecords = query.getResultList();
-        List<SingleSeasonBattingRecordBean> mvpList = new ArrayList<SingleSeasonBattingRecordBean>();
+        List<SingleSeasonRecordBean> mvpList = new ArrayList<SingleSeasonRecordBean>();
 
         for(Object[] record:allMVPRecordsecords){
             String recordString = (String)record[2] + ", " + (String)record[1];
             String seasonString = (String)record[3] + " " + Integer.toString((int)record[4]);
             BigDecimal tempRecord = (BigDecimal) record[6];
 
-            SingleSeasonBattingRecordBean tempBean = new SingleSeasonBattingRecordBean(recordString,seasonString,"mvp",tempRecord);
+            SingleSeasonRecordBean tempBean = new SingleSeasonRecordBean(recordString,"mvp",tempRecord,seasonString);
             mvpList.add(tempBean);
         }
         return mvpList;

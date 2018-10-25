@@ -1,5 +1,6 @@
 package com.main.pcblroyals.controller;
 
+import com.main.pcblroyals.service.SingleGameBattingRecordService;
 import com.main.pcblroyals.service.SingleSeasonBattingRecordService;
 import com.main.pcblroyals.service.SingleSeasonPitchingRecordService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,11 +27,16 @@ public class RecordController {
     @Qualifier("singleSeasonPitchingRecordService")
     private SingleSeasonPitchingRecordService singleSeasonPitchingRecordService;
 
+    @Autowired
+    @Qualifier("singleGameBattingRecordService")
+    private SingleGameBattingRecordService singleGameBattingRecordService;
+
     @GetMapping("api/getRecords")
     public List<Object> getSingleSeasonRecordHits(){
         List<Object> recordsList = new ArrayList<Object>();
-
+        ///////////////////////
         //SINGLE SEASON BATTING
+        ///////////////////////
         //single season batting records hits
         recordsList.add(singleSeasonBattingRecordService.getSingleSeasonBattingRecordHits());
 
@@ -70,7 +76,9 @@ public class RecordController {
         //single season batting records mvp
         recordsList.add(singleSeasonBattingRecordService.getSingleSeasonBattingRecordMVP());
 
+        ////////////////////////
         //SINGLE SEASON PITCHING
+        ////////////////////////
         //single season pitching records wins
         recordsList.add(singleSeasonPitchingRecordService.getSingleSeasonPitchingRecordWins());
 
@@ -88,6 +96,36 @@ public class RecordController {
 
         //single season batting records cy young
         recordsList.add(singleSeasonPitchingRecordService.getSingleSeasonPitchingRecordCyYoung());
+
+        /////////////////////
+        //SINGLE GAME BATTING
+        /////////////////////
+        //single game batting records hits
+        recordsList.add(singleGameBattingRecordService.getSingleGameBattingRecordHits());
+
+        //single game batting records doubles
+        recordsList.add(singleGameBattingRecordService.getSingleGameBattingRecordDoubles());
+
+        //single game batting records triples
+        recordsList.add(singleGameBattingRecordService.getSingleGameBattingRecordTriples());
+
+        //single game batting records homeruns
+        recordsList.add(singleGameBattingRecordService.getSingleGameBattingRecordHomeruns());
+
+        //single game batting records runs
+        recordsList.add(singleGameBattingRecordService.getSingleGameBattingRecordRuns());
+
+        //single game batting records rbis
+        recordsList.add(singleGameBattingRecordService.getSingleGameBattingRecordRbis());
+
+        //single game batting records stolenbases
+        recordsList.add(singleGameBattingRecordService.getSingleGameBattingRecordStolenBases());
+
+        //single game batting records walks
+        recordsList.add(singleGameBattingRecordService.getSingleGameBattingRecordWalks());
+
+        //single game batting records hitbypitch
+        recordsList.add(singleGameBattingRecordService.getSingleGameBattingRecordHitByPitch());
 
         return recordsList;
     }

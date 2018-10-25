@@ -1,6 +1,6 @@
 package com.main.pcblroyals.service;
 
-import com.main.pcblroyals.bean.SingleSeasonBattingRecordBean;
+import com.main.pcblroyals.bean.SingleSeasonRecordBean;
 import com.main.pcblroyals.dao.SingleSeasonBattingRecordDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -20,67 +20,67 @@ public class SingleSeasonBattingRecordService {
     private SingleSeasonBattingRecordDao singleSeasonBattingRecordDao;
 
     @Transactional
-    public List<SingleSeasonBattingRecordBean> getSingleSeasonBattingRecordHits(){
+    public List<SingleSeasonRecordBean> getSingleSeasonBattingRecordHits(){
         return singleSeasonBattingRecordDao.getSingleSeasonBattingRecordHits();
     }
 
     @Transactional
-    public List<SingleSeasonBattingRecordBean> getSingleSeasonBattingRecordDoubles(){
+    public List<SingleSeasonRecordBean> getSingleSeasonBattingRecordDoubles(){
         return singleSeasonBattingRecordDao.getSingleSeasonBattingRecordDoubles();
     }
 
     @Transactional
-    public List<SingleSeasonBattingRecordBean> getSingleSeasonBattingRecordTriples(){
+    public List<SingleSeasonRecordBean> getSingleSeasonBattingRecordTriples(){
         return singleSeasonBattingRecordDao.getSingleSeasonBattingRecordTriples();
     }
 
     @Transactional
-    public List<SingleSeasonBattingRecordBean> getSingleSeasonBattingRecordHomeruns(){
+    public List<SingleSeasonRecordBean> getSingleSeasonBattingRecordHomeruns(){
         return singleSeasonBattingRecordDao.getSingleSeasonBattingRecordHomeruns();
     }
 
     @Transactional
-    public List<SingleSeasonBattingRecordBean> getSingleSeasonBattingRecordRuns(){
+    public List<SingleSeasonRecordBean> getSingleSeasonBattingRecordRuns(){
         return singleSeasonBattingRecordDao.getSingleSeasonBattingRecordRuns();
     }
 
     @Transactional
-    public List<SingleSeasonBattingRecordBean> getSingleSeasonBattingRecordRbis(){
+    public List<SingleSeasonRecordBean> getSingleSeasonBattingRecordRbis(){
         return singleSeasonBattingRecordDao.getSingleSeasonBattingRecordRbis();
     }
 
     @Transactional
-    public List<SingleSeasonBattingRecordBean> getSingleSeasonBattingRecordStolenBases(){
+    public List<SingleSeasonRecordBean> getSingleSeasonBattingRecordStolenBases(){
         return singleSeasonBattingRecordDao.getSingleSeasonBattingRecordStolenBases();
     }
 
     @Transactional
-    public List<SingleSeasonBattingRecordBean> getSingleSeasonBattingRecordWalks(){
+    public List<SingleSeasonRecordBean> getSingleSeasonBattingRecordWalks(){
         return singleSeasonBattingRecordDao.getSingleSeasonBattingRecordWalks();
     }
 
     @Transactional
-    public List<SingleSeasonBattingRecordBean> getSingleSeasonBattingRecordHitByPitch(){
+    public List<SingleSeasonRecordBean> getSingleSeasonBattingRecordHitByPitch(){
         return singleSeasonBattingRecordDao.getSingleSeasonBattingRecordHitByPitch();
     }
 
     @Transactional
-    public List<SingleSeasonBattingRecordBean> getSingleSeasonBattingRecordBattingAverage(){
+    public List<SingleSeasonRecordBean> getSingleSeasonBattingRecordBattingAverage(){
         return singleSeasonBattingRecordDao.getSingleSeasonBattingRecordBattingAverage();
     }
 
     @Transactional
-    public List<SingleSeasonBattingRecordBean> getSingleSeasonBattingRecordSluggingPercentage(){
+    public List<SingleSeasonRecordBean> getSingleSeasonBattingRecordSluggingPercentage(){
         return singleSeasonBattingRecordDao.getSingleSeasonBattingRecordSluggingPercentage();
     }
 
     @Transactional
-    public List<SingleSeasonBattingRecordBean> getSingleSeasonBattingRecordOnBasePercentage(){
+    public List<SingleSeasonRecordBean> getSingleSeasonBattingRecordOnBasePercentage(){
         return singleSeasonBattingRecordDao.getSingleSeasonBattingRecordOnBasePercentage();
     }
 
     @Transactional
-    public List<SingleSeasonBattingRecordBean> getSingleSeasonBattingRecordMVP(){
+    public List<SingleSeasonRecordBean> getSingleSeasonBattingRecordMVP(){
         return singleSeasonBattingRecordDao.getSingleSeasonBattingRecordMVP();
     }
 }
