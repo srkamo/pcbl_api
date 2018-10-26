@@ -80,9 +80,14 @@ public class SeasonController {
         return seasonsAndRecentGames;
     }
 
-    @GetMapping("/api/viewAllSeason")
+    @GetMapping("/api/viewAllSeasons")
     public List<Season> viewAllseason() {
         return seasonService.getAllSeason();
+    }
+
+    @GetMapping("/api/getGamesBySeason/{seasonId}")
+    public List<Game> getGamesBySeason(@PathVariable(value = "seasonId") int seasonId) {
+        return gameService.getGamesBySeason(seasonId);
     }
 
     // gets the w-l-t across all seasons
