@@ -17,7 +17,7 @@ public class PlayerService {
     private PlayerDao playerDao;
 
     @Transactional
-    public Player getPlayerById(int playerId) {
+    public Player selectPlayerById(int playerId) {
 
         return playerDao.selectPlayerById(playerId);
     }
@@ -40,7 +40,10 @@ public class PlayerService {
     @Transactional
     public void removePlayer(int playerId) {
         playerDao.deletePlayer(playerId);
+    }
 
+    public List<Player> getPlayerById(int playerId){
+        return playerDao.getPlayerById(playerId);
     }
 
 }

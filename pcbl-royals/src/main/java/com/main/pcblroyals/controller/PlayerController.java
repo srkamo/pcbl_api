@@ -34,7 +34,7 @@ public class PlayerController {
 
     @GetMapping("/api/viewSinglePlayer/{id}")
     public Player viewPlayerById(@PathVariable(value = "id") int playerId) {
-        return playerService.getPlayerById(playerId);
+        return playerService.selectPlayerById(playerId);
     }
 
     @GetMapping("/api/viewAllPlayers")

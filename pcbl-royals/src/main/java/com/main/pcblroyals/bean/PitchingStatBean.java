@@ -181,7 +181,7 @@ public class PitchingStatBean implements Serializable {
     protected void formatInningsPitchedRaw(){
         long integerPart = (long) inningsPitched;
         double decimalPart = inningsPitched - integerPart;
-        inningsPitchedRaw = ((double) 1/3)*decimalPart + integerPart;
+        inningsPitchedRaw = (decimalPart*10)*(1.0d/3.0d) + (double)integerPart;
     }
 
     protected void calculateEarnedRunAverage(){
