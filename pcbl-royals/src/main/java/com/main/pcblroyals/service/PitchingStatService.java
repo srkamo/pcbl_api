@@ -52,4 +52,8 @@ public class PitchingStatService {
     public List<PitchingStatBean> getAllTimePitchingStatsForPlayer(int playerId){
         return pitchingStatDao.getAllTimePitchingStatsForPlayer(playerId);
     }
+
+    public List<PitchingStatBean> getAllTimePitchingStatsForPlayerBySeason(int playerId, int seasonId){
+        return pitchingStatDao.getAllTimePitchingStatsForPlayerBySeason(playerId, seasonId);
+    }
 }

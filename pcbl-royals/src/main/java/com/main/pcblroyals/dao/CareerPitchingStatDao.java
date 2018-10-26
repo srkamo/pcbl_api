@@ -2,9 +2,6 @@ package com.main.pcblroyals.dao;
 
 import com.main.pcblroyals.bean.PitchingStatBean;
 import com.main.pcblroyals.bean.PitchingStatPlayerBean;
-import com.main.pcblroyals.data.CareerBattingStat;
-import com.main.pcblroyals.data.CareerPitchingStat;
-import com.main.pcblroyals.data.Player;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;

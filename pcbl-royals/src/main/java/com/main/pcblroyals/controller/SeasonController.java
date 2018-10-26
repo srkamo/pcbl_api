@@ -83,7 +83,7 @@ public class SeasonController {
 
     @GetMapping("/api/getAllSeasonsForPlayer/{playerId}")
     public List<Season> getAllSeasonsForPlayer(@PathVariable(value = "playerId") int playerId) {
-        return playerService.getPlayerById(playerId).getSeasons();
+        return playerService.getPlayerById(playerId).get(0).getSeasons();
     }
 
 }

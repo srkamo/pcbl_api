@@ -115,7 +115,7 @@ public class BattingPitchingStatController {
         playerSeasonStats.put("allTimeBatting", battingStatService.getAllTimeBattingStatsForPlayer(playerId));
 
         // player season pitching
-        playerSeasonStats.put("seasonPitching", pitchingStatService.getPitchingStatsBySeason(playerId));
+        playerSeasonStats.put("seasonPitching", pitchingStatService.getPitchingStatsSeasonByPlayer(playerId));
         //total pitching stats player
         playerSeasonStats.put("allTimePitching", pitchingStatService.getAllTimePitchingStatsForPlayer(playerId));
 
@@ -155,7 +155,7 @@ public class BattingPitchingStatController {
         // player game pitching
         gameStats.put("gamePitching", pitchingStatService.getPitchingStatsGameBySeasonPlayer(seasonId,playerId));
         //total pitching stats player
-        // TODO: all time for season
+        // TODO: all time for season - pitchingStatService.getAllTimePitchingStatsForPlayerBySeason
         //gameStats.put("seasonPitching", pitchingStatService.getAllTimePitchingStatsForPlayer(playerId));
 
 

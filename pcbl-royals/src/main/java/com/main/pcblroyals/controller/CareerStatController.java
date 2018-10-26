@@ -1,18 +1,11 @@
 package com.main.pcblroyals.controller;
 
-import com.main.pcblroyals.bean.BattingStatBean;
-import com.main.pcblroyals.bean.BattingStatPlayerBean;
-import com.main.pcblroyals.bean.PitchingStatBean;
-import com.main.pcblroyals.data.CareerBattingStat;
-import com.main.pcblroyals.data.Player;
 import com.main.pcblroyals.service.CareerBattingStatService;
 import com.main.pcblroyals.service.CareerPitchingStatService;
-import com.main.pcblroyals.service.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 

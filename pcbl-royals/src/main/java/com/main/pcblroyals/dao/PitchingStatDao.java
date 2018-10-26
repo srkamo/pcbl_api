@@ -218,4 +218,29 @@ public class PitchingStatDao {
         return (List<PitchingStatBean>) query.getResultList();
 
     }
+
+    // need to finish this guy
+    public List<PitchingStatBean> getAllTimePitchingStatsForPlayerBySeason(int playerId, int seasonId){
+        String q = "select new com.main.pcblroyals.bean.PitchingStatBean(" +
+                "sum(case when p.result = 1 then 1 else 0 end), " +
+                "sum(case when p.result = 2 then 1 else 0 end), " +
+                "sum(case when p.result = 4 then 1 else 0 end), " +
+                "sum(case when p.result = 3 then 1 else 0 end), " +
+                "SUM(ROUND(innings) + (10 * (innings - ROUND(innings)) / 3)), " +
+                "sum(earnedRuns)," +
+                "sum(totalRuns), " +
+                "sum(strikeouts), " +
+                "sum(walks), " +
+                "sum(hitByPitch), " +
+                "sum(hits), " +
+                "sum(wildPitches), " +
+                "sum(stolenBases), " +
+                "sum(pickoffs) " +
+                ") " +
+                "from pitching_stats p where p.player.id= " + playerId +
+                " and p.";
+
+        Query query = entityManager.createQuery(q);
+        return (List<PitchingStatBean>) query.getResultList();
+    }
 }
