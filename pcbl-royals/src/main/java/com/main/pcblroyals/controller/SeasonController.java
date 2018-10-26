@@ -4,6 +4,7 @@ import com.main.pcblroyals.bean.AllTimeSeasonBean;
 import com.main.pcblroyals.data.Game;
 import com.main.pcblroyals.data.Season;
 import com.main.pcblroyals.service.GameService;
+import com.main.pcblroyals.service.PlayerService;
 import com.main.pcblroyals.service.SeasonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -24,6 +25,10 @@ public class SeasonController {
     @Autowired
     @Qualifier("gameService")
     private GameService gameService;
+
+    @Autowired
+    @Qualifier("playerService")
+    private PlayerService playerService;
 
     @PostMapping("/api/createSeason")
     public void createNewSeason(@Valid @RequestBody Season season) {
@@ -56,33 +61,12 @@ public class SeasonController {
         // get the 3 most recent games
         seasonsAndRecentGames.add(gameService.getMostRecentGames());
 
-        /*
-        // all seasons
-        List<Season> seasons = seasonService.getAllSeason();
-
-        // all time record for all seasons
-        List<AllTimeSeasonBean> allTimeSeasonBean = seasonService.getAllTimeRecord();
-        // add the all time record to the list of seasons for display
-        Season allTimeSeason = new Season();
-        allTimeSeason.setSeason("All Time");
-        allTimeSeason.setWins((int)allTimeSeasonBean.get(0).getWins());
-        allTimeSeason.setTies((int)allTimeSeasonBean.get(0).getTies());
-        allTimeSeason.setLosses((int)allTimeSeasonBean.get(0).getLosses());
-        seasons.add(allTimeSeason);
-
-        // 3 most recent games
-        List<Game> recentGames = gameService.getMostRecentGames();
-
-        seasonsAndRecentGames.add(seasons);
-        seasonsAndRecentGames.add(recentGames);
-        */
-
         return seasonsAndRecentGames;
     }
 
     @GetMapping("/api/viewAllSeasons")
-    public List<Season> viewAllseason() {
-        return seasonService.getAllSeason();
+    public List<Season> viewAllSeasons() {
+        return seasonService.getAllSeasonReverseChronological();
     }
 
     @GetMapping("/api/getGamesBySeason/{seasonId}")
@@ -96,5 +80,10 @@ public class SeasonController {
         return seasonService.getAllTimeRecord();
     }
 
+
+    @GetMapping("/api/getAllSeasonsForPlayer/{playerId}")
+    public List<Season> getAllSeasonsForPlayer(@PathVariable(value = "playerId") int playerId) {
+        return playerService.getPlayerById(playerId).getSeasons();
+    }
 
 }

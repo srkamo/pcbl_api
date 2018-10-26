@@ -105,21 +105,33 @@ public class BattingPitchingStatController {
     // SINGLE PLAYER PAGE (all time)
     // player stats all time
     @GetMapping("api/getStatsSeasonByPlayer/{playerId}")
-    public List<Object> getBattingStatsSeasonByPlayer(@PathVariable(value = "playerId") int playerId){
+    public Map<String, List<?>> getBattingStatsSeasonByPlayer(@PathVariable(value = "playerId") int playerId){
 
-        List<Object> playerSeasonStats = new ArrayList<>();
-        //player info
-        playerSeasonStats.add(playerService.getAllPlayer());
+        Map<String, List<?>> playerSeasonStats = new HashMap<>();
 
-        //player season batting
-        playerSeasonStats.add(battingStatService.getBattingStatsSeasonByPlayer(playerId));
-        //total batting stats player
-        playerSeasonStats.add(battingStatService.getAllTimeBattingStatsForPlayer(playerId));
+        // player season batting
+        playerSeasonStats.put("seasonBatting", battingStatService.getBattingStatsSeasonByPlayer(playerId));
+        // total batting stats player
+        playerSeasonStats.put("allTimeBatting", battingStatService.getAllTimeBattingStatsForPlayer(playerId));
 
-        //player season pitching
-        playerSeasonStats.add(pitchingStatService.getPitchingStatsBySeason(playerId));
+        // player season pitching
+        playerSeasonStats.put("seasonPitching", pitchingStatService.getPitchingStatsBySeason(playerId));
         //total pitching stats player
-        playerSeasonStats.add(pitchingStatService.getAllTimePitchingStatsForPlayer(playerId));
+        playerSeasonStats.put("allTimePitching", pitchingStatService.getAllTimePitchingStatsForPlayer(playerId));
+
+//        List<Object> playerSeasonStats = new ArrayList<>();
+//        //player info
+//        playerSeasonStats.add(playerService.getAllPlayer());
+//
+//        //player season batting
+//        playerSeasonStats.add(battingStatService.getBattingStatsSeasonByPlayer(playerId));
+//        //total batting stats player
+//        playerSeasonStats.add(battingStatService.getAllTimeBattingStatsForPlayer(playerId));
+//
+//        //player season pitching
+//        playerSeasonStats.add(pitchingStatService.getPitchingStatsBySeason(playerId));
+//        //total pitching stats player
+//        playerSeasonStats.add(pitchingStatService.getAllTimePitchingStatsForPlayer(playerId));
 
         return playerSeasonStats;
     }
@@ -128,18 +140,35 @@ public class BattingPitchingStatController {
     // SINGLE PLAYER PAGE (season)
     // player stats for single season (by game)
     @GetMapping("api/getStatsGameBySeasonPlayer/{seasonId}/{playerId}")
-    public List<Object> getBattingStatsGameBySeasonPlayer(@PathVariable(value = "seasonId") int seasonId,
+    public Map<String, List<?>> getBattingStatsGameBySeasonPlayer(@PathVariable(value = "seasonId") int seasonId,
                                                           @PathVariable(value = "playerId") int playerId){
-        List<Object> gameStats = new ArrayList<>();
 
-        //player info for drop down
-        gameStats.add(playerService.getAllPlayer());
-        // list of seasons that this player played in
-        gameStats.add(playerService.getPlayerById(playerId).getSeasons());
-        //game batting info, by season player
-        gameStats.add(battingStatService.getBattingStatsGameBySeasonPlayer(seasonId,playerId));
-        //game pitching info, by season player
-        gameStats.add(pitchingStatService.getPitchingStatsGameBySeasonPlayer(seasonId,playerId));
+
+        Map<String, List<?>> gameStats = new HashMap<>();
+
+        // player game batting
+        gameStats.put("gameBatting", battingStatService.getBattingStatsGameBySeasonPlayer(seasonId,playerId));
+        // total batting stats player
+        // TODO: all time for season
+        //gameStats.put("seasonBatting", battingStatService.getAllTimeBattingStatsForPlayer(playerId));
+
+        // player game pitching
+        gameStats.put("gamePitching", pitchingStatService.getPitchingStatsGameBySeasonPlayer(seasonId,playerId));
+        //total pitching stats player
+        // TODO: all time for season
+        //gameStats.put("seasonPitching", pitchingStatService.getAllTimePitchingStatsForPlayer(playerId));
+
+
+//        List<Object> gameStats = new ArrayList<>();
+
+//        //player info for drop down
+//        gameStats.add(playerService.getAllPlayer());
+//        // list of seasons that this player played in
+//        gameStats.add(playerService.getPlayerById(playerId).getSeasons());
+//        //game batting info, by season player
+//        gameStats.add(battingStatService.getBattingStatsGameBySeasonPlayer(seasonId,playerId));
+//        //game pitching info, by season player
+//        gameStats.add(pitchingStatService.getPitchingStatsGameBySeasonPlayer(seasonId,playerId));
 
         return gameStats;
     }

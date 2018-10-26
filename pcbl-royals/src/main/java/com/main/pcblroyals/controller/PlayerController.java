@@ -37,8 +37,8 @@ public class PlayerController {
         return playerService.getPlayerById(playerId);
     }
 
-    @GetMapping("/api/viewAllPlayer")
-    public List<Player> viewAllPlayer() {
+    @GetMapping("/api/viewAllPlayers")
+    public List<Player> viewAllPlayers() {
         return playerService.getAllPlayer();
     }
 
