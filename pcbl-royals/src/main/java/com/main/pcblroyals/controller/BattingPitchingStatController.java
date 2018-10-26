@@ -57,15 +57,15 @@ public class BattingPitchingStatController {
         return allStats;
     }
 
-    @GetMapping("api/battingStatsBySeason/{id}")
-    public List<BattingStatPlayerBean> getBattingStatsBySeason(@PathVariable(value = "id") int seasonId){
-        return battingStatService.getBattingStatsBySeason(seasonId);
-    }
-
-    @GetMapping("api/pitchingStatsBySeason/{id}")
-    public List<PitchingStatPlayerBean> getPitchingStatsBySeason(@PathVariable(value = "id") int seasonId){
-        return pitchingStatService.getPitchingStatsBySeason(seasonId);
-    }
+//    @GetMapping("api/battingStatsBySeason/{id}")
+//    public List<BattingStatPlayerBean> getBattingStatsBySeason(@PathVariable(value = "id") int seasonId){
+//        return battingStatService.getBattingStatsBySeason(seasonId);
+//    }
+//
+//    @GetMapping("api/pitchingStatsBySeason/{id}")
+//    public List<PitchingStatPlayerBean> getPitchingStatsBySeason(@PathVariable(value = "id") int seasonId){
+//        return pitchingStatService.getPitchingStatsBySeason(seasonId);
+//    }
 
     // single game page
     @GetMapping("api/getStatsBySeasonGame/{seasonId}/{gameId}")
@@ -85,6 +85,10 @@ public class BattingPitchingStatController {
         // player pitching stats by season and game
         allStats.add(pitchingStatService.getPitchingStatsBySeasonGame(seasonId, gameId));
         // all time records for this season pitching
+        allStats.add(pitchingStatService.getTeamPitchingStatsForGame(seasonId, gameId));
+
+        //game info
+        allStats.add(gameService.getGameInfoById(gameId));
 
         return allStats;
     }
@@ -93,6 +97,8 @@ public class BattingPitchingStatController {
     @GetMapping("api/getTeamStatsForGame/{seasonId}/{gameId}")
     public List<BattingStatBean> getTeamStatsForGame(@PathVariable(value = "seasonId") int seasonId,
                                              @PathVariable(value = "gameId") int gameId) {
+
+
         return battingStatService.getTeamStatsForGame(seasonId, gameId);
     }
 
@@ -104,10 +110,16 @@ public class BattingPitchingStatController {
         List<Object> playerSeasonStats = new ArrayList<>();
         //player info
         playerSeasonStats.add(playerService.getAllPlayer());
+
         //player season batting
         playerSeasonStats.add(battingStatService.getBattingStatsSeasonByPlayer(playerId));
+        //total batting stats player
+        playerSeasonStats.add(battingStatService.getAllTimeBattingStatsForPlayer(playerId));
+
         //player season pitching
         playerSeasonStats.add(pitchingStatService.getPitchingStatsBySeason(playerId));
+        //total pitching stats player
+        playerSeasonStats.add(pitchingStatService.getAllTimePitchingStatsForPlayer(playerId));
 
         return playerSeasonStats;
     }

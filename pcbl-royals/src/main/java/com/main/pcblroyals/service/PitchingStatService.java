@@ -2,6 +2,7 @@ package com.main.pcblroyals.service;
 
 import com.main.pcblroyals.bean.*;
 import com.main.pcblroyals.dao.PitchingStatDao;
+import com.main.pcblroyals.data.PitchingStat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -42,5 +43,13 @@ public class PitchingStatService {
     @Transactional
     public List<PitchingStatBean> getAllTimePitchingStatForSeason(int seasonId){
         return pitchingStatDao.getAllTimePitchingStatForSeason(seasonId);
+    }
+
+    public List<PitchingStatBean> getTeamPitchingStatsForGame(int seasonId, int playerId){
+        return pitchingStatDao.getTeamPitchingStatsForGame(seasonId,playerId);
+    }
+
+    public List<PitchingStatBean> getAllTimePitchingStatsForPlayer(int playerId){
+        return pitchingStatDao.getAllTimePitchingStatsForPlayer(playerId);
     }
 }

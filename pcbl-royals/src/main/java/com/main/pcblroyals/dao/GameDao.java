@@ -1,5 +1,6 @@
 package com.main.pcblroyals.dao;
 
+import com.main.pcblroyals.bean.GameBean;
 import com.main.pcblroyals.data.Game;
 import org.springframework.stereotype.Repository;
 
@@ -24,5 +25,17 @@ public class GameDao {
         String q = "select g from games g where g.season.id = " + seasonId + "order by g.date desc";
         Query query = entityManager.createQuery(q);
         return (List<Game>) query.getResultList();
+    }
+
+    public List<GameBean> getGameInfoById(int gameId){
+        String q = "select new com.main.pcblroyals.bean.GameBean" +
+                "(g.id, g.opponent.id, g.opponent.name, g.homeTeam, g.date) " +
+                "from games g " +
+                "where g.id = " + gameId;
+
+        Query query = entityManager.createQuery(q);
+        return (List<GameBean>) query.getResultList();
+
+
     }
 }

@@ -4,6 +4,7 @@ import com.main.pcblroyals.bean.PitchingStatBean;
 import com.main.pcblroyals.bean.PitchingStatGameBean;
 import com.main.pcblroyals.bean.PitchingStatPlayerBean;
 import com.main.pcblroyals.bean.PitchingStatSeasonBean;
+import com.main.pcblroyals.data.PitchingStat;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -168,5 +169,53 @@ public class PitchingStatDao {
 
         Query query = entityManager.createQuery(q);
         return (List<PitchingStatBean>) query.getResultList();
+    }
+
+    // get the all time pitching stat line for a single game
+    public List<PitchingStatBean> getTeamPitchingStatsForGame(int seasonId, int gameId){
+        String q = "select new com.main.pcblroyals.bean.PitchingStatBean(" +
+                "sum(case when p.result = 1 then 1 else 0 end), " +
+                "sum(case when p.result = 2 then 1 else 0 end), " +
+                "sum(case when p.result = 4 then 1 else 0 end), " +
+                "sum(case when p.result = 3 then 1 else 0 end), " +
+                "SUM(ROUND(innings) + (10 * (innings - ROUND(innings)) / 3)), " +
+                "sum(earnedRuns)," +
+                "sum(totalRuns), " +
+                "sum(strikeouts), " +
+                "sum(walks), " +
+                "sum(hitByPitch), " +
+                "sum(hits), " +
+                "sum(wildPitches), " +
+                "sum(stolenBases), " +
+                "sum(pickoffs) " +
+                ") " +
+                "from pitching_stats p where p.game.season.id = " + seasonId + " AND p.game.id = " + gameId;
+
+        Query query = entityManager.createQuery(q);
+        return (List<PitchingStatBean>) query.getResultList();
+    }
+
+    public List<PitchingStatBean> getAllTimePitchingStatsForPlayer(int playerId){
+        String q = "select new com.main.pcblroyals.bean.PitchingStatBean(" +
+                "sum(case when p.result = 1 then 1 else 0 end), " +
+                "sum(case when p.result = 2 then 1 else 0 end), " +
+                "sum(case when p.result = 4 then 1 else 0 end), " +
+                "sum(case when p.result = 3 then 1 else 0 end), " +
+                "SUM(ROUND(innings) + (10 * (innings - ROUND(innings)) / 3)), " +
+                "sum(earnedRuns)," +
+                "sum(totalRuns), " +
+                "sum(strikeouts), " +
+                "sum(walks), " +
+                "sum(hitByPitch), " +
+                "sum(hits), " +
+                "sum(wildPitches), " +
+                "sum(stolenBases), " +
+                "sum(pickoffs) " +
+                ") " +
+                "from pitching_stats p where p.player.id = " + playerId;
+
+        Query query = entityManager.createQuery(q);
+        return (List<PitchingStatBean>) query.getResultList();
+
     }
 }

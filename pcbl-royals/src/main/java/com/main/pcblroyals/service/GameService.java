@@ -1,5 +1,6 @@
 package com.main.pcblroyals.service;
 
+import com.main.pcblroyals.bean.GameBean;
 import com.main.pcblroyals.dao.GameDao;
 import com.main.pcblroyals.data.Game;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,5 +31,9 @@ public class GameService {
     @Transactional
     public List<Game> getGamesBySeason(int seasonId){
         return gameDao.getGamesBySeason(seasonId);
+    }
+
+    public List<GameBean> getGameInfoById(int gameId){
+        return gameDao.getGameInfoById(gameId);
     }
 }
