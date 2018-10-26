@@ -105,7 +105,7 @@ public class PitchingStatPlayerBean extends PitchingStatBean implements Serializ
                             int losses,
                             int ties,
                             int saves,
-                            double inningsPitchedRaw,
+                            double inningsPitched,
                             int earnedRuns,
                             int totalRuns,
                             int strikeouts,
@@ -124,7 +124,7 @@ public class PitchingStatPlayerBean extends PitchingStatBean implements Serializ
         this.losses = losses;
         this.ties = ties;
         this.saves = saves;
-        this.inningsPitchedRaw = inningsPitchedRaw;
+        this.inningsPitched = inningsPitched;
         this.earnedRuns = earnedRuns;
         this.totalRuns = totalRuns;
         this.strikeouts = strikeouts;

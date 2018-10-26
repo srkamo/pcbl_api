@@ -108,7 +108,7 @@ public class BattingPitchingStatController {
     public List<Object> getBattingStatsSeasonByPlayer(@PathVariable(value = "playerId") int playerId){
 
         List<Object> playerSeasonStats = new ArrayList<>();
-        //player info
+        //player info for dropdown
         playerSeasonStats.add(playerService.getAllPlayer());
 
         //player season batting
@@ -120,6 +120,10 @@ public class BattingPitchingStatController {
         playerSeasonStats.add(pitchingStatService.getPitchingStatsBySeason(playerId));
         //total pitching stats player
         playerSeasonStats.add(pitchingStatService.getAllTimePitchingStatsForPlayer(playerId));
+
+        //player info for displaying
+        playerSeasonStats.add(playerService.getPlayerById(playerId));
+
 
         return playerSeasonStats;
     }
@@ -135,11 +139,14 @@ public class BattingPitchingStatController {
         //player info for drop down
         gameStats.add(playerService.getAllPlayer());
         // list of seasons that this player played in
-        gameStats.add(playerService.getPlayerById(playerId).getSeasons());
+        gameStats.add(playerService.selectPlayerById(playerId).getSeasons());
         //game batting info, by season player
         gameStats.add(battingStatService.getBattingStatsGameBySeasonPlayer(seasonId,playerId));
         //game pitching info, by season player
         gameStats.add(pitchingStatService.getPitchingStatsGameBySeasonPlayer(seasonId,playerId));
+
+        //player info for displaying
+        gameStats.add(playerService.getPlayerById(playerId));
 
         return gameStats;
     }

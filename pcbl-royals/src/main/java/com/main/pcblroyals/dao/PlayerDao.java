@@ -46,4 +46,10 @@ public class PlayerDao {
         return (List<Player>) query.getResultList();
     }
 
+    public List<Player> getPlayerById(int playerId){
+        String q = "select p from players p where p.id = " + playerId;
+        Query query = entityManager.createQuery(q);
+        return (List<Player>) query.getResultList();
+    }
+
 }
