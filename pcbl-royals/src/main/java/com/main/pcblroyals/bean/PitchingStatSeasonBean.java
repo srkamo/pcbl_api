@@ -7,6 +7,15 @@ public class PitchingStatSeasonBean extends PitchingStatBean implements Serializ
     protected String season;
     protected int year;
     protected long numGames;
+    protected String seasonDisplayName;
+
+    public String getSeasonDisplayName() {
+        return seasonDisplayName;
+    }
+
+    public void setSeasonDisplayName(String seasonDisplayName) {
+        this.seasonDisplayName = seasonDisplayName;
+    }
 
     public int getSeason_id() {
         return season_id;
@@ -38,6 +47,10 @@ public class PitchingStatSeasonBean extends PitchingStatBean implements Serializ
 
     public void setNumGames(long numGames) {
         this.numGames = numGames;
+    }
+
+    private void formatSeasonDisplayName(){
+        seasonDisplayName = season + " " + year;
     }
 
     public PitchingStatSeasonBean(int season_id,
@@ -78,6 +91,7 @@ public class PitchingStatSeasonBean extends PitchingStatBean implements Serializ
         this.stolenBases = stolenBases;
         this.pickoffs = pickoffs;
 
+        formatSeasonDisplayName();
         formatInningsPitched();
         calculateEarnedRunAverage();
         calculateWalksAndHitsPerInning();
