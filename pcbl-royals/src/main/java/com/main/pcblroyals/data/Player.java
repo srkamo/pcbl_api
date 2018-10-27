@@ -22,12 +22,12 @@ import javax.persistence.Transient;
 @Table (name="players", schema="pcblRoyals_dev")
 public class Player implements Comparable<Player> {
     private int id;
-    private String firstName;
-    private String lastName;
-    private int jerseyNumber;
-    private String positions;
-    private String throwSide;
-    private String batSide;
+	private String firstName;
+	private String lastName;
+	private int jerseyNumber;
+	private String positions;
+	private String throwSide;
+	private String batSide;
     @JsonIgnore
     private List<Season> seasons;
 

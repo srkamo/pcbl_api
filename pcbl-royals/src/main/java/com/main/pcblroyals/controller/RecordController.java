@@ -229,6 +229,89 @@ public class RecordController {
         return tempMap;
     }
 
+    @GetMapping("api/getAllTimeRecordsBatting")
+    public Map<String,Object> getAllTimeRecordsBatting(){
+        Map<String,Object> recordsMap = new HashMap<String, Object>();
+
+        /////////////////////
+        //ALL TIME BATTING
+        /////////////////////
+        //all time batting records games
+        recordsMap.put("all_time_games",allTimeBattingRecordService.getAllTimeBattingRecordGames());
+
+        //all time batting records hits
+        recordsMap.put("all_time_hits",allTimeBattingRecordService.getAllTimeBattingRecordHits());
+
+        //all time batting records doubles
+        recordsMap.put("all_time_doubles",allTimeBattingRecordService.getAllTimeBattingRecordDoubles());
+
+        //all time batting records triples
+        recordsMap.put("all_time_triples",allTimeBattingRecordService.getAllTimeBattingRecordTriples());
+
+        //all time batting records homeruns
+        recordsMap.put("all_time_homeruns",allTimeBattingRecordService.getAllTimeBattingRecordHomeruns());
+
+        //all time batting records runs
+        recordsMap.put("all_time_runs",allTimeBattingRecordService.getAllTimeBattingRecordRuns());
+
+        //all time batting records rbis
+        recordsMap.put("all_time_rbis",allTimeBattingRecordService.getAllTimeBattingRecordRbis());
+
+        //all time batting records stolenbases
+        recordsMap.put("all_time_stolenbases",allTimeBattingRecordService.getAllTimeBattingRecordStolenBases());
+
+        //all time batting records walks
+        recordsMap.put("all_time_walks",allTimeBattingRecordService.getAllTimeBattingRecordWalks());
+
+        //all time batting records hitbypitch
+        recordsMap.put("all_time_hitbypitch",allTimeBattingRecordService.getAllTimeBattingRecordHitByPitch());
+
+        //all time batting records batting average
+        recordsMap.put("all_time_batting_average",allTimeBattingRecordService.getAllTimeBattingRecordBattingAverage());
+
+        //all time batting records slugging percentage
+        recordsMap.put("all_time_slugging_percentage",allTimeBattingRecordService.getAllTimeBattingRecordSluggingPercentage());
+
+        //all time batting records on base percentage
+        recordsMap.put("all_time_on_base_percentage",allTimeBattingRecordService.getAllTimeBattingRecordOnBasePercentage());
+
+        //all time batting records mvp
+        recordsMap.put("all_time_mvp",allTimeBattingRecordService.getAllTimeBattingRecordMVP());
+
+        return recordsMap;
+    }
+
+    @GetMapping("api/getAllTimeRecordsPitching")
+    public Map<String,Object> getAllTimeRecordsPitching(){
+        Map<String,Object> recordsMap = new HashMap<String, Object>();
+
+        /////////////////////
+        //ALL TIME PITCHING
+        /////////////////////
+        //all time pitching records games pitched
+        recordsMap.put("all_time_games_pitched",allTimePitchingRecordService.getAllTimePitchingRecordGamesPitched());
+
+        //all time pitching records wins
+        recordsMap.put("all_time_wins",allTimePitchingRecordService.getAllTimePitchingRecordWins());
+
+        //all time pitching records saves
+        recordsMap.put("all_time_saves",allTimePitchingRecordService.getAllTimePitchingRecordSaves());
+
+        //all time pitching record strikeouts
+        recordsMap.put("all_time_strikeouts",allTimePitchingRecordService.getAllTimePitchingRecordStrikeouts());
+
+        //all time pitching records era
+        recordsMap.put("all_time_era",allTimePitchingRecordService.getAllTimePitchingRecordERA());
+
+        //all time pitching records whip
+        recordsMap.put("all_time_whip",allTimePitchingRecordService.getAllTimePitchingRecordWHIP());
+
+        //all time pitching records cy young
+        recordsMap.put("all_time_cy_young",allTimePitchingRecordService.getAllTimePitchingRecordCyYoung());
+
+        return recordsMap;
+    }
+
     @GetMapping("api/getRecords")
     public Map<String,Object> getSingleSeasonRecordHits(){
         Map<String,Object> recordsMap = new HashMap<String, Object>();
