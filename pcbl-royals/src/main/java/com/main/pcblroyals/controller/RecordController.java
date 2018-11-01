@@ -43,192 +43,6 @@ public class RecordController {
     @Qualifier("allTimePitchingRecordService")
     private AllTimePitchingRecordService allTimePitchingRecordService;
 
-//    @GetMapping("api/getRecords")
-//    public List<Object> getSingleSeasonRecordHits(){
-//        List<Object> recordsList = new ArrayList<Object>();
-//        ///////////////////////
-//        //SINGLE SEASON BATTING
-//        ///////////////////////
-//        //single season batting records hits
-//        recordsList.add(singleSeasonBattingRecordService.getSingleSeasonBattingRecordHits());
-//
-//        //single season batting records doubles
-//        recordsList.add(singleSeasonBattingRecordService.getSingleSeasonBattingRecordDoubles());
-//
-//        //single season batting records triples
-//        recordsList.add(singleSeasonBattingRecordService.getSingleSeasonBattingRecordTriples());
-//
-//        //single season batting records homeruns
-//        recordsList.add(singleSeasonBattingRecordService.getSingleSeasonBattingRecordHomeruns());
-//
-//        //single season batting records runs
-//        recordsList.add(singleSeasonBattingRecordService.getSingleSeasonBattingRecordRuns());
-//
-//        //single season batting records rbis
-//        recordsList.add(singleSeasonBattingRecordService.getSingleSeasonBattingRecordRbis());
-//
-//        //single season batting records stolenbases
-//        recordsList.add(singleSeasonBattingRecordService.getSingleSeasonBattingRecordStolenBases());
-//
-//        //single season batting records walks
-//        recordsList.add(singleSeasonBattingRecordService.getSingleSeasonBattingRecordWalks());
-//
-//        //single season batting records hitbypitch
-//        recordsList.add(singleSeasonBattingRecordService.getSingleSeasonBattingRecordHitByPitch());
-//
-//        //single season batting records batting average
-//        recordsList.add(singleSeasonBattingRecordService.getSingleSeasonBattingRecordBattingAverage());
-//
-//        //single season batting records slugging average
-//        recordsList.add(singleSeasonBattingRecordService.getSingleSeasonBattingRecordSluggingPercentage());
-//
-//        //single season batting records on base percentage
-//        recordsList.add(singleSeasonBattingRecordService.getSingleSeasonBattingRecordOnBasePercentage());
-//
-//        //single season batting records mvp
-//        recordsList.add(singleSeasonBattingRecordService.getSingleSeasonBattingRecordMVP());
-//
-//        ////////////////////////
-//        //SINGLE SEASON PITCHING
-//        ////////////////////////
-//        //single season pitching records wins
-//        recordsList.add(singleSeasonPitchingRecordService.getSingleSeasonPitchingRecordWins());
-//
-//        //single season pitching records wins
-//        recordsList.add(singleSeasonPitchingRecordService.getSingleSeasonPitchingRecordSaves());
-//
-//        //single season batting records strikeouts
-//        recordsList.add(singleSeasonPitchingRecordService.getSingleSeasonPitchingRecordStrikeouts());
-//
-//        //single season batting records era
-//        recordsList.add(singleSeasonPitchingRecordService.getSingleSeasonPitchingRecordERA());
-//
-//        //single season batting records era
-//        recordsList.add(singleSeasonPitchingRecordService.getSingleSeasonPitchingRecordWHIP());
-//
-//        //single season batting records cy young
-//        recordsList.add(singleSeasonPitchingRecordService.getSingleSeasonPitchingRecordCyYoung());
-//
-//        /////////////////////
-//        //SINGLE GAME BATTING
-//        /////////////////////
-//        //single game batting records hits
-//        recordsList.add(singleGameBattingRecordService.getSingleGameBattingRecordHits());
-//
-//        //single game batting records doubles
-//        recordsList.add(singleGameBattingRecordService.getSingleGameBattingRecordDoubles());
-//
-//        //single game batting records triples
-//        recordsList.add(singleGameBattingRecordService.getSingleGameBattingRecordTriples());
-//
-//        //single game batting records homeruns
-//        recordsList.add(singleGameBattingRecordService.getSingleGameBattingRecordHomeruns());
-//
-//        //single game batting records runs
-//        recordsList.add(singleGameBattingRecordService.getSingleGameBattingRecordRuns());
-//
-//        //single game batting records rbis
-//        recordsList.add(singleGameBattingRecordService.getSingleGameBattingRecordRbis());
-//
-//        //single game batting records stolenbases
-//        recordsList.add(singleGameBattingRecordService.getSingleGameBattingRecordStolenBases());
-//
-//        //single game batting records walks
-//        recordsList.add(singleGameBattingRecordService.getSingleGameBattingRecordWalks());
-//
-//        //single game batting records hitbypitch
-//        recordsList.add(singleGameBattingRecordService.getSingleGameBattingRecordHitByPitch());
-//
-//
-//        /////////////////////
-//        //SINGLE GAME PITCHING
-//        /////////////////////
-//        //single game pitching records strikeouts
-//        recordsList.add(singleGamePitchingRecordService.getSingleSeasonPitchingRecordStrikeouts());
-//
-//        /////////////////////
-//        //ALL TIME BATTING
-//        /////////////////////
-//        //all time batting records games
-//        recordsList.add(allTimeBattingRecordService.getAllTimeBattingRecordGames());
-//
-//        //all time batting records hits
-//        recordsList.add(allTimeBattingRecordService.getAllTimeBattingRecordHits());
-//
-//        //all time batting records doubles
-//        recordsList.add(allTimeBattingRecordService.getAllTimeBattingRecordDoubles());
-//
-//        //all time batting records triples
-//        recordsList.add(allTimeBattingRecordService.getAllTimeBattingRecordTriples());
-//
-//        //all time batting records homeruns
-//        recordsList.add(allTimeBattingRecordService.getAllTimeBattingRecordHomeruns());
-//
-//        //all time batting records runs
-//        recordsList.add(allTimeBattingRecordService.getAllTimeBattingRecordRuns());
-//
-//        //all time batting records rbis
-//        recordsList.add(allTimeBattingRecordService.getAllTimeBattingRecordRbis());
-//
-//        //all time batting records stolenbases
-//        recordsList.add(allTimeBattingRecordService.getAllTimeBattingRecordStolenBases());
-//
-//        //all time batting records walks
-//        recordsList.add(allTimeBattingRecordService.getAllTimeBattingRecordWalks());
-//
-//        //all time batting records hitbypitch
-//        recordsList.add(allTimeBattingRecordService.getAllTimeBattingRecordHitByPitch());
-//
-//        //all time batting records batting average
-//        recordsList.add(allTimeBattingRecordService.getAllTimeBattingRecordBattingAverage());
-//
-//        //all time batting records slugging percentage
-//        recordsList.add(allTimeBattingRecordService.getAllTimeBattingRecordSluggingPercentage());
-//
-//        //all time batting records on base percentage
-//        recordsList.add(allTimeBattingRecordService.getAllTimeBattingRecordOnBasePercentage());
-//
-//        //all time batting records mvp
-//        recordsList.add(allTimeBattingRecordService.getAllTimeBattingRecordMVP());
-//
-//        /////////////////////
-//        //ALL TIME PITCHING
-//        /////////////////////
-//        //all time pitching records games pitched
-//        recordsList.add(allTimePitchingRecordService.getAllTimePitchingRecordGamesPitched());
-//
-//        //all time pitching records wins
-//        recordsList.add(allTimePitchingRecordService.getAllTimePitchingRecordWins());
-//
-//        //all time pitching records saves
-//        recordsList.add(allTimePitchingRecordService.getAllTimePitchingRecordSaves());
-//
-//        //all time pitching record strikeouts
-//        recordsList.add(allTimePitchingRecordService.getAllTimePitchingRecordStrikeouts());
-//
-//        //all time pitching records era
-//        recordsList.add(allTimePitchingRecordService.getAllTimePitchingRecordERA());
-//
-//        //all time pitching records whip
-//        recordsList.add(allTimePitchingRecordService.getAllTimePitchingRecordWHIP());
-//
-//        //all time pitching records cy young
-//        recordsList.add(allTimePitchingRecordService.getAllTimePitchingRecordCyYoung());
-//
-//        return recordsList;
-//    }
-
-    @GetMapping("api/testMap")
-    public Map<String,Object> testMapApi(){
-        Map<String,Object> tempMap = new HashMap<String, Object>();
-
-        tempMap.put("myString",allTimeBattingRecordService.getAllTimeBattingRecordDoubles());
-
-
-
-        return tempMap;
-    }
-
     @GetMapping("api/getAllTimeRecordsBatting")
     public Map<String,Object> getAllTimeRecordsBatting(){
         Map<String,Object> recordsMap = new HashMap<String, Object>();
@@ -312,9 +126,10 @@ public class RecordController {
         return recordsMap;
     }
 
-    @GetMapping("api/getRecords")
-    public Map<String,Object> getSingleSeasonRecordHits(){
+    @GetMapping("api/getSeasonRecordsBatting")
+    public Map<String,Object> getSeasonRecordsBatting(){
         Map<String,Object> recordsMap = new HashMap<String, Object>();
+
         ///////////////////////
         //SINGLE SEASON BATTING
         ///////////////////////
@@ -357,6 +172,14 @@ public class RecordController {
         //single season batting records mvp
         recordsMap.put("single_season_mvp",singleSeasonBattingRecordService.getSingleSeasonBattingRecordMVP());
 
+
+        return recordsMap;
+    }
+
+    @GetMapping("api/getSeasonRecordsPitching")
+    public Map<String,Object> getSeasonRecordsPitching(){
+        Map<String,Object> recordsMap = new HashMap<String, Object>();
+
         ////////////////////////
         //SINGLE SEASON PITCHING
         ////////////////////////
@@ -377,6 +200,14 @@ public class RecordController {
 
         //single season batting records cy young
         recordsMap.put("single_season_cy_young",singleSeasonPitchingRecordService.getSingleSeasonPitchingRecordCyYoung());
+
+
+        return recordsMap;
+    }
+
+    @GetMapping("api/getGameRecordsBatting")
+    public Map<String,Object> getGameRecordsBatting(){
+        Map<String,Object> recordsMap = new HashMap<String, Object>();
 
         /////////////////////
         //SINGLE GAME BATTING
@@ -409,80 +240,19 @@ public class RecordController {
         recordsMap.put("single_game_hitbypitch",singleGameBattingRecordService.getSingleGameBattingRecordHitByPitch());
 
 
+        return recordsMap;
+    }
+
+    @GetMapping("api/getGameRecordsPitching")
+    public Map<String,Object> getGameRecordsPitching(){
+        Map<String,Object> recordsMap = new HashMap<String, Object>();
+
         /////////////////////
         //SINGLE GAME PITCHING
         /////////////////////
         //single game pitching records strikeouts
         recordsMap.put("single_game_strikeouts",singleGamePitchingRecordService.getSingleSeasonPitchingRecordStrikeouts());
 
-        /////////////////////
-        //ALL TIME BATTING
-        /////////////////////
-        //all time batting records games
-        recordsMap.put("all_time_games",allTimeBattingRecordService.getAllTimeBattingRecordGames());
-
-        //all time batting records hits
-        recordsMap.put("all_time_hits",allTimeBattingRecordService.getAllTimeBattingRecordHits());
-
-        //all time batting records doubles
-        recordsMap.put("all_time_doubles",allTimeBattingRecordService.getAllTimeBattingRecordDoubles());
-
-        //all time batting records triples
-        recordsMap.put("all_time_triples",allTimeBattingRecordService.getAllTimeBattingRecordTriples());
-
-        //all time batting records homeruns
-        recordsMap.put("all_time_homeruns",allTimeBattingRecordService.getAllTimeBattingRecordHomeruns());
-
-        //all time batting records runs
-        recordsMap.put("all_time_runs",allTimeBattingRecordService.getAllTimeBattingRecordRuns());
-
-        //all time batting records rbis
-        recordsMap.put("all_time_rbis",allTimeBattingRecordService.getAllTimeBattingRecordRbis());
-
-        //all time batting records stolenbases
-        recordsMap.put("all_time_stolenbases",allTimeBattingRecordService.getAllTimeBattingRecordStolenBases());
-
-        //all time batting records walks
-        recordsMap.put("all_time_walks",allTimeBattingRecordService.getAllTimeBattingRecordWalks());
-
-        //all time batting records hitbypitch
-        recordsMap.put("all_time_hitbypitch",allTimeBattingRecordService.getAllTimeBattingRecordHitByPitch());
-
-        //all time batting records batting average
-        recordsMap.put("all_time_batting_average",allTimeBattingRecordService.getAllTimeBattingRecordBattingAverage());
-
-        //all time batting records slugging percentage
-        recordsMap.put("all_time_slugging_percentage",allTimeBattingRecordService.getAllTimeBattingRecordSluggingPercentage());
-
-        //all time batting records on base percentage
-        recordsMap.put("all_time_on_base_percentage",allTimeBattingRecordService.getAllTimeBattingRecordOnBasePercentage());
-
-        //all time batting records mvp
-        recordsMap.put("all_time_mvp",allTimeBattingRecordService.getAllTimeBattingRecordMVP());
-
-        /////////////////////
-        //ALL TIME PITCHING
-        /////////////////////
-        //all time pitching records games pitched
-        recordsMap.put("all_time_games_pitched",allTimePitchingRecordService.getAllTimePitchingRecordGamesPitched());
-
-        //all time pitching records wins
-        recordsMap.put("all_time_wins",allTimePitchingRecordService.getAllTimePitchingRecordWins());
-
-        //all time pitching records saves
-        recordsMap.put("all_time_saves",allTimePitchingRecordService.getAllTimePitchingRecordSaves());
-
-        //all time pitching record strikeouts
-        recordsMap.put("all_time_strikeouts",allTimePitchingRecordService.getAllTimePitchingRecordStrikeouts());
-
-        //all time pitching records era
-        recordsMap.put("all_time_era",allTimePitchingRecordService.getAllTimePitchingRecordERA());
-
-        //all time pitching records whip
-        recordsMap.put("all_time_whip",allTimePitchingRecordService.getAllTimePitchingRecordWHIP());
-
-        //all time pitching records cy young
-        recordsMap.put("all_time_cy_young",allTimePitchingRecordService.getAllTimePitchingRecordCyYoung());
 
         return recordsMap;
     }
