@@ -123,4 +123,17 @@ public class BattingStatDao {
         Query query = entityManager.createQuery(q);
         return (List<BattingStatBean>) query.getResultList();
     }
+
+    //get the all time batting stats for player in a season
+    public List<BattingStatBean> getTotalBattingStatsForPlayerBySeason(int seasonId, int playerId){
+        String q = "select new com.main.pcblroyals.bean.BattingStatBean" +
+                "(sum(b.atBats), sum(b.singles), sum(b.doubles), sum(b.triples), sum(b.homeRuns), " +
+                "sum(b.walks), sum(b.hitByPitch), sum(b.sacrifices), sum(b.runs), sum(b.rbis), " +
+                "sum(b.stolenBases), sum(b.passedBalls), sum(b.caughtStealing), sum(b.strikeOuts)) " +
+                "from batting_stats b where b.player.id = " + playerId + " and b.game.season.id = " + seasonId;
+
+        Query query = entityManager.createQuery(q);
+        return (List<BattingStatBean>) query.getResultList();
+    }
+
 }

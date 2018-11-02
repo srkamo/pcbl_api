@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @CrossOrigin
@@ -48,19 +50,19 @@ public class CareerStatController {
 
     // career stats page
     @GetMapping("api/viewCareerStatsAllPlayer")
-    public  List<Object>  viewCareerStatsAllPlayer(){
+    public Map<String, List<?>> viewCareerStatsAllPlayer(){
 
-        List<Object> battingPitchingStats = new ArrayList<>();
+        Map<String, List<?>> battingPitchingStats = new HashMap<>();
 
         // career batting stats all players
-        battingPitchingStats.add(careerBattingStatService.getAllCareerStats());
+        battingPitchingStats.put("playerBatting",careerBattingStatService.getAllCareerStats());
         // all time batting stat for team
-        battingPitchingStats.add(careerBattingStatService.getAllTimeBattingStat());
+        battingPitchingStats.put("totalBatting",careerBattingStatService.getAllTimeBattingStat());
 
         // career pitching stats all players
-        battingPitchingStats.add(careerPitchingStatService.getAllCareerPitchingStats());
+        battingPitchingStats.put("playerPitching",careerPitchingStatService.getAllCareerPitchingStats());
         // all time pitching stat for team
-        battingPitchingStats.add(careerPitchingStatService.getAllTimePitchingStat());
+        battingPitchingStats.put("totalPitching",careerPitchingStatService.getAllTimePitchingStat());
 
         /*
         // career batting stats all players

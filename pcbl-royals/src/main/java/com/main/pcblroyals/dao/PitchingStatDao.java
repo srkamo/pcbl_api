@@ -219,8 +219,7 @@ public class PitchingStatDao {
 
     }
 
-    // need to finish this guy
-    public List<PitchingStatBean> getAllTimePitchingStatsForPlayerBySeason(int playerId, int seasonId){
+    public List<PitchingStatBean> getTotalPitchingStatsForPlayerBySeason(int seasonId, int playerId){
         String q = "select new com.main.pcblroyals.bean.PitchingStatBean(" +
                 "sum(case when p.result = 1 then 1 else 0 end), " +
                 "sum(case when p.result = 2 then 1 else 0 end), " +
@@ -237,10 +236,11 @@ public class PitchingStatDao {
                 "sum(stolenBases), " +
                 "sum(pickoffs) " +
                 ") " +
-                "from pitching_stats p where p.player.id= " + playerId +
-                " and p.";
+                "from pitching_stats p where p.player.id = " + playerId + " and p.game.season.id= " + seasonId;
 
         Query query = entityManager.createQuery(q);
         return (List<PitchingStatBean>) query.getResultList();
+
+
     }
 }

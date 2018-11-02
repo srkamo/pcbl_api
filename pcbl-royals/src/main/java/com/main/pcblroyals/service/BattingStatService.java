@@ -55,4 +55,8 @@ public class BattingStatService {
         return battingStatDao.getAllTimeBattingStatsForPlayer(playerId);
     }
 
+    public List<BattingStatBean> getTotalBattingStatsForByPlayerBySeason(int seasonId, int playerId){
+        return battingStatDao.getTotalBattingStatsForPlayerBySeason(seasonId,playerId);
+    }
+
 }
