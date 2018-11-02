@@ -43,6 +43,15 @@ public class RecordController {
     @Qualifier("allTimePitchingRecordService")
     private AllTimePitchingRecordService allTimePitchingRecordService;
 
+    @GetMapping("api/getDropdownOptions")
+    public Map<Integer, String> getDropdownOptions(){
+        Map<Integer, String> dropdownOptions = new HashMap<>();
+        dropdownOptions.put(1, "All Time");
+        dropdownOptions.put(2, "Single Season");
+        dropdownOptions.put(3, "Single Game");
+        return dropdownOptions;
+    }
+
     @GetMapping("api/getAllTimeRecordsBatting")
     public Map<String,Object> getAllTimeRecordsBatting(){
         Map<String,Object> recordsMap = new HashMap<String, Object>();
