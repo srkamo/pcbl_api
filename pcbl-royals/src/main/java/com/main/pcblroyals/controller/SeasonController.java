@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @CrossOrigin
@@ -51,17 +53,17 @@ public class SeasonController {
     }
 
     @GetMapping("/api/getAllSeasonsAndRecentGames")
-    public List<Object> getMostRecentGames() {
-        List<Object> seasonsAndRecentGames = new ArrayList<Object>();
+    public Map<String, Object> getMostRecentGames() {
 
+        Map<String, Object> map = new HashMap<>();
         // all season records
-        seasonsAndRecentGames.add(seasonService.getAllSeason());
+        map.put("seasonRecords", seasonService.getAllSeason());
         // all time for all seasons
-        seasonsAndRecentGames.add(seasonService.getAllTimeRecord());
+        map.put("allTimeRecord", seasonService.getAllTimeRecord());
         // get the 3 most recent games
-        seasonsAndRecentGames.add(gameService.getMostRecentGames());
+        map.put("recentGames", gameService.getMostRecentGames());
 
-        return seasonsAndRecentGames;
+        return map;
     }
 
     @GetMapping("/api/viewAllSeasons")
