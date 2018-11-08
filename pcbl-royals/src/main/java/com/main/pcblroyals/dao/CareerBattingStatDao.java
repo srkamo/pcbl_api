@@ -2,6 +2,7 @@ package com.main.pcblroyals.dao;
 
 import com.main.pcblroyals.bean.BattingStatBean;
 import com.main.pcblroyals.bean.BattingStatPlayerBean;
+import com.main.pcblroyals.data.BattingStat;
 import com.main.pcblroyals.data.CareerBattingStat;
 import com.main.pcblroyals.data.Player;
 import org.springframework.stereotype.Repository;
@@ -69,6 +70,7 @@ public class CareerBattingStatDao {
                 ")  " +
                 " from batting_career_stats b " +
                 " order by b.player.lastName, b.player.firstName";
+
 
         Query query = entityManager.createQuery(q);
         return (List<BattingStatPlayerBean>) query.getResultList();

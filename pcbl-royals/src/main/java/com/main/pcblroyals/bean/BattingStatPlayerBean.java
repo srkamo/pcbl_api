@@ -74,6 +74,7 @@ public class BattingStatPlayerBean extends BattingStatBean implements Serializab
         this.caughtStealing = caughtStealing;
         this.strikeOuts = strikeOuts;
 
+        calculateHits();
         formatDisplayName();
         calculateBattingAverage();
         calculateOnBasePercentage();
@@ -101,6 +102,7 @@ public class BattingStatPlayerBean extends BattingStatBean implements Serializab
         this.caughtStealing = caughtStealing;
         this.strikeOuts = strikeOuts;
 
+        calculateHits();
         formatDisplayName();
         calculateBattingAverage();
         calculateOnBasePercentage();

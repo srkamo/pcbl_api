@@ -96,8 +96,21 @@ public class AllTimeBattingRecordDao {
     }
 
     public List<RecordBean> getAllTimeBattingRecordHits(){
-        String recordName = "singles";
-        String q = makeAllTimeBattingSumQuery(recordName);
+        String q = "SELECT  " +
+                "  b.player_id, " +
+                "  p.first_name, " +
+                "  p.last_name, " +
+                "  (SUM(singles) + SUM(doubles) + SUM(triples) + SUM(homeruns)) AS hits "+
+                "FROM  " +
+                "  batting_stats b " +
+                "JOIN " +
+                "  players p " +
+                "ON " +
+                "  b.player_id = p.id " +
+                "GROUP BY  " +
+                "  b.player_id, p.first_name, p.last_name " +
+                "ORDER BY  " +
+                "  4 DESC";
         return getTopPlayersAllTimeBattingForStat(q,"hits");
     }
 

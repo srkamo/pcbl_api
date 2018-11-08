@@ -21,6 +21,7 @@ public class BattingStatBean implements Serializable {
     protected long passedBalls;
     protected long caughtStealing;
     protected long strikeOuts;
+    protected long hits;
 
     protected String battingAverage;
     protected String onBasePercentage;
@@ -114,6 +115,10 @@ public class BattingStatBean implements Serializable {
         this.stolenBases = stolenBases;
     }
 
+    public long getHits() { return hits; }
+
+    public void setHits(long hits) { this.hits = hits; }
+
     public long getPassedBalls() {
         return passedBalls;
     }
@@ -162,6 +167,7 @@ public class BattingStatBean implements Serializable {
         this.sluggingAverage = sluggingAverage;
     }
 
+
     //constructor for single season or game batting stats
     public BattingStatBean(long atBats, long singles, long doubles, long triples, long homeRuns, long walks, long hitByPitch, long sacrifices, long runs, long rbis, long stolenBases, long passedBalls, long caughtStealing, long strikeOuts) {
         this.atBats = atBats;
@@ -179,6 +185,7 @@ public class BattingStatBean implements Serializable {
         this.caughtStealing = caughtStealing;
         this.strikeOuts = strikeOuts;
 
+        calculateHits();
         calculateBattingAverage();
         calculateOnBasePercentage();
         calculateSluggingAverage();
@@ -201,9 +208,14 @@ public class BattingStatBean implements Serializable {
         this.caughtStealing = 0;
         this.strikeOuts = 0;
 
+        calculateHits();
         calculateBattingAverage();
         calculateOnBasePercentage();
         calculateSluggingAverage();
+    }
+
+    public void calculateHits(){
+        this.hits = this.singles + this.doubles + this.triples + this.homeRuns;
     }
 
     protected void calculateBattingAverage(){
@@ -212,7 +224,7 @@ public class BattingStatBean implements Serializable {
             tempBattingAverage = 0;
         }
         else {
-            tempBattingAverage = (float)singles/atBats;
+            tempBattingAverage = (float)hits/atBats;
             tempBattingAverage = (float)Math.round(tempBattingAverage * 1000f)/1000f;
         }
 
@@ -249,4 +261,5 @@ public class BattingStatBean implements Serializable {
         DecimalFormat df = new DecimalFormat("0.000");
         sluggingAverage = df.format(tempSluggingAverage);
     }
+
 }

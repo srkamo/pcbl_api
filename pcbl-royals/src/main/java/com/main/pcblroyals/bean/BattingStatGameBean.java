@@ -109,6 +109,7 @@ public class BattingStatGameBean extends BattingStatBean implements Serializable
         this.caughtStealing = caughtStealing;
         this.strikeOuts = strikeOuts;
 
+        calculateHits();
         calculateBattingAverage();
         calculateOnBasePercentage();
         calculateSluggingAverage();

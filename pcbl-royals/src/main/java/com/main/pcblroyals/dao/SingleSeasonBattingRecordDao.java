@@ -78,8 +78,31 @@ public class SingleSeasonBattingRecordDao {
 
     //hits single season record
     public List<SingleSeasonRecordBean> getSingleSeasonBattingRecordHits(){
-        String recordName = "singles";
-        String q = makeSingleSeasonBattingSumQuery(recordName);
+        String q = "SELECT  " +
+                "    b.player_id,  " +
+                "    p.first_name,  " +
+                "    p.last_name,  " +
+                "    s.season,  " +
+                "    s.year, " +
+                "    (SUM(singles) + SUM(doubles) + SUM(triples) + SUM(homeruns)) AS hits " +
+                "FROM  " +
+                " batting_stats b " +
+                "JOIN " +
+                " players p " +
+                "ON " +
+                " b.player_id = p.id " +
+                "JOIN " +
+                " games g " +
+                "ON " +
+                " b.game_id = g.id " +
+                "JOIN " +
+                " seasons s " +
+                "ON " +
+                " g.season_id = s.id " +
+                "GROUP BY  " +
+                " b.player_id, p.first_name, p.last_name, s.season, s.year " +
+                "ORDER BY  " +
+                " 6 DESC, s.year, p.last_name, p.first_name";
         return getTopPlayersSingleSeasonBattingForStat(q,"hits");
     }
 

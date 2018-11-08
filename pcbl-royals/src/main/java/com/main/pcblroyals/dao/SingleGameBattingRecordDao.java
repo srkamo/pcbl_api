@@ -94,9 +94,40 @@ public class SingleGameBattingRecordDao {
         return q;
     }
 
+
     public List<SingleGameRecordBean> getSingleGameBattingRecordHits(){
-        String recordName = "singles";
-        String q = makeSingleGameBattingSumQuery(recordName);
+        String q = "SELECT  " +
+                " b.player_id,  " +
+                "    p.first_name,  " +
+                "    p.last_name,  " +
+                "    t.name, " +
+                "    g.home_team,  " +
+                "    s.season,  " +
+                "    s.year, " +
+                "    DATE_FORMAT(g.date,'%m/%d/%Y') as date, " +
+                "    (SUM(singles) + SUM(doubles) + SUM(triples) + SUM(homeruns)) AS hits " +
+                "FROM  " +
+                " batting_stats b " +
+                "JOIN " +
+                " players p " +
+                "ON " +
+                " b.player_id = p.id " +
+                "JOIN " +
+                " games g " +
+                "ON " +
+                " b.game_id = g.id " +
+                "JOIN " +
+                " teams t " +
+                "ON " +
+                " g.opponent_team_id = t.id " +
+                "JOIN " +
+                " seasons s " +
+                "ON " +
+                " g.season_id = s.id " +
+                "GROUP BY  " +
+                " b.player_id, p.first_name, p.last_name, t.name, g.home_team, s.season, s.year, g.date " +
+                "ORDER BY  " +
+                " 9 DESC, g.date, p.last_name,p.first_name";
         return getTopPlayersSingleGameBattingForStat(q,"hits");
     }
 

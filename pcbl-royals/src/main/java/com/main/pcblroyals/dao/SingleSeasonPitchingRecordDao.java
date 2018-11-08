@@ -223,7 +223,7 @@ public class SingleSeasonPitchingRecordDao {
                 "  t1.season,  " +
                 "  t1.year,  " +
                 "  t1.season_id,  " +
-                "    t1.cy_young  " +
+                "  ROUND(t1.cy_young)  " +
                 "FROM  " +
                 "  (SELECT   " +
                 "    ps.player_id,   " +
