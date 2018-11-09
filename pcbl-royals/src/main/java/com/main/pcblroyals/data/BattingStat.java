@@ -33,7 +33,7 @@ public class BattingStat {
     private int caughtStealing;
     private int strikeOuts;
 
-    @Id @GeneratedValue(strategy=GenerationType.AUTO)
+    @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
     public int getId() {
 		return id;
 	}

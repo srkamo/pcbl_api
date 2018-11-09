@@ -17,11 +17,6 @@ public class PlayerController {
     @Qualifier("playerService")
     private PlayerService playerService;
 
-    @PostMapping("/api/createPlayer")
-    public void createNewPlayer(@Valid @RequestBody Player player) {
-        playerService.addPlayer(player);
-    }
-
     @PutMapping("/api/changePlayer")
     public void changeExistingPlayer(@Valid @RequestBody Player player) {
         playerService.modifyPlayer(player);

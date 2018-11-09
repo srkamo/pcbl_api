@@ -32,11 +32,6 @@ public class SeasonController {
     @Qualifier("playerService")
     private PlayerService playerService;
 
-    @PostMapping("/api/createSeason")
-    public void createNewSeason(@Valid @RequestBody Season season) {
-        seasonService.addSeason(season);
-    }
-
     @PutMapping("/api/changeSeason")
     public void changeExistingSeason(@Valid @RequestBody Season season) {
         seasonService.modifySeason(season);

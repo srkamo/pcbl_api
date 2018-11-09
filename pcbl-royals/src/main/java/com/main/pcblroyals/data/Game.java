@@ -42,7 +42,7 @@ public class Game implements Comparable<Game> {
 		this.homeTeam = homeTeam;
 	}
 
-    @Id @GeneratedValue(strategy=GenerationType.AUTO)
+    @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	public int getId() {
 		return id;
 	}

@@ -19,7 +19,7 @@ import javax.persistence.Transient;
 
 
 @Entity(name = "players")
-@Table (name="players", schema="pcblRoyals_dev")
+@Table (name="players", schema="pcblroyals_dev")
 public class Player implements Comparable<Player> {
     private int id;
 	private String firstName;
@@ -47,7 +47,7 @@ public class Player implements Comparable<Player> {
 		this.firstName = firstName;
 	}
 
-    @Id @GeneratedValue(strategy=GenerationType.AUTO)
+    @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	public int getId() {
 		return id;
 	}

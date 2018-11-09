@@ -32,7 +32,7 @@ public class PlayerDao {
         playerToUpdate.setPositions(player.getPositions());
         playerToUpdate.setThrowSide(player.getThrowSide());
         playerToUpdate.setBatSide(player.getBatSide());
-        playerToUpdate.setSeasons(player.getSeasons());
+        //playerToUpdate.setSeasons(player.getSeasons());
         entityManager.flush();
     }
 

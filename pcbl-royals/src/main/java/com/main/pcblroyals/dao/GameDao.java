@@ -35,7 +35,7 @@ public class GameDao {
 
         Query query = entityManager.createQuery(q);
         return (List<GameBean>) query.getResultList();
-
-
     }
+
+    public void insertGame(Game game){ entityManager.persist(game);}
 }

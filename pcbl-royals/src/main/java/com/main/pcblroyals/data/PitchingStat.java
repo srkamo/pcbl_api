@@ -28,9 +28,8 @@ public class PitchingStat {
     private int stolenBases;
     private int pickoffs;
     private int result;
-	private float testInnings;
 
-    @Id @GeneratedValue(strategy=GenerationType.AUTO)
+    @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
     public int getId() {
 		return id;
 	}
@@ -144,8 +143,8 @@ public class PitchingStat {
 		this.result = result;
 	}
 
-	@Formula("(select (TRUNCATE(((SUM(TRUNCATE(innings,0)) + TRUNCATE(((SUM(innings) - SUM(TRUNCATE(innings,0))) / 0.3),0)) + (TRUNCATE((((SUM(innings) - SUM(TRUNCATE(innings,0))) / 0.3) - TRUNCATE(((SUM(innings) - SUM(TRUNCATE(innings,0))) / 0.3),0)),1) / 3)),1)))")
-	public float getTestInnings() { return testInnings;}
-	public void setTestInnings(float testInnings) { this.testInnings = testInnings;}
+//	@Formula("(select (TRUNCATE(((SUM(TRUNCATE(innings,0)) + TRUNCATE(((SUM(innings) - SUM(TRUNCATE(innings,0))) / 0.3),0)) + (TRUNCATE((((SUM(innings) - SUM(TRUNCATE(innings,0))) / 0.3) - TRUNCATE(((SUM(innings) - SUM(TRUNCATE(innings,0))) / 0.3),0)),1) / 3)),1)))")
+//	public float getTestInnings() { return testInnings;}
+//	public void setTestInnings(float testInnings) { this.testInnings = testInnings;}
 
 }

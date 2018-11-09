@@ -240,7 +240,7 @@ public class PitchingStatDao {
 
         Query query = entityManager.createQuery(q);
         return (List<PitchingStatBean>) query.getResultList();
-
-
     }
+
+    public void insertPitchingStat(PitchingStat pitchingStat){entityManager.persist(pitchingStat);}
 }

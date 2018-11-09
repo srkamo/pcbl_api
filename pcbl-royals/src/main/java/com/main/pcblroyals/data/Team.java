@@ -21,7 +21,7 @@ public class Team implements Comparable<Team> {
     private String name;
     private List<Season> seasons;
 
-    @Id @GeneratedValue(strategy=GenerationType.AUTO)
+    @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
     public int getId() {
 		return id;
 	}

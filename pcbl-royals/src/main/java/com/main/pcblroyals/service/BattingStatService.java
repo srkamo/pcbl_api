@@ -2,6 +2,7 @@ package com.main.pcblroyals.service;
 
 import com.main.pcblroyals.bean.*;
 import com.main.pcblroyals.dao.BattingStatDao;
+import com.main.pcblroyals.data.BattingStat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -58,5 +59,9 @@ public class BattingStatService {
     public List<BattingStatBean> getTotalBattingStatsForByPlayerBySeason(int seasonId, int playerId){
         return battingStatDao.getTotalBattingStatsForPlayerBySeason(seasonId,playerId);
     }
+
+    @Transactional
+    public void addBattingStat(BattingStat battingStat){battingStatDao.insertBattingStat(battingStat);}
+
 
 }

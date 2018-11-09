@@ -36,4 +36,7 @@ public class GameService {
     public List<GameBean> getGameInfoById(int gameId){
         return gameDao.getGameInfoById(gameId);
     }
+
+    @Transactional
+    public void addGame(Game game){ gameDao.insertGame(game);}
 }

@@ -56,4 +56,7 @@ public class PitchingStatService {
     public List<PitchingStatBean> getTotalPitchingStatsForPlayerBySeason(int seasonId,int playerId){
         return pitchingStatDao.getTotalPitchingStatsForPlayerBySeason(seasonId,playerId);
     }
+
+    @Transactional
+    public void addPitchingStat(PitchingStat pitchingStat){ pitchingStatDao.insertPitchingStat(pitchingStat);}
 }

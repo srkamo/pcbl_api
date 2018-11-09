@@ -1,6 +1,7 @@
 package com.main.pcblroyals.dao;
 
 import com.main.pcblroyals.bean.*;
+import com.main.pcblroyals.data.BattingStat;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -135,5 +136,7 @@ public class BattingStatDao {
         Query query = entityManager.createQuery(q);
         return (List<BattingStatBean>) query.getResultList();
     }
+
+    public void insertBattingStat(BattingStat battingStat){entityManager.persist(battingStat);}
 
 }
