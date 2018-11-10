@@ -19,7 +19,7 @@ public class SingleSeasonPitchingRecordDao {
     @PersistenceContext
     EntityManager entityManager;
 
-    protected int singleSeasonPitchingGameFilter = 0;
+    protected int singleSeasonPitchingGameFilter = 3;
 
     //SINGLE SEASON RECORDS
     public List<SingleSeasonRecordBean> getTopPlayersSingleSeasonPitchingForStat(String statQuery, String recordName){
