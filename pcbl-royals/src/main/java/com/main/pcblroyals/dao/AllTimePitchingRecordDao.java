@@ -8,6 +8,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,20 +34,34 @@ public class AllTimePitchingRecordDao {
         int numPeopleAdded = 0;
         for(Object[] record:allStatRecords){
             BigDecimal tempRecord;
+            String recordValueString;
             String recordString = (String)record[2] + ", " + (String)record[1];
 
             if(recordName == "games_pitched" || recordName == "cy_young"){
                 BigInteger tempRecordInt = (BigInteger)record[3];
                 tempRecord = BigDecimal.valueOf(tempRecordInt.intValue());
+
+                DecimalFormat df = new DecimalFormat("0");
+                recordValueString = df.format(tempRecord);
+
+            }
+            else if(recordName == "whip" || recordName == "era"){
+                tempRecord = (BigDecimal) record[3];
+
+                DecimalFormat df = new DecimalFormat("0.00");
+                recordValueString = df.format(tempRecord);
             }
             else{
                 tempRecord = (BigDecimal) record[3];
+
+                DecimalFormat df = new DecimalFormat("0");
+                recordValueString = df.format(tempRecord);
             }
 
             if(numPeopleAdded >= 5 && !tempRecord.equals(lastRecordAdded)){
                 break;
             } else {
-                RecordBean tempBean = new RecordBean(recordString,recordName,tempRecord);
+                RecordBean tempBean = new RecordBean(recordString,recordName,recordValueString);
                 topPlayersList.add(tempBean);
             }
             lastRecordAdded = tempRecord;
@@ -204,9 +219,9 @@ public class AllTimePitchingRecordDao {
                 "      s.season,    " +
                 "      s.year,   " +
                 "      g.season_id,   " +
-                "      SUM(CASE WHEN ps.result = 1 THEN 1 ELSE 0 END)*3 - SUM(CASE WHEN ps.result = 2 THEN 1 ELSE 0 END)*2 +    " +
-                "      SUM(CASE WHEN ps.result = 3 THEN 1 ELSE 0 END)*2 + SUM(ROUND(innings) + (10 * (innings - ROUND(innings)) / 3))*3 +   " +
-                "      SUM(strikeouts) - SUM(walks) - SUM(hitbypitch) - SUM(earned_runs) - SUM(hits) AS cy_young   " +
+                "      SUM(CASE WHEN ps.result = 1 THEN 1 ELSE 0 END)*3 - SUM(CASE WHEN ps.result = 2 THEN 1 ELSE 0 END) +    " +
+                "      SUM(CASE WHEN ps.result = 3 THEN 1 ELSE 0 END)*2 + ROUND(SUM(ROUND(innings) + (10 * (innings - ROUND(innings)) / 3))*3) +   " +
+                "      SUM(strikeouts) - SUM(walks) - SUM(hitbypitch) - SUM(earned_runs)*0.5 - SUM(hits)*0.5 AS cy_young   " +
                 "   FROM    " +
                 "      pitching_stats ps   " +
                 "   JOIN players p ON ps.player_id = p.id   " +
@@ -227,9 +242,9 @@ public class AllTimePitchingRecordDao {
                 "      SELECT    " +
                 "         ps.player_id,    " +
                 "         g.season_id,   " +
-                "         SUM(CASE WHEN ps.result = 1 THEN 1 ELSE 0 END)*3 - SUM(CASE WHEN ps.result = 2 THEN 1 ELSE 0 END)*2 +    " +
-                "         SUM(CASE WHEN ps.result = 3 THEN 1 ELSE 0 END)*2 + SUM(ROUND(innings) + (10 * (innings - ROUND(innings)) / 3))*3 +   " +
-                "         SUM(strikeouts) - SUM(walks) - SUM(hitbypitch) - SUM(earned_runs) - SUM(hits) AS cy_young   " +
+                "         SUM(CASE WHEN ps.result = 1 THEN 1 ELSE 0 END)*3 - SUM(CASE WHEN ps.result = 2 THEN 1 ELSE 0 END) +    " +
+                "         SUM(CASE WHEN ps.result = 3 THEN 1 ELSE 0 END)*2 + ROUND(SUM(ROUND(innings) + (10 * (innings - ROUND(innings)) / 3))*3) +   " +
+                "         SUM(strikeouts) - SUM(walks) - SUM(hitbypitch) - SUM(earned_runs)*0.5 - SUM(hits)*0.5 AS cy_young   " +
                 "      FROM    " +
                 "         pitching_stats ps   " +
                 "      JOIN players p ON ps.player_id = p.id   " +

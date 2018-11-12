@@ -10,6 +10,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,20 +36,33 @@ public class AllTimeBattingRecordDao {
         int numPeopleAdded = 0;
         for(Object[] record:allStatRecords){
             String recordString = (String)record[2] + ", " + (String)record[1];
-
             BigDecimal tempRecord;
+            String recordValueString;
+
             if(recordName == "games" || recordName == "mvp"){
                 BigInteger tempRecordInt = (BigInteger)record[3];
                 tempRecord = BigDecimal.valueOf(tempRecordInt.intValue());
+
+                DecimalFormat df = new DecimalFormat("0");
+                recordValueString = df.format(tempRecord);
+            }
+            else if(recordName == "on_base_percentage" || recordName == "slugging_percentage" || recordName == "batting_average"){
+                tempRecord = (BigDecimal) record[3];
+
+                DecimalFormat df = new DecimalFormat("0.000");
+                recordValueString = df.format(tempRecord);
             }
             else{
                 tempRecord = (BigDecimal) record[3];
+
+                DecimalFormat df = new DecimalFormat("0");
+                recordValueString = df.format(tempRecord);
             }
 
             if(numPeopleAdded >= 5 && !tempRecord.equals(lastRecordAdded)){
                 break;
             } else {
-                RecordBean tempBean = new RecordBean(recordString,recordName,tempRecord);
+                RecordBean tempBean = new RecordBean(recordString,recordName,recordValueString);
                 topPlayersList.add(tempBean);
             }
             lastRecordAdded = tempRecord;

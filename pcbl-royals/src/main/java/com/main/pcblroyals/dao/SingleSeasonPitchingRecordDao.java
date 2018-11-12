@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,10 +37,23 @@ public class SingleSeasonPitchingRecordDao {
             String recordString = (String)record[2] + ", " + (String)record[1];
 
             BigDecimal tempRecord = (BigDecimal) record[5];
+            String recordValueString;
+
+            if(recordName == "era" || recordName == "whip"){
+                DecimalFormat df = new DecimalFormat("0.00");
+                recordValueString = df.format(tempRecord);
+
+            }
+            else{
+                DecimalFormat df = new DecimalFormat("0");
+                recordValueString = df.format(tempRecord);
+            }
+
+
             if(numPeopleAdded >= 5 && !tempRecord.equals(lastRecordAdded)){
                 break;
             } else {
-                SingleSeasonRecordBean tempBean = new SingleSeasonRecordBean(recordString,recordName,tempRecord,seasonString);
+                SingleSeasonRecordBean tempBean = new SingleSeasonRecordBean(recordString,recordName,recordValueString,seasonString);
                 topPlayersList.add(tempBean);
             }
             lastRecordAdded = tempRecord;
@@ -223,7 +237,7 @@ public class SingleSeasonPitchingRecordDao {
                 "  t1.season,  " +
                 "  t1.year,  " +
                 "  t1.season_id,  " +
-                "  ROUND(t1.cy_young)  " +
+                "  t1.cy_young  " +
                 "FROM  " +
                 "  (SELECT   " +
                 "    ps.player_id,   " +
@@ -232,9 +246,9 @@ public class SingleSeasonPitchingRecordDao {
                 "    s.season,   " +
                 "    s.year,  " +
                 "    g.season_id,  " +
-                "    SUM(CASE WHEN ps.result = 1 THEN 1 ELSE 0 END)*3 - SUM(CASE WHEN ps.result = 2 THEN 1 ELSE 0 END)*2 +   " +
-                "    SUM(CASE WHEN ps.result = 3 THEN 1 ELSE 0 END)*2 + SUM(ROUND(innings) + (10 * (innings - ROUND(innings)) / 3))*3 +  " +
-                "    SUM(strikeouts) - SUM(walks) - SUM(hitbypitch) - SUM(earned_runs) - SUM(hits) AS cy_young  " +
+                "    SUM(CASE WHEN ps.result = 1 THEN 1 ELSE 0 END)*3 - SUM(CASE WHEN ps.result = 2 THEN 1 ELSE 0 END) +   " +
+                "    SUM(CASE WHEN ps.result = 3 THEN 1 ELSE 0 END)*2 + ROUND(SUM(ROUND(innings) + (10 * (innings - ROUND(innings)) / 3))*3) +  " +
+                "    SUM(strikeouts) - SUM(walks) - SUM(hitbypitch) - SUM(earned_runs)*0.5 - SUM(hits)*0.5 AS cy_young  " +
                 "  FROM   " +
                 "    pitching_stats ps  " +
                 "  JOIN players p ON ps.player_id = p.id  " +
@@ -255,9 +269,9 @@ public class SingleSeasonPitchingRecordDao {
                 "    SELECT   " +
                 "      ps.player_id,   " +
                 "      g.season_id,  " +
-                "      SUM(CASE WHEN ps.result = 1 THEN 1 ELSE 0 END)*3 - SUM(CASE WHEN ps.result = 2 THEN 1 ELSE 0 END)*2 +   " +
-                "      SUM(CASE WHEN ps.result = 3 THEN 1 ELSE 0 END)*2 + SUM(ROUND(innings) + (10 * (innings - ROUND(innings)) / 3))*3 +  " +
-                "      SUM(strikeouts) - SUM(walks) - SUM(hitbypitch) - SUM(earned_runs) - SUM(hits) AS cy_young  " +
+                "      SUM(CASE WHEN ps.result = 1 THEN 1 ELSE 0 END)*3 - SUM(CASE WHEN ps.result = 2 THEN 1 ELSE 0 END) +   " +
+                "      SUM(CASE WHEN ps.result = 3 THEN 1 ELSE 0 END)*2 + ROUND(SUM(ROUND(innings) + (10 * (innings - ROUND(innings)) / 3))*3) +  " +
+                "      SUM(strikeouts) - SUM(walks) - SUM(hitbypitch) - SUM(earned_runs)*0.5 - SUM(hits)*0.5 AS cy_young  " +
                 "    FROM   " +
                 "      pitching_stats ps  " +
                 "    JOIN players p ON ps.player_id = p.id  " +
@@ -286,8 +300,12 @@ public class SingleSeasonPitchingRecordDao {
             String recordString = (String)record[2] + ", " + (String)record[1];
             String seasonString = (String)record[3] + " " + Integer.toString((int)record[4]);
             BigDecimal tempRecord = (BigDecimal) record[6];
+            String recordValueString;
 
-            SingleSeasonRecordBean tempBean = new SingleSeasonRecordBean(recordString,"cy_young",tempRecord,seasonString);
+            DecimalFormat df = new DecimalFormat("0.0");
+            recordValueString = df.format(tempRecord);
+
+            SingleSeasonRecordBean tempBean = new SingleSeasonRecordBean(recordString,"cy_young",recordValueString,seasonString);
             cyYoungList.add(tempBean);
         }
         return cyYoungList;

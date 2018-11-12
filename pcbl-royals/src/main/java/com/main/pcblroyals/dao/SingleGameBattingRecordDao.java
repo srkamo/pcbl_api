@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -46,10 +47,13 @@ public class SingleGameBattingRecordDao {
             }
 
             BigDecimal tempRecord = (BigDecimal) record[8];
+            DecimalFormat df = new DecimalFormat("0");
+            String recordValueString = df.format(tempRecord);
+
             if(numPeopleAdded >= 5 && !tempRecord.equals(lastRecordAdded)){
                 break;
             } else {
-                SingleGameRecordBean tempBean = new SingleGameRecordBean(recordString,recordName,tempRecord,gameString);
+                SingleGameRecordBean tempBean = new SingleGameRecordBean(recordString,recordName,recordValueString,gameString);
                 topPlayersList.add(tempBean);
             }
             lastRecordAdded = tempRecord;

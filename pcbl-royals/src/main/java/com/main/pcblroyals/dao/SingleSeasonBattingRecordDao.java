@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,10 +36,20 @@ public class SingleSeasonBattingRecordDao {
             String recordString = (String)record[2] + ", " + (String)record[1];
             String seasonString = (String)record[3] + " " + Integer.toString((int)record[4]);
             BigDecimal tempRecord = (BigDecimal) record[5];
+            String recordValueString;
+
+            if(recordName == "on_base_percentage" || recordName == "slugging_percentage" || recordName == "batting_average"){
+                DecimalFormat df = new DecimalFormat("0.000");
+                recordValueString = df.format(tempRecord);
+            } else {
+                DecimalFormat df = new DecimalFormat("0");
+                recordValueString = df.format(tempRecord);
+            }
+
             if(numPeopleAdded >= 5 && !tempRecord.equals(lastRecordAdded)){
                 break;
             } else {
-                SingleSeasonRecordBean tempBean = new SingleSeasonRecordBean(recordString,recordName,tempRecord,seasonString);
+                SingleSeasonRecordBean tempBean = new SingleSeasonRecordBean(recordString,recordName,recordValueString,seasonString);
                 topPlayersList.add(tempBean);
             }
             lastRecordAdded = tempRecord;
@@ -328,8 +339,10 @@ public class SingleSeasonBattingRecordDao {
             String recordString = (String)record[2] + ", " + (String)record[1];
             String seasonString = (String)record[3] + " " + Integer.toString((int)record[4]);
             BigDecimal tempRecord = (BigDecimal) record[6];
+            DecimalFormat df = new DecimalFormat("0");
+            String recordValueString = df.format(tempRecord);
 
-            SingleSeasonRecordBean tempBean = new SingleSeasonRecordBean(recordString,"mvp",tempRecord,seasonString);
+            SingleSeasonRecordBean tempBean = new SingleSeasonRecordBean(recordString,"mvp",recordValueString,seasonString);
             mvpList.add(tempBean);
         }
         return mvpList;

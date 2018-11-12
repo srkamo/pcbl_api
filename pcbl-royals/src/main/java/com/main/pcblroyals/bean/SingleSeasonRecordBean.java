@@ -16,7 +16,7 @@ public class SingleSeasonRecordBean extends RecordBean implements Serializable {
         this.seasonString = seasonString;
     }
 
-    public SingleSeasonRecordBean(String recordString, String recordName, BigDecimal recordValue, String seasonString) {
+    public SingleSeasonRecordBean(String recordString, String recordName, String recordValue, String seasonString) {
         this.recordString = recordString;
         this.recordName = recordName;
         this.recordValue = recordValue;
