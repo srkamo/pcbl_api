@@ -105,11 +105,11 @@ public class Player implements Comparable<Player> {
 	}
 
 	@Transient
-	public String getFullNameLastFirst() {
+	public String getDisplayName() {
 		return getLastName() + ", " + getFirstName();
 	}
 
     public int compareTo(Player p) {
-		return getFullNameLastFirst().compareTo(p.getFullNameLastFirst());
+		return getDisplayName().compareTo(p.getDisplayName());
 	}
 }

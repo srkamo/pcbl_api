@@ -17,6 +17,9 @@ public class PlayerController {
     @Qualifier("playerService")
     private PlayerService playerService;
 
+//    @Autowired
+//    @Qualifier("")
+
     @PutMapping("/api/changePlayer")
     public void changeExistingPlayer(@Valid @RequestBody Player player) {
         playerService.modifyPlayer(player);
@@ -36,5 +39,8 @@ public class PlayerController {
     public List<Player> viewAllPlayers() {
         return playerService.getAllPlayer();
     }
+
+
+//    t
 
 }

@@ -1,5 +1,8 @@
 package com.main.pcblroyals.controller;
 
+import com.main.pcblroyals.bean.SeasonPlayerBean;
+import com.main.pcblroyals.bean.SeasonTeamBean;
+import com.main.pcblroyals.dao.UpdateDao;
 import com.main.pcblroyals.data.*;
 import com.main.pcblroyals.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @CrossOrigin
@@ -38,6 +42,10 @@ public class AdminController {
     @Qualifier("pitchingStatService")
     private PitchingStatService pitchingStatService;
 
+    @Autowired
+    @Qualifier("updateService")
+    private UpdateService updateService;
+
     @PostMapping("/api/createPlayer")
     public void createNewPlayer(@RequestBody @Valid Player player) {
         playerService.addPlayer(player);
@@ -59,5 +67,11 @@ public class AdminController {
 
     @PostMapping("/api/createPitchingStat")
     public void createNewPitchingStat(@RequestBody @Valid PitchingStat pitchingStat) {pitchingStatService.addPitchingStat(pitchingStat);}
+
+    @PostMapping("/api/updateSeasonPlayer")
+    public void updateSeasonPlayer(@RequestBody @Valid SeasonPlayerBean seasonPlayerBean){ updateService.addSeasonPlayerIfNotExists(seasonPlayerBean);}
+
+    @PostMapping("/api/updateSeasonTeam")
+    public void updateSeasonTeam(@RequestBody @Valid SeasonTeamBean seasonTeamBean){ updateService.addSeasonTeamIfNotExists(seasonTeamBean);}
 
 }
