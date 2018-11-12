@@ -1,12 +1,15 @@
 package com.main.pcblroyals.controller;
 
 import com.main.pcblroyals.data.Player;
+import com.main.pcblroyals.data.Season;
 import com.main.pcblroyals.service.PlayerService;
+import com.main.pcblroyals.service.SeasonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -17,8 +20,9 @@ public class PlayerController {
     @Qualifier("playerService")
     private PlayerService playerService;
 
-//    @Autowired
-//    @Qualifier("")
+    @Autowired
+    @Qualifier("seasonService")
+    private SeasonService seasonService;
 
     @PutMapping("/api/changePlayer")
     public void changeExistingPlayer(@Valid @RequestBody Player player) {
@@ -41,6 +45,11 @@ public class PlayerController {
     }
 
 
-//    t
+    @GetMapping("/api/getAllPlayersForSeason/{seasonId}")
+    public List<Player> getAllPlayersForSeason(@PathVariable(value = "seasonId") int seasonId){
+        List<Player> playerList = seasonService.getSeasonById(seasonId).getPlayers();
+        Collections.sort(playerList);
+        return playerList;
+    }
 
 }

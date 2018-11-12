@@ -18,7 +18,6 @@ public class PlayerService {
 
     @Transactional
     public Player selectPlayerById(int playerId) {
-
         return playerDao.selectPlayerById(playerId);
     }
 
