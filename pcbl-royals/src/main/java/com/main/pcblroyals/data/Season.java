@@ -17,9 +17,9 @@ public class Season {
     private String division;
 
 	//NEW CODE: Adding games in order to get season record
-	private int wins;
-	private int ties;
-	private int losses;
+//	private int wins;
+//	private int ties;
+//	private int losses;
 	//END NEW CODE: Adding games in order to get record
 
 	@JsonIgnore
@@ -39,18 +39,18 @@ public class Season {
 	}
 
 	//NEW CODE: Adding games in order to get season record
-	@Formula("(select sum(case when g.team_score > g.opponent_score then 1 else 0 end) from games g where g.season_id = id)")
-	public int getWins(){ return wins;}
-	public void setWins(int wins){ this.wins = wins;}
-
-	@Formula("(select sum(case when g.team_score = g.opponent_score then 1 else 0 end) from games g where g.season_id = id)")
-	public int getTies(){ return ties;}
-	public void setTies(int ties){ this.ties = ties;}
-
-	@Formula("(select sum(case when g.team_score < g.opponent_score then 1 else 0 end) from games g where g.season_id = id)")
-	public int getLosses(){ return losses;}
-	public void setLosses(int losses){ this.losses = losses;}
-	//END NEW CODE: Adding games in order to get record
+//	@Formula("(select sum(case when g.team_score > g.opponent_score then 1 else 0 end) from games g where g.season_id = id)")
+//	public int getWins(){ return wins;}
+//	public void setWins(int wins){ this.wins = wins;}
+//
+//	@Formula("(select sum(case when g.team_score = g.opponent_score then 1 else 0 end) from games g where g.season_id = id)")
+//	public int getTies(){ return ties;}
+//	public void setTies(int ties){ this.ties = ties;}
+//
+//	@Formula("(select sum(case when g.team_score < g.opponent_score then 1 else 0 end) from games g where g.season_id = id)")
+//	public int getLosses(){ return losses;}
+//	public void setLosses(int losses){ this.losses = losses;}
+//	//END NEW CODE: Adding games in order to get record
 
 	@Column (name="division", nullable=false)
     public String getDivision() {

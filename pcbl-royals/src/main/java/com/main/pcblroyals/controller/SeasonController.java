@@ -52,7 +52,8 @@ public class SeasonController {
 
         Map<String, Object> map = new HashMap<>();
         // all season records
-        map.put("seasonRecords", seasonService.getAllSeason());
+//        map.put("seasonRecords", seasonService.getAllSeason());
+        map.put("seasonRecords", seasonService.getAllSeasonResults());
         // all time for all seasons
         map.put("allTimeRecord", seasonService.getAllTimeRecord());
         // get the 3 most recent games

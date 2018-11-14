@@ -1,6 +1,7 @@
 package com.main.pcblroyals.dao;
 
 import com.main.pcblroyals.bean.AllTimeSeasonBean;
+import com.main.pcblroyals.bean.SeasonResultsBean;
 import com.main.pcblroyals.data.Season;
 import org.springframework.stereotype.Repository;
 
@@ -52,14 +53,31 @@ public class SeasonDao {
 
     }
 
-
     // w-l-t across all seasons
     public List<AllTimeSeasonBean> getAllTimeRecord(){
-        String q = "select new com.main.pcblroyals.bean.AllTimeSeasonBean" +
-                "(sum(s.wins), sum(s.ties), sum(s.losses)) " +
-                "from seasons s";
+        String q = "select new com.main.pcblroyals.bean.AllTimeSeasonBean( " +
+                "sum(case when g.teamScore > g.opponentScore then 1 else 0 end), " +
+                "sum(case when g.teamScore = g.opponentScore then 1 else 0 end), " +
+                "sum(case when g.teamScore < g.opponentScore then 1 else 0 end) " +
+                ") " +
+                "from seasons s " +
+                "join games g on s.id = g.season.id ";
         Query query = entityManager.createQuery(q);
         return (List<AllTimeSeasonBean>) query.getResultList();
+    }
+
+    public List<SeasonResultsBean> getAllSeasonResults(){
+        String q = "select new com.main.pcblroyals.bean.SeasonResultsBean( " +
+                "s.id, s.season, s.year, " +
+                "sum(case when g.teamScore > g.opponentScore then 1 else 0 end), " +
+                "sum(case when g.teamScore = g.opponentScore then 1 else 0 end), " +
+                "sum(case when g.teamScore < g.opponentScore then 1 else 0 end) " +
+                ") " +
+                "from seasons s " +
+                "join games g on s.id = g.season.id " +
+                "group by s.id, s.season, s.year";
+        Query query = entityManager.createQuery(q);
+        return (List<SeasonResultsBean>) query.getResultList();
     }
 
 }
