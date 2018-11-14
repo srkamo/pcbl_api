@@ -61,14 +61,25 @@ public class CareerBattingStatDao {
 //    }
 
     public List<BattingStatPlayerBean> selectAllCareerStats(){
+//        String q = "select new com.main.pcblroyals.bean.BattingStatPlayerBean(" +
+//                "b.player.id, b.player.firstName, b.player.lastName, b.games, " +
+//                "b.atBats, b.singles, b.doubles, b.triples, b.homeRuns, " +
+//                "b.walks, b.hitByPitch,b.sacrifices,b.runs,b.rbis," +
+//                "b.stolenBases,b.passedBalls,b.caughtStealing,b.strikeOuts" +
+//                "" +
+//                ")  " +
+//                " from batting_career_stats b " +
+//                " order by b.player.lastName, b.player.firstName";
+
         String q = "select new com.main.pcblroyals.bean.BattingStatPlayerBean(" +
-                "b.player.id, b.player.firstName, b.player.lastName, b.games, " +
-                "b.atBats, b.singles, b.doubles, b.triples, b.homeRuns, " +
-                "b.walks, b.hitByPitch,b.sacrifices,b.runs,b.rbis," +
-                "b.stolenBases,b.passedBalls,b.caughtStealing,b.strikeOuts" +
+                "b.player.id, b.player.firstName, b.player.lastName, count(b.player.id), " +
+                "sum(b.atBats), sum(b.singles), sum(b.doubles), sum(b.triples), sum(b.homeRuns), " +
+                "sum(b.walks), sum(b.hitByPitch),sum(b.sacrifices),sum(b.runs),sum(b.rbis)," +
+                "sum(b.stolenBases),sum(b.passedBalls),sum(b.caughtStealing),sum(b.strikeOuts)" +
                 "" +
                 ")  " +
-                " from batting_career_stats b " +
+                " from batting_stats b " +
+                " group by b.player.id, b.player.firstName, b.player.lastName " +
                 " order by b.player.lastName, b.player.firstName";
 
 
@@ -82,7 +93,7 @@ public class CareerBattingStatDao {
                 "(sum(b.atBats), sum(b.singles), sum(b.doubles), sum(b.triples), sum(b.homeRuns), " +
                 "sum(b.walks), sum(b.hitByPitch), sum(b.sacrifices), sum(b.runs), sum(b.rbis), " +
                 "sum(b.stolenBases), sum(b.passedBalls), sum(b.caughtStealing), sum(b.strikeOuts)) " +
-                "from batting_career_stats b";
+                "from batting_stats b";
 
         Query query = entityManager.createQuery(q);
         return (List<BattingStatBean>) query.getResultList();

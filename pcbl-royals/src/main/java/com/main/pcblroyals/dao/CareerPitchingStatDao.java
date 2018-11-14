@@ -15,79 +15,49 @@ public class CareerPitchingStatDao {
     @PersistenceContext
     EntityManager entityManager;
 
-//    public Player selectPlayerById(int playerId) {
-//        return entityManager.find(Player.class, playerId);
-//    }
-//
-//    public void insertPlayer(Player player) {
-//        entityManager.persist(player);
-//    }
-//
-//    public void updatePlayer(Player player) {
-//
-//        Player playerToUpdate = selectPlayerById(player.getId());
-//
-//        playerToUpdate.setFirstName(player.getFirstName());
-//        playerToUpdate.setLastName(player.getFirstName());
-//        playerToUpdate.setJerseyNumber(player.getJerseyNumber());
-//        playerToUpdate.setPositions(player.getPositions());
-//        playerToUpdate.setThrowSide(player.getThrowSide());
-//        playerToUpdate.setBatSide(player.getBatSide());
-//        playerToUpdate.setSeasons(player.getSeasons());
-//        entityManager.flush();
-//    }
-//
-//    public void deletePlayer(int playerId) {
-//        entityManager.remove(selectPlayerById(playerId));
-//    }
-//
-//    public List<Player> selectAllPlayer() {
-//        String q = "select * from players";
-//        Query query = entityManager.createQuery(q);
-//        return (List<Player>) query.getResultList();
-//    }
-
-//    public List<CareerPitchingStat> selectAllCareerPitchingStats(){
-//        String q = "select p from pitching_career_stats p order by p.player.lastName";
-//        Query query = entityManager.createQuery(q);
-//        return (List<CareerPitchingStat>) query.getResultList();
-//    }
-
     public List<PitchingStatPlayerBean> selectAllCareerPitchingStats(){
         String q = "select new com.main.pcblroyals.bean.PitchingStatPlayerBean(" +
-                "p.player.id, p.player.firstName, p.player.lastName, games, " +
-                "wins, " +
-                "losses, " +
-                "ties, " +
-                "saves, " +
-                "innings, " +
-                "earnedRuns," +
-                "totalRuns, " +
-                "strikeouts, " +
-                "walks, " +
-                "hitByPitch, " +
-                "hits, " +
-                "wildPitches, " +
-                "stolenBases, " +
-                "pickoffs " +
+                "p.player.id, p.player.firstName, p.player.lastName, count(p.player.id), " +
+                "sum(case when p.result = 1 then 1 else 0 end), " +
+                "sum(case when p.result = 2 then 1 else 0 end), " +
+                "sum(case when p.result = 4 then 1 else 0 end), " +
+                "sum(case when p.result = 3 then 1 else 0 end), " +
+                "SUM(ROUND(innings) + (10 * (innings - ROUND(innings)) / 3)), " +
+                "sum(earnedRuns)," +
+                "sum(totalRuns), " +
+                "sum(strikeouts), " +
+                "sum(walks), " +
+                "sum(hitByPitch), " +
+                "sum(hits), " +
+                "sum(wildPitches), " +
+                "sum(stolenBases), " +
+                "sum(pickoffs) " +
                 ") " +
-                "from pitching_career_stats p " +
+                "from pitching_stats p " +
+                " group by p.player.id, p.player.firstName, p.player.lastName " +
                 " order by p.player.lastName, p.player.firstName";
         Query query = entityManager.createQuery(q);
         return (List<PitchingStatPlayerBean>) query.getResultList();
     }
 
-    /*
-            long wins, long losses, long ties, long saves, double inningsPitchedRaw, long earnedRuns, long totalRuns, long strikeouts, long walks, long hitByPitch, long hits, long wildPitches, long stolenBases, long pickoffs
-     */
-
     public List<PitchingStatBean> getAllTimePitchingStat(){
-
-        String q = "select new com.main.pcblroyals.bean.PitchingStatBean" +
-                "(sum(p.wins), sum(p.losses), sum(p.ties), sum(p.saves), sum(p.innings), " +
-                "sum(p.earnedRuns), sum(p.totalRuns), sum(p.strikeouts), sum(p.walks), sum(p.hitByPitch), " +
-                "sum(p.hits), sum(p.wildPitches), sum(p.stolenBases), sum(p.pickoffs)) " +
-                "from pitching_career_stats p";
+        String q = "select new com.main.pcblroyals.bean.PitchingStatBean(" +
+                "sum(case when p.result = 1 then 1 else 0 end), " +
+                "sum(case when p.result = 2 then 1 else 0 end), " +
+                "sum(case when p.result = 4 then 1 else 0 end), " +
+                "sum(case when p.result = 3 then 1 else 0 end), " +
+                "SUM(ROUND(innings) + (10 * (innings - ROUND(innings)) / 3)), " +
+                "sum(earnedRuns)," +
+                "sum(totalRuns), " +
+                "sum(strikeouts), " +
+                "sum(walks), " +
+                "sum(hitByPitch), " +
+                "sum(hits), " +
+                "sum(wildPitches), " +
+                "sum(stolenBases), " +
+                "sum(pickoffs) " +
+                ") " +
+                "from pitching_stats p ";
 
         Query query = entityManager.createQuery(q);
         return (List<PitchingStatBean>) query.getResultList();
