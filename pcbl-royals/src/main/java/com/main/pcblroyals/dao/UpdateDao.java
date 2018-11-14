@@ -1,9 +1,6 @@
 package com.main.pcblroyals.dao;
 
-import com.main.pcblroyals.data.BattingStat;
-import com.main.pcblroyals.data.PitchingStat;
-import com.main.pcblroyals.data.Player;
-import com.main.pcblroyals.data.Season;
+import com.main.pcblroyals.data.*;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -52,6 +49,10 @@ public class UpdateDao {
     public void updateSeason(Season season){
         entityManager.merge(season);
     }
+
+    public void updateGame(Game game){ entityManager.merge(game);}
+
+    public void updateTeam(Team team) { entityManager.merge(team);}
 
     public void updateBattingStat(BattingStat battingStat){
         entityManager.merge(battingStat);

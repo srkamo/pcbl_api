@@ -3,10 +3,7 @@ package com.main.pcblroyals.service;
 import com.main.pcblroyals.bean.SeasonPlayerBean;
 import com.main.pcblroyals.bean.SeasonTeamBean;
 import com.main.pcblroyals.dao.UpdateDao;
-import com.main.pcblroyals.data.BattingStat;
-import com.main.pcblroyals.data.PitchingStat;
-import com.main.pcblroyals.data.Player;
-import com.main.pcblroyals.data.Season;
+import com.main.pcblroyals.data.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -52,6 +49,16 @@ public class UpdateService {
     }
 
     @Transactional
+    public void updateGame(Game game){
+        updateDao.updateGame(game);
+    }
+
+    @Transactional
+    public void updateTeam(Team team){
+        updateDao.updateTeam(team);
+    }
+
+    @Transactional
     public void updateBattingStat(BattingStat battingStat){
         updateDao.updateBattingStat(battingStat);
     }
@@ -60,5 +67,7 @@ public class UpdateService {
     public void updatePitchingStat(PitchingStat pitchingStat){
         updateDao.updatePitchingStat(pitchingStat);
     }
+
+
 
 }

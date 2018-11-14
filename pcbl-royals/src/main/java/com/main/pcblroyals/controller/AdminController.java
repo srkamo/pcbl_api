@@ -82,12 +82,18 @@ public class AdminController {
         updateService.updateSeason(season);
     }
 
+    @PostMapping("/api/updateGame")
+    public void updateGame(@RequestBody @Valid Game game) { updateService.updateGame(game); }
+
+    @PostMapping("/api/updateTeam")
+    public void updateTeam(@RequestBody @Valid Team team) {updateService.updateTeam(team);}
+
     @PostMapping("/api/updateBattingStat")
     public void updateBattingStat(@RequestBody @Valid BattingStat battingStat) {updateService.updateBattingStat(battingStat);}
 
     @PostMapping("/api/updatePitchingStat")
-    public void updatePitchingStat(@RequestBody @Valid PitchingStat pitchingStat) {
-        System.out.println("EHRE");
-        updateService.updatePitchingStat(pitchingStat);}
+    public void updatePitchingStat(@RequestBody @Valid PitchingStat pitchingStat) {updateService.updatePitchingStat(pitchingStat);}
+
+
 
 }
