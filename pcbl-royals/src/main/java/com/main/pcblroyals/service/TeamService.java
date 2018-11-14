@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service("teamService")
 public class TeamService {
@@ -17,4 +18,9 @@ public class TeamService {
 
     @Transactional
     public void addTeam(Team team){ teamDao.insertGame(team);}
+
+    @Transactional
+    public List<Team> getAllTeam() {
+        return teamDao.selectAllTeams();
+    }
 }
