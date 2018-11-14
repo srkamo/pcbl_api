@@ -59,7 +59,7 @@ public class PitchingStat {
 	public double getInnings() {
 		return innings;
 	}
-	public void setInnings(float innings) {
+	public void setInnings(double innings) {
 		this.innings = innings;
 	}
 
@@ -142,9 +142,5 @@ public class PitchingStat {
 	public void setResult(int result) {
 		this.result = result;
 	}
-
-//	@Formula("(select (TRUNCATE(((SUM(TRUNCATE(innings,0)) + TRUNCATE(((SUM(innings) - SUM(TRUNCATE(innings,0))) / 0.3),0)) + (TRUNCATE((((SUM(innings) - SUM(TRUNCATE(innings,0))) / 0.3) - TRUNCATE(((SUM(innings) - SUM(TRUNCATE(innings,0))) / 0.3),0)),1) / 3)),1)))")
-//	public float getTestInnings() { return testInnings;}
-//	public void setTestInnings(float testInnings) { this.testInnings = testInnings;}
 
 }

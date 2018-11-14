@@ -74,4 +74,20 @@ public class AdminController {
     @PostMapping("/api/updateSeasonTeam")
     public void updateSeasonTeam(@RequestBody @Valid SeasonTeamBean seasonTeamBean){ updateService.addSeasonTeamIfNotExists(seasonTeamBean);}
 
+    @PostMapping("/api/updatePlayer")
+    public void updatePlayer(@RequestBody @Valid Player player){ updateService.updatePlayer(player);}
+
+    @PostMapping("/api/updateSeason")
+    public void updateSeason(@RequestBody @Valid Season season) {
+        updateService.updateSeason(season);
+    }
+
+    @PostMapping("/api/updateBattingStat")
+    public void updateBattingStat(@RequestBody @Valid BattingStat battingStat) {updateService.updateBattingStat(battingStat);}
+
+    @PostMapping("/api/updatePitchingStat")
+    public void updatePitchingStat(@RequestBody @Valid PitchingStat pitchingStat) {
+        System.out.println("EHRE");
+        updateService.updatePitchingStat(pitchingStat);}
+
 }

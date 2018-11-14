@@ -1,5 +1,9 @@
 package com.main.pcblroyals.dao;
 
+import com.main.pcblroyals.data.BattingStat;
+import com.main.pcblroyals.data.PitchingStat;
+import com.main.pcblroyals.data.Player;
+import com.main.pcblroyals.data.Season;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -39,5 +43,21 @@ public class UpdateDao {
                 " ) LIMIT 1;";
         Query query = entityManager.createNativeQuery(q);
         query.executeUpdate();
+    }
+
+    public void updatePlayer(Player player){
+        entityManager.merge(player);
+    }
+
+    public void updateSeason(Season season){
+        entityManager.merge(season);
+    }
+
+    public void updateBattingStat(BattingStat battingStat){
+        entityManager.merge(battingStat);
+    }
+
+    public void updatePitchingStat(PitchingStat pitchingStat){
+        entityManager.merge(pitchingStat);
     }
 }

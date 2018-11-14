@@ -3,6 +3,10 @@ package com.main.pcblroyals.service;
 import com.main.pcblroyals.bean.SeasonPlayerBean;
 import com.main.pcblroyals.bean.SeasonTeamBean;
 import com.main.pcblroyals.dao.UpdateDao;
+import com.main.pcblroyals.data.BattingStat;
+import com.main.pcblroyals.data.PitchingStat;
+import com.main.pcblroyals.data.Player;
+import com.main.pcblroyals.data.Season;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -35,6 +39,26 @@ public class UpdateService {
         for(int team_id:team_ids){
             updateDao.addSeasonTeamIfNotExists(season_id,team_id);
         }
+    }
+
+    @Transactional
+    public void updatePlayer(Player player){
+        updateDao.updatePlayer(player);
+    }
+
+    @Transactional
+    public void updateSeason(Season season){
+        updateDao.updateSeason(season);
+    }
+
+    @Transactional
+    public void updateBattingStat(BattingStat battingStat){
+        updateDao.updateBattingStat(battingStat);
+    }
+
+    @Transactional
+    public void updatePitchingStat(PitchingStat pitchingStat){
+        updateDao.updatePitchingStat(pitchingStat);
     }
 
 }
