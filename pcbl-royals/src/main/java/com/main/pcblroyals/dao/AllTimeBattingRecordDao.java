@@ -35,6 +35,7 @@ public class AllTimeBattingRecordDao {
         BigDecimal lastRecordAdded = BigDecimal.valueOf(Integer.MIN_VALUE);
         int numPeopleAdded = 0;
         for(Object[] record:allStatRecords){
+            int player_id = (int)record[0];
             String recordString = (String)record[2] + ", " + (String)record[1];
             BigDecimal tempRecord;
             String recordValueString;
@@ -62,7 +63,7 @@ public class AllTimeBattingRecordDao {
             if(numPeopleAdded >= 5 && !tempRecord.equals(lastRecordAdded)){
                 break;
             } else {
-                RecordBean tempBean = new RecordBean(recordString,recordName,recordValueString);
+                RecordBean tempBean = new RecordBean(recordString,recordName,recordValueString,player_id);
                 topPlayersList.add(tempBean);
             }
             lastRecordAdded = tempRecord;
@@ -253,7 +254,7 @@ public class AllTimeBattingRecordDao {
 
     public List<RecordBean> getAllTimeBattingRecordMVP(){
         String q = "SELECT  " +
-                "  t4.player_id,  " +
+                "    t4.player_id,  " +
                 "    t4.first_name,  " +
                 "    t4.last_name,  " +
                 "    COUNT(1) num_mvps  " +

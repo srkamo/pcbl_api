@@ -33,6 +33,7 @@ public class AllTimePitchingRecordDao {
         List<RecordBean> topPlayersList = new ArrayList<RecordBean>();
         int numPeopleAdded = 0;
         for(Object[] record:allStatRecords){
+            int player_id = (int) record[0];
             BigDecimal tempRecord;
             String recordValueString;
             String recordString = (String)record[2] + ", " + (String)record[1];
@@ -61,7 +62,7 @@ public class AllTimePitchingRecordDao {
             if(numPeopleAdded >= 5 && !tempRecord.equals(lastRecordAdded)){
                 break;
             } else {
-                RecordBean tempBean = new RecordBean(recordString,recordName,recordValueString);
+                RecordBean tempBean = new RecordBean(recordString,recordName,recordValueString,player_id);
                 topPlayersList.add(tempBean);
             }
             lastRecordAdded = tempRecord;

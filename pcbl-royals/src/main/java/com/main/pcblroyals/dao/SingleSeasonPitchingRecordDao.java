@@ -33,6 +33,7 @@ public class SingleSeasonPitchingRecordDao {
         BigDecimal lastRecordAdded = BigDecimal.valueOf(Integer.MIN_VALUE);
         int numPeopleAdded = 0;
         for(Object[] record:allStatRecords){
+            int player_id = (int) record[0];
             String seasonString = (String)record[3] + " " + Integer.toString((int)record[4]);
             String recordString = (String)record[2] + ", " + (String)record[1];
 
@@ -53,7 +54,7 @@ public class SingleSeasonPitchingRecordDao {
             if(numPeopleAdded >= 5 && !tempRecord.equals(lastRecordAdded)){
                 break;
             } else {
-                SingleSeasonRecordBean tempBean = new SingleSeasonRecordBean(recordString,recordName,recordValueString,seasonString);
+                SingleSeasonRecordBean tempBean = new SingleSeasonRecordBean(recordString,recordName,recordValueString,seasonString,player_id);
                 topPlayersList.add(tempBean);
             }
             lastRecordAdded = tempRecord;
@@ -297,6 +298,7 @@ public class SingleSeasonPitchingRecordDao {
         List<SingleSeasonRecordBean> cyYoungList = new ArrayList<SingleSeasonRecordBean>();
 
         for(Object[] record:allMVPRecordsecords){
+            int player_id = (int) record[0];
             String recordString = (String)record[2] + ", " + (String)record[1];
             String seasonString = (String)record[3] + " " + Integer.toString((int)record[4]);
             BigDecimal tempRecord = (BigDecimal) record[6];
@@ -305,7 +307,7 @@ public class SingleSeasonPitchingRecordDao {
             DecimalFormat df = new DecimalFormat("0.0");
             recordValueString = df.format(tempRecord);
 
-            SingleSeasonRecordBean tempBean = new SingleSeasonRecordBean(recordString,"cy_young",recordValueString,seasonString);
+            SingleSeasonRecordBean tempBean = new SingleSeasonRecordBean(recordString,"cy_young",recordValueString,seasonString,player_id);
             cyYoungList.add(tempBean);
         }
         return cyYoungList;

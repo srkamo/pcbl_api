@@ -32,6 +32,7 @@ public class SingleGameBattingRecordDao {
         BigDecimal lastRecordAdded = BigDecimal.valueOf(Integer.MIN_VALUE);
         int numPeopleAdded = 0;
         for(Object[] record:allStatRecords){
+            int player_id = (int)record[0];
             String recordString = (String)record[2] + ", " + (String)record[1];
 
             int homeAway = (int)record[4];
@@ -53,7 +54,7 @@ public class SingleGameBattingRecordDao {
             if(numPeopleAdded >= 5 && !tempRecord.equals(lastRecordAdded)){
                 break;
             } else {
-                SingleGameRecordBean tempBean = new SingleGameRecordBean(recordString,recordName,recordValueString,gameString);
+                SingleGameRecordBean tempBean = new SingleGameRecordBean(recordString,recordName,recordValueString,gameString,player_id);
                 topPlayersList.add(tempBean);
             }
             lastRecordAdded = tempRecord;

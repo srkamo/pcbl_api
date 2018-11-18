@@ -17,10 +17,11 @@ public class SingleGameRecordBean extends RecordBean implements Serializable {
         this.gameString = gameString;
     }
 
-    public SingleGameRecordBean(String recordString, String recordName, String recordValue, String gameString) {
+    public SingleGameRecordBean(String recordString, String recordName, String recordValue, String gameString, int player_id) {
         this.recordString = recordString;
         this.recordName = recordName;
         this.recordValue = recordValue;
         this.gameString = gameString;
+        this.player_id = player_id;
     }
 }
