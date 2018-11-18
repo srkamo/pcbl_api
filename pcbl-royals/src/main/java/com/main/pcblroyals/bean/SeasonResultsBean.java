@@ -61,7 +61,7 @@ public class SeasonResultsBean implements Serializable {
         this.ties = ties;
     }
 
-    public SeasonResultsBean(int id, String season, int year, long wins, long losses, long ties) {
+    public SeasonResultsBean(int id, String season, int year, long wins, long ties, long losses) {
         this.id = id;
         this.season = season;
         this.year = year;
