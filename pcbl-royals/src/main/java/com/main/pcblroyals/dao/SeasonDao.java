@@ -27,12 +27,10 @@ public class SeasonDao {
     public void updateSeason(Season season) {
 
         Season seasonToUpdate = selectSeasonById(season.getId());
-
         seasonToUpdate.setSeason(seasonToUpdate.getSeason());
         seasonToUpdate.setYear(seasonToUpdate.getYear());
         seasonToUpdate.setDivision(seasonToUpdate.getDivision());
         seasonToUpdate.setPlayers(seasonToUpdate.getPlayers());
-
         entityManager.flush();
     }
 
@@ -47,10 +45,9 @@ public class SeasonDao {
     }
 
     public List<Season> getAllSeasonReverseChronological() {
-        String q = "select s from seasons s order by id desc";
+        String q = "select s from seasons s order by year desc, season, id desc";
         Query query = entityManager.createQuery(q);
         return (List<Season>) query.getResultList();
-
     }
 
     // w-l-t across all seasons

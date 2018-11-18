@@ -11,10 +11,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @RestController
 @CrossOrigin
@@ -81,7 +78,9 @@ public class SeasonController {
 
     @GetMapping("/api/getAllSeasonsForPlayer/{playerId}")
     public List<Season> getAllSeasonsForPlayer(@PathVariable(value = "playerId") int playerId) {
-        return playerService.getPlayerById(playerId).get(0).getSeasons();
+        List<Season> seasonList = playerService.getPlayerById(playerId).get(0).getSeasons();
+        Collections.sort(seasonList);
+        return seasonList;
     }
 
 }

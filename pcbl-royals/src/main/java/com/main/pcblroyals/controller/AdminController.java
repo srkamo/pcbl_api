@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -49,6 +50,32 @@ public class AdminController {
     @PostMapping("/api/createPlayer")
     public void createNewPlayer(@RequestBody @Valid Player player) {
         playerService.addPlayer(player);
+
+        //adding player to curr season
+        //creating necessary object
+        List<Integer> playerIds = new ArrayList<Integer>();
+        playerIds.add(player.getId());
+        int currSeasonId = seasonService.getCurrSeasonId();
+
+        //adding to table
+        SeasonPlayerBean seasonPlayerBean = new SeasonPlayerBean(playerIds,currSeasonId);
+        updateService.addSeasonPlayerIfNotExists(seasonPlayerBean);
+    }
+
+    @PostMapping("/api/createTeam")
+    public void createNewTeam(@RequestBody @Valid Team team) {
+        teamService.addTeam(team);
+
+        //adding player to curr season
+        //creating necessary object
+        List<Integer> teamIds = new ArrayList<Integer>();
+        System.out.println(team.getId());
+        teamIds.add(team.getId());
+        int currSeasonId = seasonService.getCurrSeasonId();
+
+        //adding to table
+        SeasonTeamBean seasonTeamBean = new SeasonTeamBean(teamIds,currSeasonId);
+        updateService.addSeasonTeamIfNotExists(seasonTeamBean);
     }
 
     @PostMapping("/api/createSeason")
@@ -58,9 +85,6 @@ public class AdminController {
 
     @PostMapping("/api/createGame")
     public void createNewGame(@RequestBody @Valid Game game) {gameService.addGame(game); }
-
-    @PostMapping("/api/createTeam")
-    public void createNewTeam(@RequestBody @Valid Team team) {teamService.addTeam(team);}
 
     @PostMapping("/api/createBattingStat")
     public void createNewBattingStat(@RequestBody @Valid BattingStat battingStat) {battingStatService.addBattingStat(battingStat);}

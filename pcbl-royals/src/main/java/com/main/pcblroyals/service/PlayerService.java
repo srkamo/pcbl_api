@@ -17,14 +17,10 @@ public class PlayerService {
     private PlayerDao playerDao;
 
     @Transactional
-    public Player selectPlayerById(int playerId) {
-        return playerDao.selectPlayerById(playerId);
-    }
+    public Player selectPlayerById(int playerId) { return playerDao.selectPlayerById(playerId); }
 
     @Transactional
-    public void addPlayer(Player player) {
-        playerDao.insertPlayer(player);
-    }
+    public void addPlayer(Player player) { playerDao.insertPlayer(player); }
 
     @Transactional
     public void modifyPlayer(Player player) {

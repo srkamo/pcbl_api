@@ -46,7 +46,6 @@ public class SeasonService {
     @Transactional
     public void removeSeason(int seasonId) {
         seasonDao.deleteSeason(seasonId);
-
     }
 
     @Transactional
@@ -59,5 +58,11 @@ public class SeasonService {
         return seasonDao.getAllSeasonResults();
     }
 
+    @Transactional
+    public int getCurrSeasonId(){
+        List<Season> seasonList = getAllSeasonReverseChronological();
+        int currSeasonId = seasonList.get(0).getId();
+        return currSeasonId;
+    }
 
 }

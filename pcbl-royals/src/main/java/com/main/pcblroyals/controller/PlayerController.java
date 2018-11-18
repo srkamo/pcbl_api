@@ -41,9 +41,10 @@ public class PlayerController {
 
     @GetMapping("/api/viewAllPlayers")
     public List<Player> viewAllPlayers() {
-        return playerService.getAllPlayer();
+        List<Player> playerList = playerService.getAllPlayer();
+        Collections.sort(playerList);
+        return playerList;
     }
-
 
     @GetMapping("/api/getAllPlayersForSeason/{seasonId}")
     public List<Player> getAllPlayersForSeason(@PathVariable(value = "seasonId") int seasonId){
