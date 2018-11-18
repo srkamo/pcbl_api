@@ -96,4 +96,31 @@ public class PitchingStatSeasonBean extends PitchingStatBean implements Serializ
         calculateEarnedRunAverage();
         calculateWalksAndHitsPerInning();
     }
+
+    public PitchingStatSeasonBean(){
+        this.season_id = 0;
+        this.season = "";
+        this.year = 0;
+        this.numGames = 0;
+        this.wins = 0;
+        this.losses = 0;
+        this.ties = 0;
+        this.saves = 0;
+        this.inningsPitchedRaw = 0;
+        this.earnedRuns = 0;
+        this.totalRuns = 0;
+        this.strikeouts = 0;
+        this.walks = 0;
+        this.hitByPitch = 0;
+        this.hits = 0;
+        this.wildPitches = 0;
+        this.stolenBases = 0;
+        this.pickoffs = 0;
+        this.seasonDisplayName = "Player has not pitched";
+
+        formatInningsPitched();
+        calculateEarnedRunAverage();
+        calculateWalksAndHitsPerInning();
+
+    }
 }

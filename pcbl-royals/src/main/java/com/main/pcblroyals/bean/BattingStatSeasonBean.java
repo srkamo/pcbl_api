@@ -83,4 +83,32 @@ public class BattingStatSeasonBean extends BattingStatBean implements Serializab
         calculateOnBasePercentage();
         calculateSluggingAverage();
     }
+
+    public BattingStatSeasonBean(){
+        this.season_id = 0;
+        this.season = "";
+        this.year = 0;
+        this.numGames = 0;
+        this.atBats = 0;
+        this.singles = 0;
+        this.doubles = 0;
+        this.triples = 0;
+        this.homeRuns = 0;
+        this.walks = 0;
+        this.hitByPitch = 0;
+        this.sacrifices = 0;
+        this.runs = 0;
+        this.rbis = 0;
+        this.stolenBases = 0;
+        this.passedBalls = 0;
+        this.caughtStealing = 0;
+        this.strikeOuts = 0;
+        this.seasonDisplayName = "Player has not batted";
+
+        calculateHits();
+        calculateBattingAverage();
+        calculateOnBasePercentage();
+        calculateSluggingAverage();
+
+    }
 }

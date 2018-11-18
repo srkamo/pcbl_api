@@ -117,5 +117,35 @@ public class BattingStatGameBean extends BattingStatBean implements Serializable
         formatGameString();
     }
 
+    //constructor for single game batting stats
+    public BattingStatGameBean(){
+        this.game_id = 0;
+        this.opponent_id = 0;
+        this.opponentName = "";
+        this.homeTeam = false;
+        this.date = new java.util.Date();
+        this.atBats = 0;
+        this.singles = 0;
+        this.doubles = 0;
+        this.triples = 0;
+        this.homeRuns = 0;
+        this.walks = 0;
+        this.hitByPitch = 0;
+        this.sacrifices = 0;
+        this.runs = 0;
+        this.rbis = 0;
+        this.stolenBases = 0;
+        this.passedBalls = 0;
+        this.caughtStealing = 0;
+        this.strikeOuts = 0;
+        this.dateString = "";
+        this.gameString = "Player has not batted";
+
+        calculateHits();
+        calculateBattingAverage();
+        calculateOnBasePercentage();
+        calculateSluggingAverage();
+    }
+
 
 }

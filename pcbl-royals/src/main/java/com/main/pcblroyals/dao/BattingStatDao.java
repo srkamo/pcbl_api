@@ -70,21 +70,31 @@ public class BattingStatDao {
     }
 
     public List<BattingStatGameBean> getBattingStatsGameBySeasonPlayer(int seasonId, int playerId){
-        String q = "select new com.main.pcblroyals.bean.BattingStatGameBean(" +
-                "b.game.id, b.game.opponent.id, b.game.opponent.name, b.game.homeTeam, b.game.date,  " +
-                "sum(b.atBats), sum(b.singles), sum(b.doubles), sum(b.triples), sum(b.homeRuns), " +
-                "sum(b.walks), sum(b.hitByPitch),sum(b.sacrifices),sum(b.runs),sum(b.rbis)," +
-                "sum(b.stolenBases),sum(b.passedBalls),sum(b.caughtStealing),sum(b.strikeOuts)" +
-                "" +
-                ")  " +
-                " from batting_stats b " +
-                " where b.game.season.id = " + seasonId +
-                " and b.player.id = " + playerId +
-                " group by b.game.id, b.game.opponent.id, b.game.opponent.name, b.game.homeTeam, b.game.date " +
-                " order by b.game.date";
+        if(checkPlayerHasBattedSeason(seasonId, playerId)){
+            String q = "select new com.main.pcblroyals.bean.BattingStatGameBean(" +
+                    "b.game.id, b.game.opponent.id, b.game.opponent.name, b.game.homeTeam, b.game.date,  " +
+                    "sum(b.atBats), sum(b.singles), sum(b.doubles), sum(b.triples), sum(b.homeRuns), " +
+                    "sum(b.walks), sum(b.hitByPitch),sum(b.sacrifices),sum(b.runs),sum(b.rbis)," +
+                    "sum(b.stolenBases),sum(b.passedBalls),sum(b.caughtStealing),sum(b.strikeOuts)" +
+                    "" +
+                    ")  " +
+                    " from batting_stats b " +
+                    " where b.game.season.id = " + seasonId +
+                    " and b.player.id = " + playerId +
+                    " group by b.game.id, b.game.opponent.id, b.game.opponent.name, b.game.homeTeam, b.game.date " +
+                    " order by b.game.date";
 
-        Query query = entityManager.createQuery(q);
-        return (List<BattingStatGameBean>) query.getResultList();
+            Query query = entityManager.createQuery(q);
+            return (List<BattingStatGameBean>) query.getResultList();
+        }
+        else{
+            List<BattingStatGameBean> battingStatGameBean = new ArrayList<BattingStatGameBean>();
+            BattingStatGameBean tempBean = new BattingStatGameBean();
+            battingStatGameBean.add(tempBean);
+            return battingStatGameBean;
+        }
+
+
 
     }
 
@@ -115,28 +125,62 @@ public class BattingStatDao {
 
     // get the all time batting stats for the player
     public List<BattingStatBean> getAllTimeBattingStatsForPlayer(int playerId){
-        String q = "select new com.main.pcblroyals.bean.BattingStatBean" +
-                "(sum(b.atBats), sum(b.singles), sum(b.doubles), sum(b.triples), sum(b.homeRuns), " +
-                "sum(b.walks), sum(b.hitByPitch), sum(b.sacrifices), sum(b.runs), sum(b.rbis), " +
-                "sum(b.stolenBases), sum(b.passedBalls), sum(b.caughtStealing), sum(b.strikeOuts)) " +
-                "from batting_stats b where b.player.id = " + playerId;
+        if(checkPlayerHasBattedAllTime(playerId)){
+            String q = "select new com.main.pcblroyals.bean.BattingStatBean" +
+                    "(sum(b.atBats), sum(b.singles), sum(b.doubles), sum(b.triples), sum(b.homeRuns), " +
+                    "sum(b.walks), sum(b.hitByPitch), sum(b.sacrifices), sum(b.runs), sum(b.rbis), " +
+                    "sum(b.stolenBases), sum(b.passedBalls), sum(b.caughtStealing), sum(b.strikeOuts)) " +
+                    "from batting_stats b where b.player.id = " + playerId;
 
-        Query query = entityManager.createQuery(q);
-        return (List<BattingStatBean>) query.getResultList();
+            Query query = entityManager.createQuery(q);
+            return (List<BattingStatBean>) query.getResultList();
+        }
+        else{
+            List<BattingStatBean> battingStatBeanList = new ArrayList<BattingStatBean>();
+            BattingStatBean tempBean = new BattingStatBean();
+            battingStatBeanList.add(tempBean);
+            return battingStatBeanList;
+        }
     }
 
     //get the all time batting stats for player in a season
     public List<BattingStatBean> getTotalBattingStatsForPlayerBySeason(int seasonId, int playerId){
-        String q = "select new com.main.pcblroyals.bean.BattingStatBean" +
-                "(sum(b.atBats), sum(b.singles), sum(b.doubles), sum(b.triples), sum(b.homeRuns), " +
-                "sum(b.walks), sum(b.hitByPitch), sum(b.sacrifices), sum(b.runs), sum(b.rbis), " +
-                "sum(b.stolenBases), sum(b.passedBalls), sum(b.caughtStealing), sum(b.strikeOuts)) " +
-                "from batting_stats b where b.player.id = " + playerId + " and b.game.season.id = " + seasonId;
+        if(checkPlayerHasBattedSeason(seasonId, playerId)){
+            String q = "select new com.main.pcblroyals.bean.BattingStatBean" +
+                    "(sum(b.atBats), sum(b.singles), sum(b.doubles), sum(b.triples), sum(b.homeRuns), " +
+                    "sum(b.walks), sum(b.hitByPitch), sum(b.sacrifices), sum(b.runs), sum(b.rbis), " +
+                    "sum(b.stolenBases), sum(b.passedBalls), sum(b.caughtStealing), sum(b.strikeOuts)) " +
+                    "from batting_stats b where b.player.id = " + playerId + " and b.game.season.id = " + seasonId;
 
-        Query query = entityManager.createQuery(q);
-        return (List<BattingStatBean>) query.getResultList();
+            Query query = entityManager.createQuery(q);
+            return (List<BattingStatBean>) query.getResultList();
+        }
+        else{
+            List<BattingStatBean> battingStatBeanList = new ArrayList<BattingStatBean>();
+            BattingStatBean tempBean = new BattingStatBean();
+            battingStatBeanList.add(tempBean);
+            return battingStatBeanList;
+        }
     }
 
     public void insertBattingStat(BattingStat battingStat){entityManager.persist(battingStat);}
+
+    public boolean checkPlayerHasBattedAllTime(int playerId){
+        String preQ = "SELECT * FROM batting_stats WHERE player_id = " + playerId;
+        Query preQuery = entityManager.createNativeQuery(preQ);
+        List<Object[]> preQueryObject = preQuery.getResultList();
+        return (preQueryObject.size() > 0);
+    }
+
+    public boolean checkPlayerHasBattedSeason(int seasonId, int playerId){
+        String preQ = "SELECT b.player_id " +
+                " FROM batting_stats b " +
+                " JOIN games g ON b.game_id = g.id" +
+                " WHERE b.player_id = " + playerId +
+                " AND g.season_id = " + seasonId;
+        Query preQuery = entityManager.createNativeQuery(preQ);
+        List<Object[]> preQueryObject = preQuery.getResultList();
+        return (preQueryObject.size() > 0);
+    }
 
 }

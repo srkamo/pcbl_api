@@ -84,8 +84,7 @@ public class PitchingStatGameBean extends PitchingStatBean implements Serializab
     }
 
     //constructor for single game pitching stats
-    public PitchingStatGameBean(int game_id, int opponent_id, String opponentName, boolean homeTeam, Date date, long wins, long losses, long ties, long saves, double inningsPitchedRaw, long earnedRuns, long totalRuns, long strikeouts, long walks, long hitByPitch, long hits, long wildPitches, long stolenBases, long pickoffs)
-    {
+    public PitchingStatGameBean(int game_id, int opponent_id, String opponentName, boolean homeTeam, Date date, long wins, long losses, long ties, long saves, double inningsPitchedRaw, long earnedRuns, long totalRuns, long strikeouts, long walks, long hitByPitch, long hits, long wildPitches, long stolenBases, long pickoffs) {
         this.game_id = game_id;
         this.opponent_id = opponent_id;
         this.opponentName = opponentName;
@@ -111,5 +110,33 @@ public class PitchingStatGameBean extends PitchingStatBean implements Serializab
         calculateWalksAndHitsPerInning();
         formatDateString();
         formatGameString();
+    }
+
+    public PitchingStatGameBean(){
+        this.game_id = 0;
+        this.opponent_id = 0;
+        this.opponentName = "";
+        this.homeTeam = false;
+        this.date = new java.util.Date();
+        this.wins = 0;
+        this.losses = 0;
+        this.ties = 0;
+        this.saves = 0;
+        this.inningsPitchedRaw = 0;
+        this.earnedRuns = 0;
+        this.totalRuns = 0;
+        this.strikeouts = 0;
+        this.walks = 0;
+        this.hitByPitch = 0;
+        this.hits = 0;
+        this.wildPitches = 0;
+        this.stolenBases = 0;
+        this.pickoffs = 0;
+        this.dateString = "";
+        this.gameString = "Player has not pitched";
+
+        formatInningsPitched();
+        calculateEarnedRunAverage();
+        calculateWalksAndHitsPerInning();
     }
 }
