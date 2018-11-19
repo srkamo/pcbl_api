@@ -1,6 +1,7 @@
 package com.main.pcblroyals.controller;
 
 import com.main.pcblroyals.bean.AllTimeSeasonBean;
+import com.main.pcblroyals.bean.GameBean;
 import com.main.pcblroyals.data.Game;
 import com.main.pcblroyals.data.Season;
 import com.main.pcblroyals.service.GameService;
@@ -65,7 +66,7 @@ public class SeasonController {
     }
 
     @GetMapping("/api/getGamesBySeason/{seasonId}")
-    public List<Game> getGamesBySeason(@PathVariable(value = "seasonId") int seasonId) {
+    public List<GameBean> getGamesBySeason(@PathVariable(value = "seasonId") int seasonId) {
         return gameService.getGamesBySeason(seasonId);
     }
 

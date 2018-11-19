@@ -29,7 +29,7 @@ public class GameService {
     }
 
     @Transactional
-    public List<Game> getGamesBySeason(int seasonId){
+    public List<GameBean> getGamesBySeason(int seasonId){
         return gameDao.getGamesBySeason(seasonId);
     }
 

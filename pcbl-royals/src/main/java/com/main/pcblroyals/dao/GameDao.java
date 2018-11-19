@@ -21,7 +21,7 @@ public class GameDao {
         return (List<Game>) query.getResultList();
     }
 
-    public List<Game> getGamesBySeason(int seasonId){
+    public List<GameBean> getGamesBySeason(int seasonId){
         String q = "select new com.main.pcblroyals.bean.GameBean" +
                 "(g.id, g.opponent.id, g.opponent.name, g.homeTeam, g.date) " +
                 "from games g " +
@@ -29,7 +29,7 @@ public class GameDao {
 
 
         Query query = entityManager.createQuery(q);
-        return (List<Game>) query.getResultList();
+        return (List<GameBean>) query.getResultList();
     }
 
     public List<GameBean> getGameInfoById(int gameId){
