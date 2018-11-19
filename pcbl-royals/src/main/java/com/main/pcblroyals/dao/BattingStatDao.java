@@ -52,23 +52,14 @@ public class BattingStatDao {
         return (List<BattingStatPlayerBean>) query.getResultList();
     }
 
-    public List<BattingStatPlayerBean> getBattingStatForSeasonGamePlayer(int seasonId, int gameId, int playerId){
-        String q = "select new com.main.pcblroyals.bean.BattingStatPlayerBean(" +
-                "b.player.id, b.player.firstName, b.player.lastName, count(b.player.id), " +
-                "sum(b.atBats), sum(b.singles), sum(b.doubles), sum(b.triples), sum(b.homeRuns), " +
-                "sum(b.walks), sum(b.hitByPitch),sum(b.sacrifices),sum(b.runs),sum(b.rbis)," +
-                "sum(b.stolenBases),sum(b.passedBalls),sum(b.caughtStealing),sum(b.strikeOuts)" +
-                "" +
-                ")  " +
-                " from batting_stats b " +
-                " where b.game.season.id = " + seasonId +
-                " and b.game.id = " + gameId +
-                " and b.player.id = " + playerId +
-                " group by b.player.id, b.player.firstName, b.player.lastName " +
-                " order by b.player.lastName, b.player.firstName";
+    public List<BattingStat> getBattingStatForSeasonGamePlayer(int seasonId, int gameId, int playerId){
+        String q = "select b FROM batting_stats b " +
+                " WHERE b.player.id = " + playerId +
+                " AND b.game.id = " + gameId +
+                " AND b.game.season.id = " + seasonId;
 
         Query query = entityManager.createQuery(q);
-        return (List<BattingStatPlayerBean>) query.getResultList();
+        return (List<BattingStat>) query.getResultList();
     }
 
     public List<BattingStatSeasonBean> getBattingStatsSeasonByPlayer(int playerId){

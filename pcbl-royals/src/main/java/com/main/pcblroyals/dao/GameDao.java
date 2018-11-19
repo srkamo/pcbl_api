@@ -27,7 +27,7 @@ public class GameDao {
                 "from games g " +
                 "where g.season.id = " + seasonId;
 
-        
+
         Query query = entityManager.createQuery(q);
         return (List<Game>) query.getResultList();
     }

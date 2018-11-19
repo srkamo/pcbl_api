@@ -1,6 +1,8 @@
 package com.main.pcblroyals.controller;
 
 import com.main.pcblroyals.bean.*;
+import com.main.pcblroyals.data.BattingStat;
+import com.main.pcblroyals.data.PitchingStat;
 import com.main.pcblroyals.data.Player;
 import com.main.pcblroyals.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,18 +72,18 @@ public class BattingPitchingStatController {
     // get a single batting stat for a player, season, game
     // for admin update batting stat
     @GetMapping("api/getBattingStatForSeasonGamePlayer/{seasonId}/{gameId}/{playerId}")
-    public List<BattingStatPlayerBean> getBattingStatForSeasonGamePlayer(@PathVariable(value = "seasonId") int seasonId,
-                                                      @PathVariable(value = "gameId") int gameId,
-                                                                  @PathVariable(value = "playerId") int playerId){
+    public List<BattingStat> getBattingStatForSeasonGamePlayer(@PathVariable(value = "seasonId") int seasonId,
+                                                               @PathVariable(value = "gameId") int gameId,
+                                                               @PathVariable(value = "playerId") int playerId){
         return battingStatService.getBattingStatForSeasonGamePlayer(seasonId, gameId, playerId);
     }
 
     // get a single pitching stat for a player, season, game
     // for admin update pitching stat
     @GetMapping("api/getPitchingStatForSeasonGamePlayer/{seasonId}/{gameId}/{playerId}")
-    public List<PitchingStatPlayerBean> getPitchingStatForSeasonGamePlayer(@PathVariable(value = "seasonId") int seasonId,
-                                                                         @PathVariable(value = "gameId") int gameId,
-                                                                         @PathVariable(value = "playerId") int playerId){
+    public List<PitchingStat> getPitchingStatForSeasonGamePlayer(@PathVariable(value = "seasonId") int seasonId,
+                                                                 @PathVariable(value = "gameId") int gameId,
+                                                                 @PathVariable(value = "playerId") int playerId){
         return pitchingStatService.getPitchingStatForSeasonGamePlayer(seasonId, gameId, playerId);
     }
 

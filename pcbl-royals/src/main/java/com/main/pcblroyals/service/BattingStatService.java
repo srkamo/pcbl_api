@@ -33,7 +33,7 @@ public class BattingStatService {
     }
 
     @Transactional
-    public List<BattingStatPlayerBean> getBattingStatForSeasonGamePlayer(int seasonId, int gameId, int playerId){
+    public List<BattingStat> getBattingStatForSeasonGamePlayer(int seasonId, int gameId, int playerId){
         return battingStatDao.getBattingStatForSeasonGamePlayer(seasonId, gameId, playerId);
     }
 
