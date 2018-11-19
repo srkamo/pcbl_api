@@ -67,6 +67,24 @@ public class BattingPitchingStatController {
 //        return pitchingStatService.getPitchingStatsBySeason(seasonId);
 //    }
 
+    // get a single batting stat for a player, season, game
+    // for admin update batting stat
+    @GetMapping("api/getBattingStatForSeasonGamePlayer/{seasonId}/{gameId}/{playerId}")
+    public List<BattingStatPlayerBean> getBattingStatForSeasonGamePlayer(@PathVariable(value = "seasonId") int seasonId,
+                                                      @PathVariable(value = "gameId") int gameId,
+                                                                  @PathVariable(value = "playerId") int playerId){
+        return battingStatService.getBattingStatForSeasonGamePlayer(seasonId, gameId, playerId);
+    }
+
+    // get a single pitching stat for a player, season, game
+    // for admin update pitching stat
+    @GetMapping("api/getPitchingStatForSeasonGamePlayer/{seasonId}/{gameId}/{playerId}")
+    public List<PitchingStatPlayerBean> getPitchingStatForSeasonGamePlayer(@PathVariable(value = "seasonId") int seasonId,
+                                                                         @PathVariable(value = "gameId") int gameId,
+                                                                         @PathVariable(value = "playerId") int playerId){
+        return pitchingStatService.getPitchingStatForSeasonGamePlayer(seasonId, gameId, playerId);
+    }
+
     // single game page
     @GetMapping("api/getStatsBySeasonGame/{seasonId}/{gameId}")
     public Map<String, List<?>>  getStatsBySeasonGame(@PathVariable(value = "seasonId") int seasonId,
