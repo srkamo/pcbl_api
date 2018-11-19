@@ -27,8 +27,7 @@ public class GameDao {
                 "from games g " +
                 "where g.season.id = " + seasonId;
 
-
-//        String q = "select g from games g where g.season.id = " + seasonId + "order by g.date desc";
+        
         Query query = entityManager.createQuery(q);
         return (List<Game>) query.getResultList();
     }
