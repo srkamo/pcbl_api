@@ -22,7 +22,13 @@ public class GameDao {
     }
 
     public List<Game> getGamesBySeason(int seasonId){
-        String q = "select g from games g where g.season.id = " + seasonId + "order by g.date desc";
+        String q = "select new com.main.pcblroyals.bean.GameBean" +
+                "(g.id, g.opponent.id, g.opponent.name, g.homeTeam, g.date) " +
+                "from games g " +
+                "where g.season.id = " + seasonId;
+
+
+//        String q = "select g from games g where g.season.id = " + seasonId + "order by g.date desc";
         Query query = entityManager.createQuery(q);
         return (List<Game>) query.getResultList();
     }
