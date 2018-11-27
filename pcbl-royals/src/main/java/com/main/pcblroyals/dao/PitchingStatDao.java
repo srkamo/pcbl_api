@@ -273,7 +273,13 @@ public class PitchingStatDao {
         }
     }
 
-    public void insertPitchingStat(PitchingStat pitchingStat){entityManager.persist(pitchingStat);}
+    public void insertPitchingStat(PitchingStat pitchingStat){
+        int playerId = pitchingStat.getPlayer().getId();
+        int gameId = pitchingStat.getGame().getId();
+        if(!checkPitchingStatExists(gameId,playerId)){
+            entityManager.persist(pitchingStat);
+        }
+    }
 
     public boolean checkPlayerHasPitchedAllTime(int playerId){
         String preQ = "SELECT * FROM pitching_stats WHERE player_id = " + playerId;
@@ -292,4 +298,17 @@ public class PitchingStatDao {
         List<Object[]> preQueryObject = preQuery.getResultList();
         return (preQueryObject.size() > 0);
     }
+
+    public boolean checkPitchingStatExists(int gameId, int playerId){
+        String preQ = "SELECT p.player_id " +
+                " FROM pitching_stats p " +
+                " JOIN games g ON p.game_id = g.id" +
+                " WHERE p.player_id = " + playerId +
+                " AND g.id = " + gameId;
+        Query preQuery = entityManager.createNativeQuery(preQ);
+        List<Object[]> preQueryObject = preQuery.getResultList();
+        return (preQueryObject.size() > 0);
+    }
+
+
 }

@@ -103,9 +103,6 @@ public class BattingStatDao {
             battingStatGameBean.add(tempBean);
             return battingStatGameBean;
         }
-
-
-
     }
 
     // get the all time batting stat line for a single season
@@ -173,7 +170,13 @@ public class BattingStatDao {
         }
     }
 
-    public void insertBattingStat(BattingStat battingStat){entityManager.persist(battingStat);}
+    public void insertBattingStat(BattingStat battingStat){
+        int playerId = battingStat.getPlayer().getId();
+        int gameId = battingStat.getGame().getId();
+        if(!checkBattingStatExists(gameId,playerId)){
+            entityManager.persist(battingStat);
+        }
+    }
 
     public boolean checkPlayerHasBattedAllTime(int playerId){
         String preQ = "SELECT * FROM batting_stats WHERE player_id = " + playerId;
@@ -188,6 +191,17 @@ public class BattingStatDao {
                 " JOIN games g ON b.game_id = g.id" +
                 " WHERE b.player_id = " + playerId +
                 " AND g.season_id = " + seasonId;
+        Query preQuery = entityManager.createNativeQuery(preQ);
+        List<Object[]> preQueryObject = preQuery.getResultList();
+        return (preQueryObject.size() > 0);
+    }
+
+    public boolean checkBattingStatExists(int gameId, int playerId){
+        String preQ = "SELECT b.player_id " +
+                " FROM batting_stats b " +
+                " JOIN games g ON b.game_id = g.id" +
+                " WHERE b.player_id = " + playerId +
+                " AND g.id = " + gameId;
         Query preQuery = entityManager.createNativeQuery(preQ);
         List<Object[]> preQueryObject = preQuery.getResultList();
         return (preQueryObject.size() > 0);
