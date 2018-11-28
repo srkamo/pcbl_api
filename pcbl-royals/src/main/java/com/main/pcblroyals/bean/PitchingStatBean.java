@@ -10,7 +10,7 @@ public class PitchingStatBean implements Serializable {
     protected long losses;
     protected long ties;
     protected long saves;
-    protected double inningsPitched;
+    protected double inningsPitchedFormatted;
     protected double inningsPitchedRaw;
     protected long earnedRuns;
     protected long totalRuns;
@@ -24,6 +24,7 @@ public class PitchingStatBean implements Serializable {
 
     protected String earnedRunAverage;
     protected String walksAndHitsPerInning;
+    protected String inningsPitched;
 
     public long getWins() {
         return wins;
@@ -57,12 +58,20 @@ public class PitchingStatBean implements Serializable {
         this.saves = saves;
     }
 
-    public double getInningsPitched() {
+    public String getInningsPitched() {
         return inningsPitched;
     }
 
-    public void setInningsPitched(double inningsPitched) {
+    public void setInningsPitched(String inningsPitched) {
         this.inningsPitched = inningsPitched;
+    }
+
+    public double getInningsPitchedFormatted() {
+        return inningsPitchedFormatted;
+    }
+
+    public void setInningsPitchedFormatted(double inningsPitchedFormatted) {
+        this.inningsPitchedFormatted = inningsPitchedFormatted;
     }
 
     public double getInningsPitchedRaw() {
@@ -165,23 +174,28 @@ public class PitchingStatBean implements Serializable {
         long integerPart = (long) inningsPitchedRaw;
         double decimalPart = inningsPitchedRaw - integerPart;
         double roundedDecimalPart = (double)Math.round(decimalPart * 10f)/10f;
-        inningsPitched = (double) integerPart;
+        inningsPitchedFormatted = (double) integerPart;
 
         if(roundedDecimalPart > 0.1 && roundedDecimalPart < 0.45){
-            inningsPitched += 0.1;
+            inningsPitchedFormatted += 0.1;
         }
         if(roundedDecimalPart > 0.45 && roundedDecimalPart < 0.75){
-            inningsPitched += 0.2;
+            inningsPitchedFormatted += 0.2;
         }
         if(roundedDecimalPart > 0.75 && roundedDecimalPart < 1.0){
-            inningsPitched += 1.0;
+            inningsPitchedFormatted += 1.0;
         }
     }
 
     protected void formatInningsPitchedRaw(){
-        long integerPart = (long) inningsPitched;
-        double decimalPart = inningsPitched - integerPart;
+        long integerPart = (long) inningsPitchedFormatted;
+        double decimalPart = inningsPitchedFormatted - integerPart;
         inningsPitchedRaw = (decimalPart*10)*(1.0d/3.0d) + (double)integerPart;
+    }
+
+    protected void formatInningsPitchedDisplay(){
+        DecimalFormat df = new DecimalFormat("0.0");
+        this.inningsPitched = df.format(inningsPitchedFormatted);
     }
 
     protected void calculateEarnedRunAverage(){
@@ -230,6 +244,7 @@ public class PitchingStatBean implements Serializable {
         this.pickoffs = 0;
 
         formatInningsPitched();
+        formatInningsPitchedDisplay();
         calculateEarnedRunAverage();
         calculateWalksAndHitsPerInning();
     }
@@ -251,6 +266,7 @@ public class PitchingStatBean implements Serializable {
         this.pickoffs = pickoffs;
 
         formatInningsPitched();
+        formatInningsPitchedDisplay();
         calculateEarnedRunAverage();
         calculateWalksAndHitsPerInning();
     }
