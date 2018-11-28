@@ -93,7 +93,6 @@ public class PitchingStatSeasonBean extends PitchingStatBean implements Serializ
 
         formatSeasonDisplayName();
         formatInningsPitched();
-        formatInningsPitchedDisplay();
         calculateEarnedRunAverage();
         calculateWalksAndHitsPerInning();
     }
@@ -120,7 +119,6 @@ public class PitchingStatSeasonBean extends PitchingStatBean implements Serializ
         this.seasonDisplayName = "Player has not pitched";
 
         formatInningsPitched();
-        formatInningsPitchedDisplay();
         calculateEarnedRunAverage();
         calculateWalksAndHitsPerInning();
 

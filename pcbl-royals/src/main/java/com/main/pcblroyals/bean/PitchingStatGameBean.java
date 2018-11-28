@@ -106,7 +106,6 @@ public class PitchingStatGameBean extends PitchingStatBean implements Serializab
         this.pickoffs = pickoffs;
 
         formatInningsPitched();
-        formatInningsPitchedDisplay();
         calculateEarnedRunAverage();
         calculateWalksAndHitsPerInning();
         formatDateString();
@@ -137,7 +136,6 @@ public class PitchingStatGameBean extends PitchingStatBean implements Serializab
         this.gameString = "Player has not pitched";
 
         formatInningsPitched();
-        formatInningsPitchedDisplay();
         calculateEarnedRunAverage();
         calculateWalksAndHitsPerInning();
     }
